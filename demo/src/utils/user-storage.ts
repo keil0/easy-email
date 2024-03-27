@@ -18,7 +18,7 @@ export class UserStorage {
             headers: {
               authorization: token,
             },
-            baseURL: 'https://www.maocanhua.cn',
+            baseURL: 'https://www.pierrecruz.com',
           });
           account = data;
         } catch (error) {
@@ -34,7 +34,7 @@ export class UserStorage {
           password: USER.password,
         },
         {
-          baseURL: 'https://www.maocanhua.cn',
+          baseURL: 'https://www.pierrecruz.com',
         }
       );
 

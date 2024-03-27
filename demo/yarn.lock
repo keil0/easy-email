@@ -1050,6 +1050,11 @@ fastest-stable-stringify@^2.0.2:
   resolved "https://registry.yarnpkg.com/fastest-stable-stringify/-/fastest-stable-stringify-2.0.2.tgz#3757a6774f6ec8de40c4e86ec28ea02417214c76"
   integrity sha512-bijHueCGd0LqqNK9b5oCMHc0MluJAx0cwqASgbWMvkO01lCYgIhacVRLcaDz3QnyYIRNJRDwMb41VuT6pHJ91Q==
 
+file-saver@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
+  integrity sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==
+
 filelist@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/filelist/-/filelist-1.0.2.tgz#80202f21462d4d1c2e214119b1807c1bc0380e5b"

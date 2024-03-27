@@ -16,18 +16,18 @@
     "lint": "lerna exec -- yarn format"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0",
-    "@types/file-saver": "^2.0.5",
+    "@sendgrid/mail": "^8.1.1",
+    "@types/file-saver": "^2.0.7",
     "easy-localized-translation": "^1.1.0",
     "file-saver": "^2.0.5",
-    "lerna": "^4.0.0",
-    "liquidjs": "^9.34.1"
+    "lerna": "^8.1.2",
+    "liquidjs": "^10.10.2"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "@types/lodash": "^4.14.191",
-    "@types/node": "^18.8.4",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "dotenv": "^16.0.3"
+    "@types/fs-extra": "^11.0.4",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "dotenv": "^16.4.5"
   }
 }
