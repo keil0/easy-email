@@ -553,28 +553,6 @@ export default function Editor() {
                         type='text'
                         icon={isDarkMode ? <IconMoonFill /> : <IconSunFill />}
                       ></Button>
-
-                      <Select
-                        onChange={onChangeTheme}
-                        value={theme}
-                      >
-                        <Select.Option value='blue'>Blue</Select.Option>
-                        <Select.Option value='green'>Green</Select.Option>
-                        <Select.Option value='purple'>Purple</Select.Option>
-                      </Select>
-                      <Select
-                        onChange={setLocale}
-                        value={locale}
-                      >
-                        <Select.Option value='en'>English</Select.Option>
-                        <Select.Option value='zh-Hans'>中文简体</Select.Option>
-                        <Select.Option value='zh-Hant'>中文繁體</Select.Option>
-                        <Select.Option value='ja'>Japanese</Select.Option>
-                        <Select.Option value='it'>Italian</Select.Option>
-                      </Select>
-
-                      {/* <Button onClick={openMergeTagsModal}>Update mergeTags</Button> */}
-
                       <Dropdown
                         droplist={
                           <Menu>
@@ -633,32 +611,6 @@ export default function Editor() {
                           <strong>Export</strong>
                         </Button>
                       </Dropdown>
-                      <Button onClick={() => setVisible(true)}>
-                        <strong>Try responsive editor</strong>
-                      </Button>
-                      <a
-                        href='https://www.buymeacoffee.com/easyemail?utm_source=webside&utm_medium=button&utm_content=donate'
-                        target='_blank'
-                        onClick={ev => {
-                          ev.preventDefault();
-                          pushEvent({ event: 'Donate' });
-                          window.open(
-                            'https://www.buymeacoffee.com/easyemail?utm_source=webside&utm_medium=button&utm_content=donate',
-                            '_blank',
-                          );
-                        }}
-                      >
-                        <img
-                          style={{
-                            marginTop: -16,
-                            position: 'relative',
-                            top: 11,
-                            height: 32,
-                          }}
-                          src='https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png'
-                          alt='Buy Me A Coffee'
-                        />
-                      </a>
                     </Stack>
                   }
                 />
