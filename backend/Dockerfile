@@ -37,10 +37,10 @@ COPY yarn.lock ./
 RUN yarn install --production
 
 # Copie des fichiers de construction depuis l'étape de build
-COPY --from=build-stage /app/build ./build
+COPY --from=build-stage /app/dist ./dist
 
 # Expose le port sur lequel votre application s'exécute
 EXPOSE 3000
 
 # Commande pour démarrer l'application avec pm2-runtime
-CMD ["pm2-runtime", "build/app.js"]
+CMD ["pm2-runtime", "dist/app.js"]
