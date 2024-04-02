@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  easy_email_mysql:
+    image: mysql:5.7
+    container_name: easy_email_mysql
+    environment:
+      MYSQL_DATABASE: easy_email_users
+      MYSQL_USER: easy_email
+      MYSQL_PASSWORD: easy_email
+      MYSQL_ROOT_PASSWORD: easy_email
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:

@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  easy-email-app:
+    container_name: easy-email-app
+    image: ghcr.io/keil0/easy-email:latest
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app-static.rule=Host(`easy-email.pierrecruz.com`) && PathPrefix(`/`)"
+      - "traefik.http.routers.easy-email-app.entrypoints=websecure"
+      - "traefik.http.routers.easy-email-app.tls.certresolver=myresolver"
+    networks:
+      - traefik_network
+
+  easy_email_mysql:
+    image: mysql:5.7
+    container_name: easy_email_mysql
+    environment:
+      MYSQL_DATABASE: easy_email_users
+      MYSQL_USER: easy_email
+      MYSQL_PASSWORD: easy_email
+      MYSQL_ROOT_PASSWORD: easy_email
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    networks:
+      - traefik_network
+
+  easy-email-auth:
+    container_name: easy-email-auth
+    image: ghcr.io/keil0/easy-email-auth:latest
+    restart: always
+    env_file: .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth-backend.rule=Host(`easy-email.pierrecruz.com`) && PathPrefix(`/auth`)"
+      - "traefik.http.middlewares.auth-strip.stripprefix.prefixes=/auth"
+      - "traefik.http.routers.auth-backend.middlewares=auth-strip"
+      - "traefik.http.routers.easy-email-auth.entrypoints=websecure"
+      - "traefik.http.routers.easy-email-auth.tls.certresolver=myresolver"
+    networks:
+      - traefik_network
+
+networks:
+  traefik_network:
+    external: true
+
+
+
