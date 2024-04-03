@@ -4,6 +4,7 @@ import User from '#models/user'
 import { createMagicValidator } from '#validators/magic'
 import router from '@adonisjs/core/services/router'
 import env from '#start/env'
+import crypto from 'crypto'
 
 export default class AuthController {
   async check({ response }: HttpContext) {
@@ -17,6 +18,17 @@ export default class AuthController {
           .make('auth.login')
       )
     }
+  }
+
+  async processMagicLink({ request, response, auth }: HttpContext) {
+    const token = request.param('token')
+    const user = await User.findBy('token', token)
+
+    if (user) {
+      await auth.use('web').login(user)
+    }
+
+    return response.redirect('/')
   }
 
   async login(ctx: HttpContext) {
@@ -41,13 +53,25 @@ export default class AuthController {
     const user = await User.findBy('email', payload.email)
 
     if (user) {
+      // Create and store token
+      user.token = crypto.randomBytes(32).toString('hex')
+      await user.save()
+
+      // Build url
+      const link = router
+        .builder()
+        .prefixUrl(env.get('BASE_DOMAIN') + env.get('NODE_ENV') === 'development' ? '' : '/auth')
+        .params({ token: user.token })
+        .make('auth.processMagicLink')
+
+      // Send the email
       mail.send((message) => {
         message
           .to(user.email)
           .from(env.get('MAIL_SENDER'))
           .subject('Magic link for the Email Builder')
-          .htmlView('emails/magic_link_html', { user, token: 'REPLACE_TOKEN' })
-          .textView('emails/magic_link_text', { user, token: 'REPLACE_TOKEN' })
+          .htmlView('emails/magic_link_html', { user, link })
+          .textView('emails/magic_link_text', { user, link })
       })
     }
 
