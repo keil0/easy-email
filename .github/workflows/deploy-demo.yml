@@ -3,7 +3,7 @@ name: "Deploy demo"
 on:
   push:
     branches: [master]
-    paths: ['packages/**', 'demo/**', '.github/workflows/deploy-demo.yml']
+    paths: ['packages/**', 'demo/**', '.github/workflows/deploy-demo.yml', 'docker/frontend/**']
 
 jobs:
   build-and-push-docker-image:
