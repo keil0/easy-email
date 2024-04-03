@@ -23,6 +23,8 @@ export default function Home() {
       title='Templates'
       primaryAction={
         <Button
+          type='primary'
+          size="large"
           onClick={() => {
             pushEvent({ event: 'Create' });
             history.push('/editor');

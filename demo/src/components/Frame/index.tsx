@@ -27,30 +27,11 @@ export default function Frame({
         </Stack>
       </Header>
       <Layout>
-        <Sider width={200}>
-          <Menu
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-          >
-            <SubMenu key='sub1' title='Templates'>
-              <Menu.Item key='1'>Templates</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Sider>
         <Layout style={{ padding: 24 }}>
           <Stack vertical>
-            {breadcrumb && (
-              <Breadcrumb>
-                <Breadcrumb.Item>{breadcrumb}</Breadcrumb.Item>
-              </Breadcrumb>
-            )}
-
             <Stack distribution='equalSpacing' alignment='center'>
               <Stack.Item>
-                <h2>
-                  <strong>{title}</strong>
-                </h2>
+
               </Stack.Item>
               <Stack.Item>{primaryAction}</Stack.Item>
             </Stack>
