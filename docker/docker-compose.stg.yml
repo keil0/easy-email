@@ -1,18 +1,6 @@
 version: '3.8'
 
 services:
-  easy-email-app:
-    container_name: easy-email-app
-    image: ghcr.io/keil0/easy-email:latest
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.app-static.rule=Host(`easy-email.pierrecruz.com`) && PathPrefix(`/`)"
-      - "traefik.http.routers.easy-email-app.entrypoints=websecure"
-      - "traefik.http.routers.easy-email-app.tls.certresolver=myresolver"
-    networks:
-      - traefik_network
-
   easy-email-mysql:
     image: mysql:5.7
     container_name: easy-email-mysql
@@ -33,11 +21,28 @@ services:
     env_file: .env
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth-backend.rule=Host(`easy-email.pierrecruz.com`) && PathPrefix(`/auth`)"
+      - "traefik.http.routers.easy-email-auth.rule=Host(`easy-email.pierrecruz.com`) && PathPrefix(`/auth`)"
       - "traefik.http.middlewares.auth-strip.stripprefix.prefixes=/auth"
-      - "traefik.http.routers.auth-backend.middlewares=auth-strip"
+      - "traefik.http.routers.easy-email-auth.middlewares=auth-strip"
       - "traefik.http.routers.easy-email-auth.entrypoints=websecure"
       - "traefik.http.routers.easy-email-auth.tls.certresolver=myresolver"
+    networks:
+      - traefik_network
+  easy-email-app:
+
+    container_name: easy-email-app
+    image: ghcr.io/keil0/easy-email:latest
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.easy-email-app.rule=Host(`easy-email.pierrecruz.com`)"
+      - "traefik.http.routers.easy-email-app.entrypoints=websecure"
+      - "traefik.http.routers.easy-email-app.tls.certresolver=myresolver"
+      # Authentification
+      - "traefik.http.middlewares.auth-forward.forwardauth.address=https://easy-email.pierrecruz.com/auth"
+      - "traefik.http.middlewares.auth-forward.forwardauth.trustForwardHeader=true"
+      - "traefik.http.middlewares.auth-forward.forwardauth.authResponseHeaders=X-Forwarded-User"
+      - "traefik.http.routers.easy-email-app.middlewares=auth-forward"
     networks:
       - traefik_network
 
