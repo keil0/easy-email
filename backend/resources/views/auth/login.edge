@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+
+<div class="h-full flex items-center justify-center">
+<div>
+    <h1 class="text-xl font-medium mb-3">Innocean Email Builder</h1>
+    <div class="border rounded shadow p-3">
+    <form class="flex gap-2" method="post">
+        <label class="flex-1" for="email">
+              <input id="email" class="py-1 px-2" type="email" name="Email" placeholder="Email">
+        </label>
+
+        <input class="flex-1 rounded px-3 py-1 bg-gray-100" type="submit" value="Send magic link">
+    </form>
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>

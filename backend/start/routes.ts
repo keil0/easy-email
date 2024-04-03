@@ -10,4 +10,5 @@
 const AuthController = () => import('#controllers/auth_controller')
 import router from '@adonisjs/core/services/router'
 
-router.get('/', [AuthController, 'index'])
+router.get('/', [AuthController, 'check'])
+router.get('/login', [AuthController, 'login'])
