@@ -20,7 +20,12 @@ export default class AuthController {
   }
 
   async login(ctx: HttpContext) {
-    return ctx.view.render('auth/login')
+    return ctx.view.render('auth/login', {
+      action: router
+        .builder()
+        .prefixUrl(env.get('NODE_ENV') === 'development' ? '' : '/auth')
+        .make('auth.sendMagicLink'),
+    })
   }
 
   async checkInbox(ctx: HttpContext) {

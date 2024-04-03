@@ -13,7 +13,7 @@
 <div>
     <h1 class="text-xl font-medium mb-3">Innocean Email Builder</h1>
     <div class="border rounded shadow p-3">
-    <form class="flex gap-2" method="POST" action="/magic">
+    <form class="flex gap-2" method="POST" action="{{ action }}">
       {{ csrfField() }}
         <label class="flex-1" for="email">
               <input id="email" class="py-1 px-2" type="email" name="email" placeholder="Email">
