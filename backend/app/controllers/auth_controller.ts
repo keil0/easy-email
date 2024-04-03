@@ -13,5 +13,5 @@ export default class AuthController {
     return ctx.view.render('auth/login')
   }
 
-  async magicLink(ctx: HttpContext) {}
+  async magicLink() {}
 }
