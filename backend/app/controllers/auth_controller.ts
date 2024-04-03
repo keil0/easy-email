@@ -4,20 +4,11 @@ import User from '#models/user'
 import { createMagicValidator } from '#validators/magic'
 import router from '@adonisjs/core/services/router'
 import env from '#start/env'
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
 export default class AuthController {
   async check({ response }: HttpContext) {
-    if (false) {
-      return response.safeStatus(200)
-    } else {
-      return response.redirect(
-        router
-          .builder()
-          .prefixUrl(env.get('NODE_ENV') === 'development' ? '' : '/auth')
-          .make('auth.login')
-      )
-    }
+    return response.safeStatus(200)
   }
 
   async processMagicLink({ request, response, auth }: HttpContext) {
@@ -60,7 +51,11 @@ export default class AuthController {
       // Build url
       const link = router
         .builder()
-        .prefixUrl(env.get('BASE_DOMAIN') + env.get('NODE_ENV') === 'development' ? '' : '/auth')
+        .prefixUrl(
+          env.get('NODE_ENV') === 'development'
+            ? env.get('BASE_DOMAIN')
+            : `${env.get('BASE_DOMAIN')}/auth`
+        )
         .params({ token: user.token })
         .make('auth.processMagicLink')
 
