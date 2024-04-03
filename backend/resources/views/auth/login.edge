@@ -13,9 +13,10 @@
 <div>
     <h1 class="text-xl font-medium mb-3">Innocean Email Builder</h1>
     <div class="border rounded shadow p-3">
-    <form class="flex gap-2" method="post">
+    <form class="flex gap-2" method="POST" action="/magic">
+      {{ csrfField() }}
         <label class="flex-1" for="email">
-              <input id="email" class="py-1 px-2" type="email" name="Email" placeholder="Email">
+              <input id="email" class="py-1 px-2" type="email" name="email" placeholder="Email">
         </label>
 
         <input class="flex-1 rounded px-3 py-1 bg-gray-100" type="submit" value="Send magic link">
