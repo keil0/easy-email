@@ -17,6 +17,8 @@ export default class AuthController {
 
     if (user) {
       await auth.use('web').login(user)
+      user.token = null
+      await user.save()
     }
 
     return response.redirect('/')
