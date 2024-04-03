@@ -40,6 +40,8 @@ jobs:
           context: .
           build-args: |
             NODE_ENV=production
+            DOMAIN_NAME={{ secrets.DOMAIN_NAME }}
+            BACKEND_DOCKER_URI={{ secrets.BACKEND_DOCKER_URI }}
           tags: ghcr.io/${{ github.repository_owner }}/easy-email:latest
           push: ${{ github.ref == 'refs/heads/master' }}
           cache-from: type=local,src=/tmp/.buildx-cache

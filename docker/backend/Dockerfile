@@ -1,16 +1,16 @@
-FROM node:lts-bullseye-slim
+FROM node:20
 
 WORKDIR /usr/src/app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 # Copy app source code
 COPY . .
 
 # Build app
-RUN npm run build --omit=dev
+RUN npm run build
 
 # Expose port
 EXPOSE 3333
