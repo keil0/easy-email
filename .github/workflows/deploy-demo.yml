@@ -3,7 +3,7 @@ name: "Deploy demo"
 on:
   push:
     branches: [master]
-    paths: ['packages/**', 'demo/**']
+    paths: ['packages/**', 'demo/**', '.github/workflows/deploy-demo.yml']
 
 jobs:
   build-and-push-docker-image:
@@ -36,12 +36,10 @@ jobs:
       - name: Build image and push to registry
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile
+          file: docker/frontend/Dockerfile
           context: .
           build-args: |
             NODE_ENV=production
-            DOMAIN_NAME={{ secrets.DOMAIN_NAME }}
-            BACKEND_DOCKER_URI={{ secrets.BACKEND_DOCKER_URI }}
           tags: ghcr.io/${{ github.repository_owner }}/easy-email:latest
           push: ${{ github.ref == 'refs/heads/master' }}
           cache-from: type=local,src=/tmp/.buildx-cache
