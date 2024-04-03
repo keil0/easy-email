@@ -30,12 +30,6 @@ FROM nginx:stable-alpine as production-stage
 # Copie les fichiers construits de l'étape précédente vers le dossier de service nginx
 COPY --from=build-stage /app/demo/dist /usr/share/nginx/html
 
-# Créer un répertoire pour stocker la configuration personnalisée
-RUN mkdir -p /etc/nginx/conf.d
-
-# Copier le fichier de configuration NGINX personnalisé dans l'image
-COPY docker/frontend/nginx/custom_nginx.conf /etc/nginx/conf.d/default.conf
-
 # Expose le port 80 pour accéder à l'application
 EXPOSE 80
 
