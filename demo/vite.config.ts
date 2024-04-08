@@ -34,7 +34,6 @@ export default defineConfig({
       ),
     },
   },
-
   define: {},
   esbuild: {
     jsxInject: 'import "@arco-design/web-react/dist/css/arco.css";',
