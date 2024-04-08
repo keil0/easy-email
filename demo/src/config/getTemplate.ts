@@ -7,7 +7,6 @@ export async function getTemplate(id: string | number) {
   let data: any = null;
   switch (item.path) {
 
-
   }
   return data;
 }
