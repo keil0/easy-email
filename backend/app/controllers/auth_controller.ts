@@ -33,6 +33,11 @@ export default class AuthController {
     })
   }
 
+  async logout({ auth, response }: HttpContext) {
+    await auth.use('web').logout()
+    return response.redirect('/')
+  }
+
   async checkInbox(ctx: HttpContext) {
     return ctx.view.render('auth/check-email')
   }
@@ -59,7 +64,7 @@ export default class AuthController {
             : `${env.get('BASE_DOMAIN')}/auth`
         )
         .params({ token: user.token })
-        .make('auth.processMagicLink')
+        .make('auth.loginMagic')
 
       // Send the email
       mail.send((message) => {
