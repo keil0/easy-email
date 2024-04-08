@@ -174,22 +174,7 @@ const defaultCategories: ExtensionProps['categories'] = [
 const imageCompression = import('browser-image-compression');
 
 const fontList = [
-  'Arial',
-  'Tahoma',
-  'Verdana',
-  'Times New Roman',
-  'Courier New',
-  'Georgia',
-  'Lato',
-  'Montserrat',
-  '黑体',
-  '仿宋',
-  '楷体',
-  '标楷体',
-  '华文仿宋',
-  '华文楷体',
-  '宋体',
-  '微软雅黑',
+  'Helvetica, Arial, Verdana, sans serif',
 ].map(item => ({ value: item, label: item }));
 
 export default function Editor() {

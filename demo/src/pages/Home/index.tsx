@@ -8,7 +8,7 @@ import { CardItem } from './components/CardItem';
 import { Stack } from '@demo/components/Stack';
 import { history } from '@demo/utils/history';
 import { pushEvent } from '@demo/utils/pushEvent';
-import templates from '@demo/config/templates.json';
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ export default function Home() {
     >
       <>
         <Stack>
-          {[...templates, ...list].map((item) => (
+          {[ ...list].map((item) => (
             <CardItem data={item} key={item.article_id} />
           ))}
         </Stack>
