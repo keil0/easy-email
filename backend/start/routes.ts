@@ -23,6 +23,16 @@ router.post('/magic', [AuthController, 'sendMagicLink']).as('auth.sendMagicLink'
 
 // Template & image management
 router
-  .get('/templates', [TemplatesController, 'getMyTemplates'])
-  .as('templates.getMyTemplates')
+  .group(() => {
+    router.get('/templates', [TemplatesController, 'getMyTemplates']).as('templates.getMyTemplates')
+    router
+      .post('/templates', [TemplatesController, 'createMyTemplate'])
+      .as('templates.createMyTemplate')
+    router
+      .patch('/templates/:id', [TemplatesController, 'updateMyTemplate'])
+      .as('templates.updateMyTemplate')
+    router
+      .delete('/templates/:id', [TemplatesController, 'deleteMyTemplate'])
+      .as('templates.deleteMyTemplate')
+  })
   .use(middleware.auth())

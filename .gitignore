@@ -5,7 +5,7 @@ dist
 .history
 yarn-error.log
 lib
-
+tmp
 coverage
 stats.html
 .npmrc

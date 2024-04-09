@@ -88,8 +88,6 @@ function FormWrapper({ children }: { children: EmailEditorProviderProps['childre
   return <>{children(data, helper)}</>;
 }
 
-// final-form bug https://github.com/final-form/final-form/issues/169
-
 const RegisterFields = React.memo(() => {
   const { touched } = useFormState<IEmailTemplate>();
   const [touchedMap, setTouchedMap] = useState<{ [key: string]: boolean }>({});

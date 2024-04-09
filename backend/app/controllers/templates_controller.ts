@@ -4,7 +4,7 @@ export default class TemplatesController {
   async getMyTemplates({ response }: HttpContext) {
     return response.send([
       {
-        subject: 'Welcome to Easy-email',
+        title: 'Welcome to Easy-email',
         subTitle: 'Nice to meet you!',
         content: {
           type: 'page',
@@ -77,5 +77,23 @@ export default class TemplatesController {
         },
       },
     ])
+  }
+
+  async createMyTemplate({ response }: HttpContext) {
+    return response.send({
+      message: 'Template created successfully',
+    })
+  }
+
+  async updateMyTemplate({ response }: HttpContext) {
+    return response.send({
+      message: 'Template saved successfully',
+    })
+  }
+
+  async deleteMyTemplate({ response }: HttpContext) {
+    return response.send({
+      message: 'Template deleted successfully',
+    })
   }
 }

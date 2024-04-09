@@ -7,7 +7,6 @@ import { Button } from '@arco-design/web-react';
 import { CardItem } from './components/CardItem';
 import { Stack } from '@demo/components/Stack';
 import { history } from '@demo/utils/history';
-import { pushEvent } from '@demo/utils/pushEvent';
 
 
 export default function Home() {
@@ -16,6 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(templateList.actions.fetch(undefined));
+    console.log("List", list);
   }, [dispatch]);
 
   return (
@@ -26,7 +26,6 @@ export default function Home() {
           type='primary'
           size="large"
           onClick={() => {
-            pushEvent({ event: 'Create' });
             history.push('/editor');
           }}
         >
