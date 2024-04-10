@@ -1,6 +1,4 @@
-import { article } from '@demo/services/article';
 import createSliceState from './common/createSliceState';
-import { Message } from '@arco-design/web-react';
 import { BlockManager, BasicType, AdvancedType } from 'easy-email-core';
 import { IEmailTemplate } from 'easy-email-editor';
 import { templateService } from '@demo/services/template';
@@ -14,6 +12,9 @@ export default createSliceState({
     },
   },
   effects: {
+    reset: async state => {
+      return null;
+    },
     fetchById: async (state, { id }: { id: number; }) => {
       const data = await templateService.getTemplate(id);
       return data as IEmailTemplate;
@@ -27,7 +28,7 @@ export default createSliceState({
         }),
       } as IEmailTemplate;
     },
-    create: async (state, payload: IEmailTemplate,) => {
+    create: async (state, payload: IEmailTemplate) => {
       // TODO: const picture = await emailToImage(payload.content);
       const data = await templateService.createTemplate({
         // TODO: picture,
@@ -37,19 +38,13 @@ export default createSliceState({
       });
       return { ...data, ...payload };
     },
-    updateById: async (
-      state,
-      payload: {
-        id: number;
-        template: IEmailTemplate;
-      },
-    ) => {
+    updateById: async (state, payload: { id: number; template: IEmailTemplate; }) => {
       const data = await templateService.updateTemplate(payload.id, {
         // TODO: picture,
         subject: payload.template.subject,
         subTitle: payload.template.subTitle,
         content: JSON.stringify(payload.template.content),
-      })
+      });
       return { ...data, ...payload, content: JSON.parse(data.content) };
     },
   },
