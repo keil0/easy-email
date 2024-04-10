@@ -1,4 +1,4 @@
-import { JsonToMjml, IBlockData } from 'easy-email-core';
+import { IBlockData, JsonToMjml } from 'easy-email-core';
 import services from '@demo/services';
 
 export async function emailToImage(content: IBlockData) {
@@ -29,8 +29,7 @@ export async function emailToImage(content: IBlockData) {
   document.body.removeChild(container);
 
   try {
-    const picture = await services.common.uploadByQiniu(blob);
-    return picture;
+    return await services.common.uploadImageToBackend(blob);
   } catch (error) {
     return 'http://res.cloudinary.com/dwkp0e1yo/image/upload/v1665841585/use2lx1xqmrhzceshsys.png';
   }

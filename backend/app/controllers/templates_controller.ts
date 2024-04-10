@@ -1,97 +1,74 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import { templateValidator } from '#validators/template'
+import Template from '#models/template'
 
 export default class TemplatesController {
-  async getMyTemplates({ response }: HttpContext) {
-    return response.send([
-      {
-        title: 'Welcome to Easy-email',
-        subTitle: 'Nice to meet you!',
-        content: {
-          type: 'page',
-          data: {
-            value: {
-              'breakpoint': '480px',
-              'headAttributes': '',
-              'font-size': '14px',
-              'font-weight': '400',
-              'line-height': '1.7',
-              'headStyles': [],
-              'fonts': ['Helvetica, Arial, Verdana, sans serif'],
-              'responsive': true,
-              'text-color': '#000000',
-            },
-          },
-          attributes: {
-            'background-color': '#efeeea',
-            'width': '600px',
-          },
-          children: [
-            {
-              type: 'advanced_wrapper',
-              data: {
-                value: {},
-              },
-              attributes: {
-                'padding': '20px 0px 0px 0px',
-                'border': 'none',
-                'direction': 'ltr',
-                'text-align': 'center',
-              },
-              children: [
-                {
-                  type: 'advanced_text',
-                  data: {
-                    value: {
-                      content:
-                        'Make it easy for everyone to compose emails!<div>And it work in multiline</div>',
-                    },
-                  },
-                  attributes: {
-                    'padding': '0px 0px 0px 0px',
-                    'align': 'left',
-                    'font-family': 'Helvetica, Arial, Verdana, sans serif',
-                    'color': '#000000',
-                    'container-background-color': '#4a90e2',
-                    'text-decoration': '',
-                    'font-weight': '500',
-                    'font-size': '20px',
-                  },
-                  children: [],
-                },
-              ],
-            },
-            {
-              type: 'advanced_image',
-              data: {
-                value: {},
-              },
-              attributes: {
-                align: 'center',
-                height: 'auto',
-                padding: '0px 0px 0px 0px',
-                src: '',
-              },
-              children: [],
-            },
-          ],
-        },
-      },
-    ])
+  async getMyTemplates({ response, auth }: HttpContext) {
+    const templates = await Template.findManyBy({ userId: auth.user!.id })
+    return response.send(templates)
   }
 
-  async createMyTemplate({ response }: HttpContext) {
-    return response.send({
-      message: 'Template created successfully',
+  async getMyTemplate({ request, response, auth }: HttpContext) {
+    const template = await Template.findBy({ userId: auth.user!.id, id: request.param('id') })
+    return response.send(template)
+  }
+
+  async createMyTemplate({ request, response, auth }: HttpContext) {
+    const payload = await templateValidator.validate(request.all())
+
+    const template = await Template.create({
+      subject: payload.subject,
+      subTitle: payload.subTitle,
+      content: payload.content,
     })
+    await template.related('user').associate(auth.user!)
+
+    return response.send(template)
   }
 
-  async updateMyTemplate({ response }: HttpContext) {
-    return response.send({
-      message: 'Template saved successfully',
-    })
+  async updateMyTemplate({ request, response, auth }: HttpContext) {
+    const templateId = request.param('id')
+    if (!templateId) {
+      return response.status(400).send({
+        message: 'Template ID is required',
+      })
+    }
+    const template = await Template.findBy({ userId: auth.user!.id, id: templateId })
+    if (!template) {
+      return response.status(404).send({
+        message: 'Template not found',
+      })
+    }
+    const payload = await templateValidator.validate(request.all())
+
+    await template
+      .merge({
+        subject: payload.subject,
+        subTitle: payload.subTitle,
+        content: payload.content,
+      })
+      .save()
+
+    return response.send(template)
   }
 
-  async deleteMyTemplate({ response }: HttpContext) {
+  async deleteMyTemplate({ request, response, auth }: HttpContext) {
+    const templateId = request.param('id')
+    if (!templateId) {
+      return response.status(400).send({
+        message: 'Template ID is required',
+      })
+    }
+    const template = await Template.findBy({ userId: auth.user!.id, id: templateId })
+    if (!template) {
+      return response.status(404).send({
+        message: 'Template not found',
+      })
+    }
+
+    const dbTemplate = await Template.findOrFail(templateId)
+    await dbTemplate.delete()
+
     return response.send({
       message: 'Template deleted successfully',
     })

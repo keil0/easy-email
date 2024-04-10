@@ -30,4 +30,14 @@ export const request = {
   ) {
     return axiosInstance.post<T>(url, data, config).then((data) => data.data);
   },
+  async patch<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig | undefined
+  ) {
+    return axiosInstance.patch<T>(url, data, config).then((data) => data.data);
+  },
+  async delete<T>(url: string, config?: AxiosRequestConfig | undefined): Promise<void> {
+    await axiosInstance.delete<T>(url, config);
+  }
 };

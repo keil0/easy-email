@@ -24,7 +24,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.8);
     z-index: 1;
     .listBottom {
       position: absolute;
@@ -37,11 +37,12 @@
       border-top: 1px solid #eee;
 
       .listItem {
-        color: #fff;
+        color: #000;
         flex: 1;
         align-items: center;
         justify-content: center;
         display: flex;
+        gap: 10px;
         flex-wrap: nowrap;
         font-size: 14px;
         cursor: pointer;
@@ -50,7 +51,7 @@
           border-right: none;
         }
         a {
-          color: #fff;
+          color: #000;
           white-space: nowrap;
         }
       }
@@ -64,5 +65,9 @@
     width: 100%;
     background: #fff;
     left: 0;
+  }
+  .delete {
+    color: #ff3939;
+    text-decoration: underline;
   }
 }

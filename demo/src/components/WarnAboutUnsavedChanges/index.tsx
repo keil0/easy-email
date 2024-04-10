@@ -40,15 +40,12 @@ export function WarnAboutUnsavedChanges(props: WarnAboutUnsavedChangesProps) {
       const onCheckUnsaved = (event: Event) => {
         if (dirty) {
           props.onBeforeConfirm?.();
-
           event.preventDefault();
           (event.returnValue as any) =
             'Changes that you made may not be saved.';
         }
       };
-
       window.addEventListener('beforeunload', onCheckUnsaved);
-
       return () => {
         window.removeEventListener('beforeunload', onCheckUnsaved);
       };

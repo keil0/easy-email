@@ -1,7 +1,7 @@
 import { request } from './axios.config';
 import axios from 'axios';
 
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dwkp0e1yo/image/upload';
+const CLOUDINARY_URL = '<none>';
 
 export const common = {
   async uploadByQiniu(file: File | Blob): Promise<string> {
@@ -42,6 +42,12 @@ export const common = {
       html: data.html,
     });
   },
+  uploadImageToBackend(file: File | Blob) {
+    console.log("uploadImageToBackend file: ", file);
+    // const data = new FormData();
+    // data.append('file', file);
+    // return request.post<string>('/upload/user/upload-image', data);
+  }
 };
 
 export interface IAppMenuItem {

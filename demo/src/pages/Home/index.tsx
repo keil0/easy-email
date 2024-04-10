@@ -2,20 +2,26 @@ import { useAppSelector } from '@demo/hooks/useAppSelector';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Frame from '@demo/components/Frame';
-import templateList from '@demo/store/templateList';
-import { Button } from '@arco-design/web-react';
-import { CardItem } from './components/CardItem';
+import { Button, Notification } from '@arco-design/web-react';
+import { CardItem } from '../../components/CardItem';
 import { Stack } from '@demo/components/Stack';
 import { history } from '@demo/utils/history';
-
+import templates from '@demo/store/templates';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const list = useAppSelector('templateList');
+  const templatesState = useAppSelector('templates');
+
+  const handleDelete = (id: number) => {
+    dispatch(templates.actions.deleteById({ id }));
+    Notification.success({
+      title: 'Success',
+      content: 'Template deleted successfully',
+    });
+  }
 
   useEffect(() => {
-    dispatch(templateList.actions.fetch(undefined));
-    console.log("List", list);
+    dispatch(templates.actions.fetch(undefined));
   }, [dispatch]);
 
   return (
@@ -26,17 +32,17 @@ export default function Home() {
           type='primary'
           size="large"
           onClick={() => {
-            history.push('/editor');
+            history.push(`/editor/new`);
           }}
         >
-          Add
+          Create
         </Button>
       }
     >
       <>
         <Stack>
-          {[ ...list].map((item) => (
-            <CardItem data={item} key={item.article_id} />
+          {[ ...templatesState].map((item) => (
+            <CardItem data={item} key={item.id} handleDelete={handleDelete} />
           ))}
         </Stack>
       </>

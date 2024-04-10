@@ -24,7 +24,11 @@ function App() {
                 component={Home}
               />
               <Route
-                path='/editor'
+                path='/editor/new'
+                component={Editor}
+              />
+              <Route
+                path='/editor/:id'
                 component={Editor}
               />
             </Switch>

@@ -26,6 +26,9 @@ router
   .group(() => {
     router.get('/templates', [TemplatesController, 'getMyTemplates']).as('templates.getMyTemplates')
     router
+      .get('/templates/:id', [TemplatesController, 'getMyTemplate'])
+      .as('templates.getMyTemplate')
+    router
       .post('/templates', [TemplatesController, 'createMyTemplate'])
       .as('templates.createMyTemplate')
     router
