@@ -5,7 +5,6 @@ import app from '@adonisjs/core/services/app'
 import { cuid } from '@adonisjs/core/helpers'
 import Image from '#models/image'
 import env from '#start/env'
-import router from '@adonisjs/core/services/router'
 
 export default class TemplatesController {
   async getMyTemplates({ response, auth }: HttpContext) {
