@@ -24,6 +24,7 @@ router.post('/magic', [AuthController, 'sendMagicLink']).as('auth.sendMagicLink'
 // Template & image management
 router
   .group(() => {
+    // CRUD Template
     router.get('/templates', [TemplatesController, 'getMyTemplates']).as('templates.getMyTemplates')
     router
       .get('/templates/:id', [TemplatesController, 'getMyTemplate'])
@@ -37,5 +38,12 @@ router
     router
       .delete('/templates/:id', [TemplatesController, 'deleteMyTemplate'])
       .as('templates.deleteMyTemplate')
+    // UPLOAD IMAGE
+    router
+      .post('/templates/:id/upload', [TemplatesController, 'uploadImageTemplate'])
+      .as('templates.uploadImageTemplate')
+    router
+      .post('/templates/upload', [TemplatesController, 'uploadImageTemplate'])
+      .as('templates.uploadImageNewTemplate')
   })
   .use(middleware.auth())

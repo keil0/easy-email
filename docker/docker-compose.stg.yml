@@ -26,6 +26,8 @@ services:
       - "traefik.http.routers.easy-email-auth.middlewares=auth-strip"
       - "traefik.http.routers.easy-email-auth.entrypoints=websecure"
       - "traefik.http.routers.easy-email-auth.tls.certresolver=myresolver"
+    volumes:
+      - ./uploads:/usr/src/app/public/uploads
     networks:
       - traefik_network
   easy-email-app:

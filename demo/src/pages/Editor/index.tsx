@@ -31,13 +31,17 @@ import {
   MjmlToJson,
   StandardLayout,
 } from 'easy-email-extensions';
-import { AutoSaveAndRestoreEmail } from '@demo/components/AutoSaveAndRestoreEmail';
 import 'easy-email-editor/lib/style.css';
 import 'easy-email-extensions/lib/style.css';
 import '@arco-themes/react-easy-email-theme/css/arco.css';
 import { useWindowSize } from 'react-use';
 import { Uploader } from '@demo/utils/Uploader';
 import enUS from '@arco-design/web-react/es/locale/en-US';
+import { WarnAboutUnsavedChanges } from '@demo/components/WarnAboutUnsavedChanges';
+
+interface IEmailTemplateModel extends IEmailTemplate {
+  id?: number
+}
 
 const defaultCategories: ExtensionProps['categories'] = [
   {
@@ -117,7 +121,7 @@ export default function Editor() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const templateData = useAppSelector('template');
+  const templateData: IEmailTemplateModel | null = useAppSelector('template');
   const { width } = useWindowSize();
   const smallScene = width < 1400;
   const loading = useLoading(template.loadings.fetchById);
@@ -131,13 +135,21 @@ export default function Editor() {
     }
   }, [isDarkMode]);
 
+  // Load template
   useEffect(() => {
     if (params.id) {
       dispatch(template.actions.fetchById({ id: params.id }));
     } else {
       dispatch(template.actions.fetchDefaultTemplate(undefined));
     }
-  }, [dispatch, params]);
+  }, [dispatch]);
+
+  // Update route if template is saved
+  useEffect(() => {
+    if (templateData && templateData.id) {
+      history.replace(`/editor/${templateData.id}`);
+    }
+  }, [templateData]);
 
   const onUploadImage = async (blob: Blob) => {
     // TODO: Process upload image
@@ -147,7 +159,11 @@ export default function Editor() {
     ).default(blob as File, {
       maxWidthOrHeight: 1440,
     });
-    return services.common.uploadImageToBackend(compressionFile);
+    if (templateData && templateData.id) {
+      return services.common.uploadImageToBackend(compressionFile, templateData.id);
+    } else {
+      return services.common.uploadImageToBackend(compressionFile);
+    }
   };
 
   const onImportMJML = async ({ restart }: { restart: (val: IEmailTemplate) => void; }) => {
@@ -271,7 +287,7 @@ export default function Editor() {
     }
   };
 
-  const initialValues: IEmailTemplate | null = useMemo(() => {
+  const initialValues: IEmailTemplateModel | null = useMemo(() => {
     if (!templateData) return null;
     const sourceData = cloneDeep(templateData.content) as IBlockData;
     return {
@@ -390,7 +406,7 @@ export default function Editor() {
                 >
                   <EmailEditor />
                 </StandardLayout>
-                <AutoSaveAndRestoreEmail />
+                <WarnAboutUnsavedChanges />
               </>
             );
           }}

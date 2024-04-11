@@ -42,11 +42,10 @@ export const common = {
       html: data.html,
     });
   },
-  uploadImageToBackend(file: File | Blob) {
-    console.log("uploadImageToBackend file: ", file);
-    // const data = new FormData();
-    // data.append('file', file);
-    // return request.post<string>('/upload/user/upload-image', data);
+  uploadImageToBackend(file: File | Blob, templateId?: number) {
+    const data = new FormData();
+    data.append('image', file);
+    return templateId ? request.post<string>(`/templates/${templateId}/upload`, data) : request.post<string>('/templates/upload', data);
   }
 };
 

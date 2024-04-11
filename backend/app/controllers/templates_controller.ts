@@ -1,6 +1,10 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { templateValidator } from '#validators/template'
 import Template from '#models/template'
+import app from '@adonisjs/core/services/app'
+import { cuid } from '@adonisjs/core/helpers'
+import Image from '#models/image'
+import env from '#start/env'
 
 export default class TemplatesController {
   async getMyTemplates({ response, auth }: HttpContext) {
@@ -72,5 +76,52 @@ export default class TemplatesController {
     return response.send({
       message: 'Template deleted successfully',
     })
+  }
+
+  async uploadImageTemplate({ request, response, auth }: HttpContext) {
+    const templateId = request.param('id')
+    if (!templateId) {
+      // TODO: Manage upload image for new template
+      return response.status(400).send({
+        message: 'Template ID is required',
+      })
+    }
+    const template = await Template.findBy({ userId: auth.user!.id, id: templateId })
+    if (!template) {
+      return response.status(404).send({
+        message: 'Template not found',
+      })
+    }
+
+    const image = request.file('image', {
+      size: '2mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    })
+
+    if (!image) {
+      return response.status(400).send({
+        message: 'Image is required',
+      })
+    }
+
+    const imagePath = app.makePath(`public/uploads/${auth.user!.id}/templates/${templateId}`)
+    const imageName = `${cuid()}.${image.extname}`
+
+    await image.move(imagePath, {
+      name: imageName,
+    })
+
+    const absolutePublicUrl =
+      env.get('BASE_DOMAIN') + `/uploads/${auth.user!.id}/templates/${templateId}/` + imageName
+
+    // Save image
+    const imageDb = await Image.create({
+      url: absolutePublicUrl,
+    })
+
+    // Link image to template
+    await imageDb.related('template').associate(template)
+
+    return response.send(absolutePublicUrl)
   }
 }
