@@ -5,6 +5,7 @@ import app from '@adonisjs/core/services/app'
 import { cuid } from '@adonisjs/core/helpers'
 import Image from '#models/image'
 import env from '#start/env'
+import router from '@adonisjs/core/services/router'
 
 export default class TemplatesController {
   async getMyTemplates({ response, auth }: HttpContext) {
@@ -112,7 +113,10 @@ export default class TemplatesController {
     })
 
     const absolutePublicUrl =
-      env.get('BASE_DOMAIN') + `/uploads/${auth.user!.id}/templates/${templateId}/` + imageName
+      env.get('BASE_DOMAIN') +
+      `${env.get('NODE_ENV') === 'development' ? '' : '/auth'}` +
+      `/uploads/${auth.user!.id}/templates/${templateId}/` +
+      imageName
 
     // Save image
     const imageDb = await Image.create({
