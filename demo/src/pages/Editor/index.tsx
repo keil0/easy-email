@@ -38,8 +38,10 @@ import { useWindowSize } from 'react-use';
 import { Uploader } from '@demo/utils/Uploader';
 import enUS from '@arco-design/web-react/es/locale/en-US';
 import { WarnAboutUnsavedChanges } from '@demo/components/WarnAboutUnsavedChanges';
+import { extractImageUrls } from '@demo/utils/extractImages';
+import { downloadImagesAsZip } from '@demo/utils/downloadImages';
 
-interface IEmailTemplateModel extends IEmailTemplate {
+export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number
 }
 
@@ -258,11 +260,10 @@ export default function Editor() {
     );
   };
 
-  const onExportImage = () => {
-    Notification.info({
-      title: 'TODO',
-      content: 'Export images',
-    });
+  const onExportImage = async () => {
+    if (templateData) {
+      await downloadImagesAsZip(extractImageUrls(templateData.content));
+    }
   };
 
   const handleSave = (restart, values) => {

@@ -47,5 +47,8 @@ export default createSliceState({
       });
       return { ...data, ...payload, content: JSON.parse(data.content) };
     },
+    downloadTemplateImages: async (state, { id }: { id: number | undefined; }) => {
+
+    },
   },
 });
