@@ -41,6 +41,9 @@ import { WarnAboutUnsavedChanges } from '@demo/components/WarnAboutUnsavedChange
 import { extractImageUrls } from '@demo/utils/extractImages';
 import { downloadImagesAsZip } from '@demo/utils/downloadImages';
 
+import "../../innocean";
+import { CustomBlocksType } from '@demo/innocean/constants';
+
 export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number;
 }
@@ -76,6 +79,15 @@ const defaultCategories: ExtensionProps['categories'] = [
         type: AdvancedType.WRAPPER,
       },
     ],
+  },
+  {
+    label: 'Custom',
+    active: true,
+    blocks: [
+      {
+        type: CustomBlocksType.MY_FIRST_BLOCK
+      }
+    ]
   },
   {
     label: 'Layout',
