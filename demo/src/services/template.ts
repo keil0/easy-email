@@ -21,7 +21,7 @@ export const templateService = {
 
 export interface ITemplate {
   id: number;
-  picture: string;
+  previewUrl: string;
   subject: string;
   subTitle: string;
   updatedAt: number;

@@ -17,7 +17,7 @@ export function CardItem(props: CardItemProps) {
     <div
       key={data.id}
       className={styles.templeteItem}
-      style={{ backgroundImage: `url(${data.picture})` }}
+      style={{ backgroundImage: `url(${data.previewUrl})` }}
     >
       <div className={styles.bottom}>
         <div className={styles.title}>Title: {data.subject}</div>

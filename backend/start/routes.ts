@@ -40,10 +40,7 @@ router
       .as('templates.deleteMyTemplate')
     // UPLOAD IMAGE
     router
-      .post('/templates/:id/upload', [TemplatesController, 'uploadImageTemplate'])
-      .as('templates.uploadImageTemplate')
-    router
-      .post('/templates/upload', [TemplatesController, 'uploadImageTemplate'])
-      .as('templates.uploadImageNewTemplate')
+      .post('/templates/upload', [TemplatesController, 'uploadTemplateImage'])
+      .as('templates.uploadTemplateImage')
   })
   .use(middleware.auth())

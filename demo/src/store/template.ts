@@ -2,6 +2,7 @@ import createSliceState from './common/createSliceState';
 import { BlockManager, BasicType, AdvancedType } from 'easy-email-core';
 import { IEmailTemplate } from 'easy-email-editor';
 import { templateService } from '@demo/services/template';
+import { emailToImage } from '@demo/utils/emailToImage';
 
 export default createSliceState({
   name: 'template',
@@ -29,9 +30,9 @@ export default createSliceState({
       } as IEmailTemplate;
     },
     create: async (state, payload: IEmailTemplate) => {
-      // TODO: const picture = await emailToImage(payload.content);
+      const previewUrl = await emailToImage(payload.content);
       const data = await templateService.createTemplate({
-        // TODO: picture,
+        previewUrl,
         subject: payload.subject,
         subTitle: payload.subTitle,
         content: JSON.stringify(payload.content),
@@ -39,16 +40,14 @@ export default createSliceState({
       return { ...data, ...payload };
     },
     updateById: async (state, payload: { id: number; template: IEmailTemplate; }) => {
+      const previewUrl = await emailToImage(payload.template.content);
       const data = await templateService.updateTemplate(payload.id, {
-        // TODO: picture,
+        previewUrl,
         subject: payload.template.subject,
         subTitle: payload.template.subTitle,
         content: JSON.stringify(payload.template.content),
       });
       return { ...data, ...payload, content: JSON.parse(data.content) };
-    },
-    downloadTemplateImages: async (state, { id }: { id: number | undefined; }) => {
-
     },
   },
 });

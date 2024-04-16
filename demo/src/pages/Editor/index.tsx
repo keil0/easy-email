@@ -42,7 +42,7 @@ import { extractImageUrls } from '@demo/utils/extractImages';
 import { downloadImagesAsZip } from '@demo/utils/downloadImages';
 
 export interface IEmailTemplateModel extends IEmailTemplate {
-  id?: number
+  id?: number;
 }
 
 const defaultCategories: ExtensionProps['categories'] = [
@@ -154,18 +154,12 @@ export default function Editor() {
   }, [templateData]);
 
   const onUploadImage = async (blob: Blob) => {
-    // TODO: Process upload image
-    console.log('TODO: Process upload image');
     const compressionFile = await (
       await imageCompression
     ).default(blob as File, {
       maxWidthOrHeight: 1440,
     });
-    if (templateData && templateData.id) {
-      return services.common.uploadImageToBackend(compressionFile, templateData.id);
-    } else {
-      return services.common.uploadImageToBackend(compressionFile);
-    }
+    return services.common.uploadImageToBackend(compressionFile);
   };
 
   const onImportMJML = async ({ restart }: { restart: (val: IEmailTemplate) => void; }) => {
@@ -320,7 +314,7 @@ export default function Editor() {
           enabledLogic
           dashed={false}
         >
-          {({ values }, { submit, restart }) => {
+          {({ values }, { restart }) => {
             return (
               <>
                 <PageHeader
@@ -384,7 +378,7 @@ export default function Editor() {
                               key="Export Image"
                               onClick={() => onExportImage(values)}
                             >
-                              Export Image
+                              Export Images
                             </Menu.Item>
                           </Menu>
                         }

@@ -9,7 +9,7 @@ export default class Template extends BaseModel {
   declare id: number
 
   @column()
-  declare picture: string
+  declare previewUrl: string
 
   @column()
   declare subject: string

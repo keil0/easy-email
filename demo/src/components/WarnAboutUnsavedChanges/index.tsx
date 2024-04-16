@@ -16,7 +16,6 @@ export function WarnAboutUnsavedChanges() {
 
   useEffect(() => {
     setIsDirty(getIsFormTouched(formState.touched as any));
-    console.log('dirty', dirty);
   }, [formState.touched]);
 
   useEffect(() => {

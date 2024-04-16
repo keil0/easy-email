@@ -31,6 +31,6 @@ export async function emailToImage(content: IBlockData) {
   try {
     return await services.common.uploadImageToBackend(blob);
   } catch (error) {
-    return 'http://res.cloudinary.com/dwkp0e1yo/image/upload/v1665841585/use2lx1xqmrhzceshsys.png';
+    console.error('upload image error', error);
   }
 }

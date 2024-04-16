@@ -19,8 +19,8 @@ export default class TemplatesController {
 
   async createMyTemplate({ request, response, auth }: HttpContext) {
     const payload = await templateValidator.validate(request.all())
-
     const template = await Template.create({
+      previewUrl: payload.previewUrl,
       subject: payload.subject,
       subTitle: payload.subTitle,
       content: payload.content,
@@ -47,6 +47,7 @@ export default class TemplatesController {
 
     await template
       .merge({
+        previewUrl: payload.previewUrl,
         subject: payload.subject,
         subTitle: payload.subTitle,
         content: payload.content,
@@ -78,21 +79,8 @@ export default class TemplatesController {
     })
   }
 
-  async uploadImageTemplate({ request, response, auth }: HttpContext) {
-    const templateId = request.param('id')
-    if (!templateId) {
-      // TODO: Manage upload image for new template
-      return response.status(400).send({
-        message: 'Template ID is required',
-      })
-    }
-    const template = await Template.findBy({ userId: auth.user!.id, id: templateId })
-    if (!template) {
-      return response.status(404).send({
-        message: 'Template not found',
-      })
-    }
-
+  async uploadTemplateImage({ request, response, auth }: HttpContext) {
+    // Get the image
     const image = request.file('image', {
       size: '2mb',
       extnames: ['jpg', 'png', 'jpeg'],
@@ -104,8 +92,9 @@ export default class TemplatesController {
       })
     }
 
-    const imagePath = app.makePath(`public/uploads/${auth.user!.id}/templates/${templateId}`)
+    // Generate image unique name
     const imageName = `${cuid()}.${image.extname}`
+    const imagePath = app.makePath(`public/uploads/${auth.user!.id}`)
 
     await image.move(imagePath, {
       name: imageName,
@@ -114,7 +103,7 @@ export default class TemplatesController {
     const absolutePublicUrl =
       env.get('BASE_DOMAIN') +
       `${env.get('NODE_ENV') === 'development' ? '' : '/auth'}` +
-      `/uploads/${auth.user!.id}/templates/${templateId}/` +
+      `/uploads/${auth.user!.id}/` +
       imageName
 
     // Save image
@@ -123,7 +112,7 @@ export default class TemplatesController {
     })
 
     // Link image to template
-    await imageDb.related('template').associate(template)
+    await imageDb.related('user').associate(auth.user!)
 
     return response.send(absolutePublicUrl)
   }
