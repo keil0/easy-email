@@ -17,14 +17,6 @@ export function Panel() {
               alignment='center'
             />
 
-            {/* // If you want to upload image, you should provide `onUploadImage` to `EmailEditorProvider` */}
-            <ImageUploaderField
-              label='Logo'
-              name={`${focusIdx}.data.value.imageUrl`}
-              inline
-              alignment='center'
-            />
-
             <ColorPickerField
               label='text color'
               name={`${focusIdx}.attributes.text-color`}

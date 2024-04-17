@@ -1,27 +1,28 @@
 import { BlockManager } from 'easy-email-core';
 import { BlockAttributeConfigurationManager, BlockMarketManager, BlockMaskWrapper } from 'easy-email-extensions';
 import React from 'react';
-import { CustomBlocksType } from './constants';
-import { MyFirstBlock, Panel } from './MyFirstBlock';
 
-BlockManager.registerBlocks({ [CustomBlocksType.MY_FIRST_BLOCK]: MyFirstBlock });
+import { InnoceanBlocksType } from './constants';
+import { InnoceanHeaderBlock, Panel } from './InnoceanHeaderBlock';
+
+BlockManager.registerBlocks({ [InnoceanBlocksType.HEADER]: InnoceanHeaderBlock });
 
 BlockAttributeConfigurationManager.add({
-  [CustomBlocksType.MY_FIRST_BLOCK]: Panel
+  [InnoceanBlocksType.HEADER]: Panel
 });
 
 BlockMarketManager.addCategories([
   {
-    title: 'Custom',
-    name: 'Custom',
+    title: 'Innocean',
+    name: 'Innocean',
     blocks: [
       {
-        type: CustomBlocksType.MY_FIRST_BLOCK,
+        type: InnoceanBlocksType.HEADER,
         title: 'My first block',
         description: 'An custom block',
         component: () => (
           <BlockMaskWrapper
-            type={CustomBlocksType.MY_FIRST_BLOCK as any}
+            type={InnoceanBlocksType.HEADER as any}
             payload={{
             }}
           >
