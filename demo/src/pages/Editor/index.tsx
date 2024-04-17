@@ -42,7 +42,7 @@ import { extractImageUrls } from '@demo/utils/extractImages';
 import { downloadImagesAsZip } from '@demo/utils/downloadImages';
 
 import "../../innocean";
-import { CustomBlocksType } from '@demo/innocean/constants';
+import { InnoceanBlocksType } from '@demo/innocean/constants';
 
 export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number;
@@ -81,11 +81,11 @@ const defaultCategories: ExtensionProps['categories'] = [
     ],
   },
   {
-    label: 'Custom',
+    label: 'Innocean',
     active: true,
     blocks: [
       {
-        type: CustomBlocksType.MY_FIRST_BLOCK
+        type: InnoceanBlocksType.HEADER
       }
     ]
   },
