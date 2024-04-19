@@ -125,7 +125,7 @@ export function Button() {
           <Space direction='vertical'>
             <Grid.Row>
               <Grid.Col span={11}>
-                <FontFamily />
+
               </Grid.Col>
               <Grid.Col
                 offset={1}

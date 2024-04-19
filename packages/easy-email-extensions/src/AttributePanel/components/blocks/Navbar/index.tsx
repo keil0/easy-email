@@ -115,7 +115,7 @@ function NavbarLink({
 
         <Grid.Row>
           <Grid.Col span={11}>
-            <FontFamily name={`${focusIdx}.data.value.links.[${index}].font-family`} />
+
           </Grid.Col>
           <Grid.Col
             offset={1}

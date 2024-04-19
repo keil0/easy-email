@@ -37,7 +37,7 @@ export function AccordionTitle() {
                 <FontSize />
               </Grid.Col>
               <Grid.Col offset={1} span={11}>
-                <FontFamily />
+
               </Grid.Col>
             </Grid.Row>
 
