@@ -107,6 +107,21 @@ export const Page = createBlock<IPage>({
       ? `<mj-raw>${value.extraHeadContent}</mj-raw>`
       : '';
 
+    const responsiveUtilities = `
+      <mj-style>
+        @media only screen and (max-width:${value.breakpoint}) {
+          .hide-on-mobile {
+            display: none !important;
+          }
+        }
+        @media only screen and (min-width:${value.breakpoint}) {
+          .hide-on-desktop {
+            display: none !important;
+          }
+        }
+      </mj-style>
+    `;
+
     return (
       <>
         {`
@@ -114,6 +129,7 @@ export const Page = createBlock<IPage>({
           <mj-head>
               ${metaData}
               ${nonResponsive}
+              ${responsiveUtilities}
               ${styles}
               ${userStyle}
               ${breakpoint}
@@ -139,11 +155,9 @@ export const Page = createBlock<IPage>({
             `
                   : ''
               }
-
             </mj-attributes>
           </mj-head>
           <mj-body ${getAdapterAttributesString(params)}>`}
-
         {data.children.map((child, index) => (
           <BlockRenderer
             {...params}
@@ -153,7 +167,7 @@ export const Page = createBlock<IPage>({
           />
         ))}
 
-        {'</mj-body></mjml > '}
+        {'</mj-body></mjml> '}
       </>
     );
   },
