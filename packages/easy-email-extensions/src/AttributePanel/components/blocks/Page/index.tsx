@@ -67,12 +67,6 @@ export function Page({ hideSubTitle, hideSubject }: PageProps) {
             >
               <Grid.Row>
                 <Grid.Col span={11}>
-                  <FontFamily name={`${focusIdx}.data.value.font-family`} />
-                </Grid.Col>
-                <Grid.Col
-                  offset={1}
-                  span={11}
-                >
                   <NumberField
                     label='Font size (px)'
                     name={`${focusIdx}.data.value.font-size`}
@@ -80,26 +74,30 @@ export function Page({ hideSubTitle, hideSubject }: PageProps) {
                     autoComplete='off'
                   />
                 </Grid.Col>
-              </Grid.Row>
-
-              <Grid.Row>
-                <Grid.Col span={11}>
+                <Grid.Col
+                  offset={1}
+                  span={11}
+                >
                   <InputWithUnitField
                     label={t('Line height')}
                     unitOptions='percent'
                     name={`${focusIdx}.data.value.line-height`}
                   />
                 </Grid.Col>
-                <Grid.Col
-                  offset={1}
-                  span={11}
-                >
+              </Grid.Row>
+
+              <Grid.Row>
+                <Grid.Col span={11}>
                   <InputWithUnitField
                     label={t('Font weight')}
                     unitOptions='percent'
                     name={`${focusIdx}.data.value.font-weight`}
                   />
                 </Grid.Col>
+                <Grid.Col
+                  offset={1}
+                  span={11}
+                 />
               </Grid.Row>
 
               <Grid.Row>
@@ -134,7 +132,6 @@ export function Page({ hideSubTitle, hideSubject }: PageProps) {
               />
               <Stack.Item />
               <Stack.Item />
-              <AddFont />
               <Stack.Item />
               <Stack.Item />
             </Stack>

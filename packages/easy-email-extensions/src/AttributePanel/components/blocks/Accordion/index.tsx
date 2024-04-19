@@ -71,7 +71,7 @@ export function Accordion() {
                 offset={1}
                 span={11}
               >
-                <FontFamily />
+
               </Grid.Col>
             </Grid.Row>
 

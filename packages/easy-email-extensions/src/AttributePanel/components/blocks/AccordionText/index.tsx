@@ -43,7 +43,7 @@ export function AccordionText() {
             </Grid.Row>
             <Grid.Row>
               <Grid.Col span={11}>
-                <FontFamily />
+
               </Grid.Col>
               <Grid.Col offset={1} span={11}>
                 <BackgroundColor />
