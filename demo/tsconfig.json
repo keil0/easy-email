@@ -22,6 +22,12 @@
     "paths": {
       "@demo": ["src"],
       "@demo/*": ["src/*"],
+      "@core": [
+        "../easy-email-core/src"
+      ],
+      "@core/*": [
+        "../easy-email-core/src/*"
+      ],
       "easy-email-localization/*": ["../packages/easy-email-localization/*"],
       "easy-email-editor/lib/locales.json": [
         "../packages/easy-email-editor/lib/locales.json"
