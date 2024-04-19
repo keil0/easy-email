@@ -1,18 +1,14 @@
 import { AdvancedType, BasicType, components, IBlock, IBlockData } from 'easy-email-core';
-import { BasicBlock } from '@core/components/BasicBlock';
 import React from 'react';
+import { BasicBlock } from '@core/components/BasicBlock';
+import { InnoceanBlocksType } from '../constants';
 import { merge } from 'lodash';
 
-import { InnoceanBlocksType } from '../constants';
-
 export type ICustomHeader = IBlockData<
+  {},
   {
-    'background-color': string;
-    'text-color': string;
-  },
-  {
-    buttonText: string;
-    imageUrl: string
+    desktopImageUrl: string
+    mobileImageUrl: string
   }
 >;
 
@@ -26,14 +22,11 @@ export const InnoceanHeaderBlock: IBlock = {
       type: InnoceanBlocksType.HEADER,
       data: {
         value: {
-          buttonText: 'Got it',
-          imageUrl: 'https://assets.maocanhua.cn/10dada65-c4fb-4b1f-837e-59a1005bbea6-image.png',
+          desktopImageUrl: payload?.data?.value.desktopImageUrl,
+          mobileImageUrl: payload?.data?.value.mobileImageUrl,
         },
       },
-      attributes: {
-        'background-color': '#4A90E2',
-        'text-color': '#ffffff',
-      },
+      attributes: {},
       children: [],
     };
     return merge(defaultData, payload);
@@ -41,16 +34,34 @@ export const InnoceanHeaderBlock: IBlock = {
   validParentType: [
     BasicType.PAGE,
     AdvancedType.WRAPPER,
-    AdvancedType.COLUMN,
-    AdvancedType.GROUP,
-    AdvancedType.SECTION
   ],
   render(params) {
     return (
       <BasicBlock
         params={params}
         tag="mj-section"
-      ></BasicBlock>
+      >
+        <components.Section css-class={'hide-on-desktop'}>
+          <components.Image
+            params={params}
+            tag="mj-image"
+            src={params.data.data.value.mobileImageUrl}
+            padding="0"
+            alt="hyundai"
+            css-class={'keilo'}
+          />
+        </components.Section>
+        <components.Section css-class={'hide-on-mobile'}>
+          <components.Image
+            params={params}
+            tag="mj-image"
+            src={params.data.data.value.desktopImageUrl}
+            width="600px"
+            padding="0"
+            alt="hyundai"
+          />
+        </components.Section>
+      </BasicBlock>
     );
   },
 };

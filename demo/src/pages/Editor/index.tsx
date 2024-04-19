@@ -21,7 +21,7 @@ import { saveAs } from 'file-saver';
 import {
   EmailEditor,
   EmailEditorProvider,
-  IEmailTemplate,
+  IEmailTemplate, useActiveTab,
 } from 'easy-email-editor';
 import { Stack } from '@demo/components/Stack';
 
@@ -40,7 +40,7 @@ import enUS from '@arco-design/web-react/es/locale/en-US';
 import { WarnAboutUnsavedChanges } from '@demo/components/WarnAboutUnsavedChanges';
 import { extractImageUrls } from '@demo/utils/extractImages';
 import { downloadImagesAsZip } from '@demo/utils/downloadImages';
-
+const imageCompression = import('browser-image-compression');
 import "../../innocean";
 import { InnoceanBlocksType } from '@demo/innocean/constants';
 
@@ -120,7 +120,14 @@ const defaultCategories: ExtensionProps['categories'] = [
   },
 ];
 
-const imageCompression = import('browser-image-compression');
+export   const onUploadImage = async (blob: Blob) => {
+  const compressionFile = await (
+    await imageCompression
+  ).default(blob as File, {
+    maxWidthOrHeight: 1440,
+  });
+  return services.common.uploadImageToBackend(compressionFile);
+};
 
 const fontList = [
   'Helvetica, Arial, Verdana, sans serif',
@@ -164,15 +171,6 @@ export default function Editor() {
       history.replace(`/editor/${templateData.id}`);
     }
   }, [templateData]);
-
-  const onUploadImage = async (blob: Blob) => {
-    const compressionFile = await (
-      await imageCompression
-    ).default(blob as File, {
-      maxWidthOrHeight: 1440,
-    });
-    return services.common.uploadImageToBackend(compressionFile);
-  };
 
   const onImportMJML = async ({ restart }: { restart: (val: IEmailTemplate) => void; }) => {
     const uploader = new Uploader(() => Promise.resolve(''), {

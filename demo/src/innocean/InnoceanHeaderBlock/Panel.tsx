@@ -1,7 +1,8 @@
 import React from 'react';
-import { ColorPickerField, TextField, ImageUploaderField, AttributesPanelWrapper } from 'easy-email-extensions';
+import { AttributesPanelWrapper, ImageUploaderField } from 'easy-email-extensions';
 import { useFocusIdx, Stack, } from 'easy-email-editor'
 import { Collapse } from 'antd';
+import { onUploadImage } from '@demo/pages/Editor';
 
 export function Panel() {
   const { focusIdx } = useFocusIdx();
@@ -10,25 +11,19 @@ export function Panel() {
       <Collapse defaultActiveKey={['1']}>
         <Collapse.Panel key='1' header='Setting'>
           <Stack vertical>
-            <TextField
-              label='Button text'
-              name={`${focusIdx}.data.value.buttonText`}
+            <ImageUploaderField
+              label='Desktop Image'
+              name={`${focusIdx}.data.value.desktopImageUrl`}
               inline
               alignment='center'
+              uploadHandler={onUploadImage}
             />
-
-            <ColorPickerField
-              label='text color'
-              name={`${focusIdx}.attributes.text-color`}
+            <ImageUploaderField
+              label='Mobile Image'
+              name={`${focusIdx}.data.value.mobileImageUrl`}
               inline
               alignment='center'
-            />
-
-            <ColorPickerField
-              label='Background color'
-              name={`${focusIdx}.attributes.background-color`}
-              inline
-              alignment='center'
+              uploadHandler={onUploadImage}
             />
           </Stack>
         </Collapse.Panel>
