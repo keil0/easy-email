@@ -1,9 +1,9 @@
-name: "Deploy auth backend"
+name: "Deploy demo frontend"
 
 on:
   push:
-    branches: [master]
-    paths: ['backend/**']
+    branches: [release]
+    paths: ['packages/**', 'demo/**', '.github/workflows/deploy-demo.yml', 'docker/frontend/**']
 
 jobs:
   build-and-push-docker-image:
@@ -36,11 +36,12 @@ jobs:
       - name: Build image and push to registry
         uses: docker/build-push-action@v2
         with:
-          file: docker/backend/Dockerfile
-          context: backend
+          file: docker/frontend/Dockerfile
+          context: .
           build-args: |
             NODE_ENV=production
-          tags: ghcr.io/${{ github.repository_owner }}/easy-email-auth:latest
+            VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}
+          tags: ghcr.io/${{ github.repository_owner }}/easy-email:latest
           push: ${{ github.ref == 'refs/heads/master' }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new

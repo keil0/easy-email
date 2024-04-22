@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  easy-email-auth:
+    container_name: easy-email-auth
+    image: ghcr.io/keil0/easy-email-auth:latest
+    restart: always
+    env_file: .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.easy-email-auth.rule=Host(`easy-email.pierrecruz.com`) && PathPrefix(`/auth`)"
+      - "traefik.http.middlewares.auth-strip.stripprefix.prefixes=/auth"
+      - "traefik.http.routers.easy-email-auth.middlewares=auth-strip@docker"
+      - "traefik.http.routers.easy-email-auth.entrypoints=websecure"
+      - "traefik.http.routers.easy-email-auth.tls=true"
+    volumes:
+      - ./uploads:/usr/src/app/public/uploads
+    networks:
+      - traefik_network
+
+  easy-email-app:
+    container_name: easy-email-app
+    image: ghcr.io/keil0/easy-email:latest
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.easy-email-app.rule=Host(`easy-email.pierrecruz.com`)"
+      - "traefik.http.routers.easy-email-app.entrypoints=websecure"
+      - "traefik.http.routers.easy-email-app.tls=true"
+      # Authentication
+      - "traefik.http.middlewares.auth-forward.forwardauth.address=https://easy-email.pierrecruz.com/auth"
+      - "traefik.http.middlewares.auth-forward.forwardauth.trustForwardHeader=true"
+      - "traefik.http.middlewares.auth-forward.forwardauth.authResponseHeaders=X-Forwarded-User"
+      - "traefik.http.routers.easy-email-app.middlewares=auth-forward@docker"
+    networks:
+      - traefik_network
+
+  traefik:
+    image: traefik:v2.3
+    container_name: traefik
+    command:
+      - --log.level=ERROR
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --api.dashboard=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/etc/traefik/traefik.yml
+    networks:
+      - traefik_network
+
+networks:
+  traefik_network:
