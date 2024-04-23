@@ -1,43 +1,11 @@
-version: '3.8'
-
 services:
-  easy-email-auth:
-    container_name: easy-email-auth
-    image: ghcr.io/keil0/easy-email-auth:latest
-    restart: always
-    env_file: .env
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.easy-email-auth.rule=Host(`easy-email.pierrecruz.com`) && PathPrefix(`/auth`)"
-      - "traefik.http.middlewares.auth-strip.stripprefix.prefixes=/auth"
-      - "traefik.http.routers.easy-email-auth.middlewares=auth-strip@docker"
-      - "traefik.http.routers.easy-email-auth.entrypoints=websecure"
-      - "traefik.http.routers.easy-email-auth.tls=true"
-    volumes:
-      - ./uploads:/usr/src/app/public/uploads
-    networks:
-      - traefik_network
-
-  easy-email-app:
-    container_name: easy-email-app
-    image: ghcr.io/keil0/easy-email:latest
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.easy-email-app.rule=Host(`easy-email.pierrecruz.com`)"
-      - "traefik.http.routers.easy-email-app.entrypoints=websecure"
-      - "traefik.http.routers.easy-email-app.tls=true"
-      # Authentication
-      - "traefik.http.middlewares.auth-forward.forwardauth.address=https://easy-email.pierrecruz.com/auth"
-      - "traefik.http.middlewares.auth-forward.forwardauth.trustForwardHeader=true"
-      - "traefik.http.middlewares.auth-forward.forwardauth.authResponseHeaders=X-Forwarded-User"
-      - "traefik.http.routers.easy-email-app.middlewares=auth-forward@docker"
-    networks:
-      - traefik_network
-
   traefik:
     image: traefik:v2.3
     container_name: traefik
+    networks:
+      - traefik_network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     command:
       - --log.level=ERROR
       - --providers.docker=true
@@ -50,11 +18,41 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.yml:/etc/traefik/traefik.yml
+
+  postcard-auth:
+    container_name: postcard-auth
+    image: ghcr.io/keil0/easy-email-auth:latest
+    restart: always
+    env_file: .env
     networks:
       - traefik_network
+    volumes:
+      - ./uploads:/usr/src/app/public/uploads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.postcard-auth.rule=Host(`postcard.innocean.app`) && PathPrefix(`/auth`)"
+      - "traefik.http.middlewares.auth-strip.stripprefix.prefixes=/auth"
+      - "traefik.http.routers.postcard-auth.middlewares=auth-strip"
+      - "traefik.http.routers.postcard-auth.entrypoints=websecure"
+      - "traefik.http.routers.postcard-auth.tls=true"
+
+  postcard-app:
+    container_name: postcard-app
+    image: ghcr.io/keil0/easy-email:latest
+    restart: always
+    networks:
+      - traefik_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.postcard-app.rule=Host(`postcard.innocean.app`)"
+      - "traefik.http.routers.postcard-app.entrypoints=websecure"
+      - "traefik.http.routers.postcard-app.tls=true"
+      # Authentication
+      - "traefik.http.middlewares.auth-forward.forwardauth.address=https://postcard.innocean.app/auth"
+      - "traefik.http.middlewares.auth-forward.forwardauth.trustForwardHeader=true"
+      - "traefik.http.middlewares.auth-forward.forwardauth.authResponseHeaders=X-Forwarded-User"
+      - "traefik.http.routers.postcard-app.middlewares=auth-forward@docker"
 
 networks:
   traefik_network:
+    driver: bridge

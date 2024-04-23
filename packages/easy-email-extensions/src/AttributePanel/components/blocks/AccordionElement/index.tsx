@@ -15,7 +15,7 @@ export function AccordionElement() {
           <Space direction='vertical'>
             <Border />
             <BackgroundColor />
-            <FontFamily />
+
           </Space>
         </Collapse.Item>
       </Collapse>

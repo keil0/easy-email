@@ -47,7 +47,6 @@ export function Table() {
 
         <Collapse.Item name='2' header={t('Typography')}>
           <Stack>
-            <FontFamily />
             <FontSize />
           </Stack>
           <FontStyle />

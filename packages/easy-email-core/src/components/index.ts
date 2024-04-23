@@ -20,4 +20,5 @@ export { Social } from './Social';
 export { Table } from './Table';
 export { Template } from './Template';
 export { BlockRenderer } from './BlockRenderer';
+export { BasicBlock } from './BasicBlock';
 export { default as MjmlBlock } from './MjmlBlock';

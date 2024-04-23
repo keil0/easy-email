@@ -30,8 +30,8 @@ services:
       - ./uploads:/usr/src/app/public/uploads
     networks:
       - traefik_network
-  easy-email-app:
 
+  easy-email-app:
     container_name: easy-email-app
     image: ghcr.io/keil0/easy-email:latest
     restart: always
