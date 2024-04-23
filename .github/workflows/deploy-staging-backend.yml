@@ -1,15 +1,15 @@
-name: "Deploy auth backend"
+name: "Deploy staging backend"
 
 on:
   push:
     branches: [release]
-    paths: ['backend/**']
+    paths: ['backend/**', '.github/workflows/deploy-staging-backend.yml']
 
 jobs:
   build-and-push-docker-image:
     name: Build Docker image and push to repository
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

@@ -22,7 +22,7 @@ docker exec -it easy-email-auth node ace migration:run
 ```
 
 ## Install prod environment
-#### Prerequisites
+### Prerequisites
 - VPS server
 - Domain linked to it
 - [Docker](https://docs.docker.com/get-docker/)
@@ -30,7 +30,7 @@ docker exec -it easy-email-auth node ace migration:run
 - [Github CLI](https://docs.github.com/en/get-started/getting-started-with-git/set-up-git#using-git)
 - A database server (MySQL, Postgres, etc.) with a database created and user with access to it
 
-#### Create environment
+### Create environment
 1. Create a folder for the project "postcard"
 2. Copy content of docker.the docker-compose.prd.yml into docker-compose.yml
 3. Create .env file base from .env.example
@@ -49,21 +49,27 @@ docker exec -it easy-email-auth node ace migration:run
     docker exec -it postcard-auth node ace migration:run
     ```
    
-## Database manual operations
-### Connect to the database
+### Database manual operations
+#### Connect to the database
 ```bash
 docker run --rm -it mysql bash
 mysql -h 51.159.113.67 --port 10792 -p -u innocean postcard
 ```
-### List all users
+#### List all users
 ```bash
 SELECT * FROM users;
 ```
-### Insert a new user
+#### Insert a new user
 ```bash
 INSERT INTO users (full_name, email, created_at) VALUES ('John', 'contact@example.com', NOW());
 ```
-### Delete a user
+#### Delete a user
 ```bash
 DELETE FROM users WHERE email = 'contact@example.com';
 ```
+
+## Configure CI/CD
+Define the following secrets in the repository settings:
+- `GHCR_TOKEN`: Github Personal Access Token to access Github packages
+And the following environment variables for staging / production in the repository settings:
+- `VITE_API_BASE_URL`: Backend base URL (e.g. https://postcard.innocean.app/auth)
