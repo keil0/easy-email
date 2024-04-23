@@ -1,8 +1,8 @@
 import { AdvancedType, BasicType, components, IBlock, IBlockData } from 'easy-email-core';
 import React from 'react';
-import { BasicBlock } from '@core/components/BasicBlock';
-import { InnoceanBlocksType } from '../constants';
 import { merge } from 'lodash';
+
+import { InnoceanBlocksType } from '../constants';
 
 export type ICustomHeader = IBlockData<
   {},
@@ -37,7 +37,7 @@ export const InnoceanHeaderBlock: IBlock = {
   ],
   render(params) {
     return (
-      <BasicBlock
+      <components.BasicBlock
         params={params}
         tag="mj-section"
       >
@@ -61,7 +61,7 @@ export const InnoceanHeaderBlock: IBlock = {
             alt="hyundai"
           />
         </components.Section>
-      </BasicBlock>
+      </components.BasicBlock>
     );
   },
 };
