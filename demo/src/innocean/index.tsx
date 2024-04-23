@@ -3,12 +3,15 @@ import { BlockAttributeConfigurationManager } from 'easy-email-extensions';
 
 
 import { InnoceanBlocksType } from './constants';
-import { InnoceanHeaderBlock, Panel } from './InnoceanHeaderBlock';
+import { InnoceanHeaderBlock, Panel as HeaderPanel } from './InnoceanHeaderBlock';
+import { InnoceanButtonBlock, Panel as ButtonPanel } from './InnoceanButtonBlock';
 
 BlockManager.registerBlocks({
-  [InnoceanBlocksType.HEADER]: InnoceanHeaderBlock
+  [InnoceanBlocksType.HEADER]: InnoceanHeaderBlock,
+  [InnoceanBlocksType.BUTTON]: InnoceanButtonBlock
 });
 
 BlockAttributeConfigurationManager.add({
-  [InnoceanBlocksType.HEADER]: Panel
+  [InnoceanBlocksType.HEADER]: HeaderPanel,
+  [InnoceanBlocksType.BUTTON]: ButtonPanel
 });
