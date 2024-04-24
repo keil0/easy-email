@@ -34,8 +34,6 @@ FROM nginx:stable-alpine as production-stage
 # Copie les fichiers construits de l'étape précédente vers le dossier de service nginx
 COPY --from=build-stage /app/demo/dist /usr/share/nginx/html
 
-
-
 # Expose le port 80 pour accéder à l'application
 EXPOSE 80
 

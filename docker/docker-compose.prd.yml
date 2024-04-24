@@ -31,10 +31,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.postcard-auth.rule=Host(`postcard.innocean.app`) && PathPrefix(`/auth`)"
-      - "traefik.http.middlewares.auth-strip.stripprefix.prefixes=/auth"
-      - "traefik.http.routers.postcard-auth.middlewares=auth-strip"
-      - "traefik.http.routers.postcard-auth.entrypoints=websecure"
+      # SSL
       - "traefik.http.routers.postcard-auth.tls=true"
+      - "traefik.http.routers.postcard-auth.entrypoints=websecure"
+      # Middleware to strip the /auth prefix
+      - "traefik.http.middlewares.auth-strip.stripprefix.prefixes=/auth"
+      # Apply middlewares
+      - "traefik.http.routers.postcard-auth.middlewares=auth-strip"
 
   postcard-app:
     container_name: postcard-app
@@ -45,12 +48,14 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.postcard-app.rule=Host(`postcard.innocean.app`)"
+      # SSL
       - "traefik.http.routers.postcard-app.entrypoints=websecure"
       - "traefik.http.routers.postcard-app.tls=true"
-      # Authentication
+      # Authentification middleware
       - "traefik.http.middlewares.auth-forward.forwardauth.address=https://postcard.innocean.app/auth"
       - "traefik.http.middlewares.auth-forward.forwardauth.trustForwardHeader=true"
       - "traefik.http.middlewares.auth-forward.forwardauth.authResponseHeaders=X-Forwarded-User"
+      # Apply middlewares
       - "traefik.http.routers.postcard-app.middlewares=auth-forward@docker"
 
 networks:

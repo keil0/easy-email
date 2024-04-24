@@ -27,7 +27,7 @@ services:
       - "traefik.http.routers.easy-email-auth.entrypoints=websecure"
       - "traefik.http.routers.easy-email-auth.tls.certresolver=myresolver"
     volumes:
-      - ./uploads:/usr/src/app/public/uploads
+      - ./uploads:/usr/src/app/build/public/uploads
     networks:
       - traefik_network
 
@@ -38,12 +38,14 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.easy-email-app.rule=Host(`easy-email.pierrecruz.com`)"
-      - "traefik.http.routers.easy-email-app.entrypoints=websecure"
-      - "traefik.http.routers.easy-email-app.tls.certresolver=myresolver"
-      # Authentification
+      # Authentification middleware
       - "traefik.http.middlewares.auth-forward.forwardauth.address=https://easy-email.pierrecruz.com/auth"
       - "traefik.http.middlewares.auth-forward.forwardauth.trustForwardHeader=true"
       - "traefik.http.middlewares.auth-forward.forwardauth.authResponseHeaders=X-Forwarded-User"
+      # SSL
+      - "traefik.http.routers.easy-email-app.entrypoints=websecure"
+      - "traefik.http.routers.easy-email-app.tls.certresolver=myresolver"
+      # Apply middlewares
       - "traefik.http.routers.easy-email-app.middlewares=auth-forward"
     networks:
       - traefik_network
