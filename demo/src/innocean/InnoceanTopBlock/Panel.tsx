@@ -1,5 +1,5 @@
 import React from 'react';
-import { AttributesPanelWrapper, ImageUploaderField } from 'easy-email-extensions';
+import { AttributesPanelWrapper, ImageUploaderField, TextField } from 'easy-email-extensions';
 import { useFocusIdx, Stack, } from 'easy-email-editor'
 import { onUploadImage } from '@demo/pages/Editor';
 
@@ -8,6 +8,12 @@ export function Panel() {
   return (
     <AttributesPanelWrapper>
       <Stack vertical>
+        <TextField
+          label="Link url"
+          name={`${focusIdx}.data.value.link`}
+          inline
+          alignment="center"
+        />
         <ImageUploaderField
           label='Desktop Image'
           name={`${focusIdx}.data.value.desktopImageUrl`}

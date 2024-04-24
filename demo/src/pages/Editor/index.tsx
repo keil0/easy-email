@@ -85,6 +85,9 @@ const defaultCategories: ExtensionProps['categories'] = [
     active: true,
     blocks: [
       {
+        type: InnoceanBlocksType.TOP
+      },
+      {
         type: InnoceanBlocksType.HEADER
       },
       {

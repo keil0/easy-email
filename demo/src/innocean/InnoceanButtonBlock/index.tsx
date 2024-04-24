@@ -4,11 +4,11 @@ import { merge } from 'lodash';
 
 import { InnoceanBlocksType } from '../constants';
 
-export type ICustomHeader = IBlockData<
+export type IInnoceanButton = IBlockData<
   {},
   {
-    desktopImageUrl: string
-    mobileImageUrl: string
+    buttonLink: string
+    buttonText: string
   }
 >;
 
@@ -18,15 +18,22 @@ export const InnoceanButtonBlock: IBlock = {
   create(
     payload,
   ) {
-    const defaultData: ICustomHeader = {
+    const defaultData: IInnoceanButton = {
       type: InnoceanBlocksType.BUTTON,
       data: {
         value: {
-          desktopImageUrl: payload?.data?.value.desktopImageUrl,
-          mobileImageUrl: payload?.data?.value.mobileImageUrl,
+          buttonText: payload?.data?.value.buttonText,
+          buttonLink: payload?.data?.value.buttonLink,
         },
       },
-      attributes: {},
+      attributes: {
+        "border-radius": "0px",
+        "font-size": "15px",
+        align: "left",
+        "inner-padding": "15px 38px",
+        padding: "0px",
+        "background-color": "#002c5f",
+      },
       children: [],
     };
     return merge(defaultData, payload);
@@ -34,34 +41,13 @@ export const InnoceanButtonBlock: IBlock = {
   validParentType: [
     BasicType.PAGE,
     AdvancedType.WRAPPER,
+    AdvancedType.COLUMN,
   ],
   render(params) {
     return (
-      <components.BasicBlock
-        params={params}
-        tag="mj-section"
-      >
-        <components.Section css-class={'hide-on-desktop'}>
-          <components.Image
-            params={params}
-            tag="mj-image"
-            src={params.data.data.value.mobileImageUrl}
-            padding="0"
-            alt="hyundai"
-            css-class={'keilo'}
-          />
-        </components.Section>
-        <components.Section css-class={'hide-on-mobile'}>
-          <components.Image
-            params={params}
-            tag="mj-image"
-            src={params.data.data.value.desktopImageUrl}
-            width="600px"
-            padding="0"
-            alt="hyundai"
-          />
-        </components.Section>
-      </components.BasicBlock>
+      <components.Section padding='0px'>
+
+      </components.Section>
     );
   },
 };

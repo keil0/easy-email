@@ -4,26 +4,26 @@ import { merge } from 'lodash';
 
 import { InnoceanBlocksType } from '../constants';
 
-const { BasicBlock, Section, Image } = components;
+const { BasicBlock, Column, Text, Section, Image } = components;
 
-export type ICustomHeader = IBlockData<
+export type ICustomTop = IBlockData<
   {},
   {
+    link: string
     desktopImageUrl: string
     mobileImageUrl: string
   }
 >;
 
-export const InnoceanHeaderBlock: IBlock = {
-  name: 'Header',
-  type: InnoceanBlocksType.HEADER,
-  create(
-    payload,
-  ) {
-    const defaultData: ICustomHeader = {
-      type: InnoceanBlocksType.HEADER,
+export const InnoceanTopBlock: IBlock = {
+  name: 'Top',
+  type: InnoceanBlocksType.TOP,
+  create(payload) {
+    const defaultData: ICustomTop = {
+      type: InnoceanBlocksType.TOP,
       data: {
         value: {
+          link: payload?.data?.value.link,
           desktopImageUrl: payload?.data?.value.desktopImageUrl,
           mobileImageUrl: payload?.data?.value.mobileImageUrl,
         },
@@ -40,9 +40,17 @@ export const InnoceanHeaderBlock: IBlock = {
   render(params) {
     return (
       <BasicBlock
-        params={params}
+        params={{
+          ...params,
+          data: { ...params.data, attributes: { 'background-color': '#F6F3F2', 'padding': '0px' } },
+        }}
         tag="mj-section"
       >
+        <Section padding={"0px"}>
+          <Column>
+            <Text font-size={"10px"} font-family={"Helvetica"} padding={"0px"} align={"center"}>{`Un problème d'affichage ? <a href='${params.data.data.value.link}'>Cliquez ici</a>`}</Text>
+          </Column>
+        </Section>
         <Section padding={"0px"} css-class={'hide-on-desktop'}>
           <Image
             params={params}
@@ -67,5 +75,6 @@ export const InnoceanHeaderBlock: IBlock = {
   },
 };
 
-
-export { Panel } from './Panel';
+export {
+  Panel,
+} from './Panel';

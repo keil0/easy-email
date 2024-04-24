@@ -1,35 +1,26 @@
 import React from 'react';
-import { AttributesPanelWrapper, ImageUploaderField } from 'easy-email-extensions';
-import { useFocusIdx, Stack, } from 'easy-email-editor'
-import { Collapse } from 'antd';
-import { onUploadImage } from '@demo/pages/Editor';
+import { AttributesPanelWrapper, TextField } from 'easy-email-extensions';
+import { useFocusIdx } from 'easy-email-editor';
+import { Stack } from '@demo/components/Stack';
 
 export function Panel() {
   const { focusIdx } = useFocusIdx();
   return (
     <AttributesPanelWrapper>
-      <Collapse defaultActiveKey={['1']}>
-        <Collapse.Panel key='1' header='Setting'>
-          <Stack vertical>
-            <ImageUploaderField
-              label='Desktop Image'
-              name={`${focusIdx}.data.value.desktopImageUrl`}
-              inline
-              alignment='center'
-              uploadHandler={onUploadImage}
-            />
-            <ImageUploaderField
-              label='Mobile Image'
-              name={`${focusIdx}.data.value.mobileImageUrl`}
-              inline
-              alignment='center'
-              uploadHandler={onUploadImage}
-            />
-          </Stack>
-        </Collapse.Panel>
-      </Collapse>
-
+      <Stack vertical>
+        <TextField
+          label="Button text"
+          name={`${focusIdx}.data.value.buttonText`}
+          inline
+          alignment="center"
+        />
+        <TextField
+          label="Button link"
+          name={`${focusIdx}.data.value.buttonLink`}
+          inline
+          alignment="center"
+        />
+      </Stack>
     </AttributesPanelWrapper>
-
   );
 }
