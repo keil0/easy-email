@@ -25,7 +25,7 @@ import {
 } from 'easy-email-editor';
 import { Stack } from '@demo/components/Stack';
 
-import { AdvancedType, IBlockData, JsonToMjml } from 'easy-email-core';
+import { AdvancedType, BasicType, IBlockData, JsonToMjml } from 'easy-email-core';
 import {
   ExtensionProps,
   MjmlToJson,
@@ -53,6 +53,9 @@ const defaultCategories: ExtensionProps['categories'] = [
     label: 'Content',
     active: true,
     blocks: [
+      {
+        type: BasicType.TEXT,
+      },
       {
         type: AdvancedType.TEXT,
       },
@@ -85,11 +88,44 @@ const defaultCategories: ExtensionProps['categories'] = [
     active: true,
     blocks: [
       {
-        type: InnoceanBlocksType.HEADER
+        type: InnoceanBlocksType.TOP
+      },
+      {
+        type: InnoceanBlocksType.RESPONSIVE_IMAGE
       },
       {
         type: InnoceanBlocksType.BUTTON
-      }
+      },
+      {
+        type: InnoceanBlocksType.TEXT_BLOCK
+      },
+      {
+        type: InnoceanBlocksType.TITLE_IMAGE_BLOCK
+      },
+      {
+        type: InnoceanBlocksType.TWO_COLUMNS
+      },
+      {
+        type: InnoceanBlocksType.THREE_COLUMNS
+      },
+      {
+        type: InnoceanBlocksType.FOUR_COLUMNS
+      },
+      {
+        type: InnoceanBlocksType.HERO
+      },
+      {
+        type: InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA
+      },
+      {
+        type: InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE
+      },
+      {
+        type: InnoceanBlocksType.SLICE_CTA_IMAGE
+      },
+      {
+        type: InnoceanBlocksType.SLICE_IMAGE_CTA
+      },
     ]
   },
   {
@@ -123,7 +159,7 @@ const defaultCategories: ExtensionProps['categories'] = [
   },
 ];
 
-export   const onUploadImage = async (blob: Blob) => {
+export const onUploadImage = async (blob: Blob) => {
   const compressionFile = await (
     await imageCompression
   ).default(blob as File, {

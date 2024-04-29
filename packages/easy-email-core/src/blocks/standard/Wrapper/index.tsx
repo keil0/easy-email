@@ -31,7 +31,7 @@ export const Wrapper = createBlock<IWrapper>({
         value: {},
       },
       attributes: {
-        padding: '20px 0px 20px 0px',
+        padding: '0px 0px 0px 0px',
         border: 'none',
         direction: 'ltr',
         'text-align': 'center',
