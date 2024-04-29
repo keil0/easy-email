@@ -26,7 +26,7 @@ export const InnoceanSliceCTAImage = createBlock<IBlockData>({
       },
       attributes: {
         'background-color': '#FFFFFF',
-        padding: '0 20px 25px 20px',
+        padding: '0 25px',
       },
       children: [
         {
@@ -44,14 +44,14 @@ export const InnoceanSliceCTAImage = createBlock<IBlockData>({
                 value: {},
               },
               attributes: {
-                padding: "15px 25px"
+                padding: "15px 25px 15px 0"
               },
               children: [
                 {
                   type: 'text',
                   data: {
                     value: {
-                      content: 'Sed porttitor eget justo eu ornare. Etiam ut orci non eros vestibulum luctus. Proin mattis odio at dignissim condimentum. Pellentesque molestie velit dolor, vel dignissim augue posuere sit amet.',
+                      content: 'Sed porttitor eget justo eu ornare. Etiam ut orci non eros vestibulum luctus. Proin mattis odio at dignissim condimentum.',
                     },
                   },
                   attributes: {
@@ -95,14 +95,14 @@ export const InnoceanSliceCTAImage = createBlock<IBlockData>({
                 value: {},
               },
               attributes: {
-                'padding': '0 25px',
+                'padding': '0px',
               },
               children: [
                 {
                   type: InnoceanBlocksType.RESPONSIVE_IMAGE,
                   data: {
                     value: {
-                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/1200x688/004dff/fff.png&text=header-desktop',
+                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/700x688/004dff/fff.png&text=header-desktop',
                       mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=header-mobile',
                     },
                   },
