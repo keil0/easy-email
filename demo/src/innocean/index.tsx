@@ -19,6 +19,7 @@ import { InnoceanSliceBackgroundImageCTA, Panel as SliceBackgroundImageCTAPanel 
 import { InnoceanSliceBackgroundCTAImage, Panel as SliceBackgroundCTAImagePanel } from './InnoceanSliceBackgroundCTAImage';
 import { InnoceanSliceCTAImage, Panel as SliceCTAImagePanel } from './InnoceanSliceCTAImage';
 import { InnoceanSliceImageCTA, Panel as SliceImageCTAPanel } from './InnoceanSliceImageCTA';
+import { InnoceanSideImage, Panel as SideImagePanel } from './InnoceanSideImage';
 
 BlockManager.registerBlocks({
   [InnoceanBlocksType.RESPONSIVE_IMAGE]: InnoceanResponsiveImage,
@@ -34,6 +35,7 @@ BlockManager.registerBlocks({
   [InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE]: InnoceanSliceBackgroundCTAImage,
   [InnoceanBlocksType.SLICE_CTA_IMAGE]: InnoceanSliceCTAImage,
   [InnoceanBlocksType.SLICE_IMAGE_CTA]: InnoceanSliceImageCTA,
+  [InnoceanBlocksType.SIDE_IMAGE]: InnoceanSideImage,
 });
 
 BlockAttributeConfigurationManager.add({
@@ -50,4 +52,5 @@ BlockAttributeConfigurationManager.add({
   [InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE]: SliceBackgroundCTAImagePanel,
   [InnoceanBlocksType.SLICE_CTA_IMAGE]: SliceCTAImagePanel,
   [InnoceanBlocksType.SLICE_IMAGE_CTA]: SliceImageCTAPanel,
+  [InnoceanBlocksType.SIDE_IMAGE]: SideImagePanel,
 });

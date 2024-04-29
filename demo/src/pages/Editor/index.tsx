@@ -126,6 +126,9 @@ const defaultCategories: ExtensionProps['categories'] = [
       {
         type: InnoceanBlocksType.SLICE_IMAGE_CTA
       },
+      {
+        type: InnoceanBlocksType.SIDE_IMAGE
+      },
     ]
   },
   {

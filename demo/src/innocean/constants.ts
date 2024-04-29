@@ -1,5 +1,3 @@
-import { IInnoceanSliceColoredImageCTA } from 'src/innocean/InnoceanSliceBackgroundImageCTA';
-
 export enum InnoceanBlocksType {
   TOP = 'TOP',
   RESPONSIVE_IMAGE = 'RESPONSIVE_IMAGE',
@@ -14,4 +12,5 @@ export enum InnoceanBlocksType {
   SLICE_BACKGROUND_CTA_IMAGE = 'SLICE_BACKGROUND_CTA_IMAGE',
   SLICE_IMAGE_CTA = 'SLICE_IMAGE_CTA',
   SLICE_CTA_IMAGE = 'SLICE_CTA_IMAGE',
+  SIDE_IMAGE = 'SIDE_IMAGE',
 }
