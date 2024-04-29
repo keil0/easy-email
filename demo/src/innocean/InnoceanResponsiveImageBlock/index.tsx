@@ -6,7 +6,7 @@ import { InnoceanBlocksType } from '../constants';
 
 const { BasicBlock, Section, Image } = components;
 
-export type ICustomHeader = IBlockData<
+export type ICustomResponsiveImage = IBlockData<
   {},
   {
     desktopImageUrl: string
@@ -14,18 +14,18 @@ export type ICustomHeader = IBlockData<
   }
 >;
 
-export const InnoceanHeaderBlock: IBlock = {
-  name: 'Header',
-  type: InnoceanBlocksType.HEADER,
+export const InnoceanResponsiveImageBlock: IBlock = {
+  name: 'ResponsiveImage',
+  type: InnoceanBlocksType.RESPONSIVE_IMAGE,
   create(
     payload,
   ) {
-    const defaultData: ICustomHeader = {
-      type: InnoceanBlocksType.HEADER,
+    const defaultData: ICustomResponsiveImage = {
+      type: InnoceanBlocksType.RESPONSIVE_IMAGE,
       data: {
         value: {
-          desktopImageUrl: payload?.data?.value.desktopImageUrl,
-          mobileImageUrl: payload?.data?.value.mobileImageUrl,
+          desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/1200x688/004dff/fff.png&text=header-desktop',
+          mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=header-mobile',
         },
       },
       attributes: {},
@@ -36,11 +36,15 @@ export const InnoceanHeaderBlock: IBlock = {
   validParentType: [
     BasicType.PAGE,
     AdvancedType.WRAPPER,
+    AdvancedType.COLUMN,
   ],
   render(params) {
     return (
       <BasicBlock
-        params={params}
+        params={{
+          ...params,
+          data: { ...params.data, attributes: { 'padding': '0px' } },
+        }}
         tag="mj-section"
       >
         <Section padding={"0px"} css-class={'hide-on-desktop'}>
@@ -48,7 +52,7 @@ export const InnoceanHeaderBlock: IBlock = {
             params={params}
             tag="mj-image"
             src={params.data.data.value.mobileImageUrl}
-            padding="0"
+            padding="0px"
             alt="hyundai"
           />
         </Section>

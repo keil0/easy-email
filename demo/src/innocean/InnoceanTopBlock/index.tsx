@@ -23,9 +23,9 @@ export const InnoceanTopBlock: IBlock = {
       type: InnoceanBlocksType.TOP,
       data: {
         value: {
-          link: payload?.data?.value.link,
-          desktopImageUrl: payload?.data?.value.desktopImageUrl,
-          mobileImageUrl: payload?.data?.value.mobileImageUrl,
+          link: payload?.data?.value.link || '#',
+          desktopImageUrl: payload?.data?.value.desktopImageUrl || import.meta.env.VITE_API_BASE_URL as string + '/uploads/default/top_logo.png',
+          mobileImageUrl: payload?.data?.value.mobileImageUrl || import.meta.env.VITE_API_BASE_URL as string + '/uploads/default/top_logo_mobile.png',
         },
       },
       attributes: {},
@@ -46,9 +46,9 @@ export const InnoceanTopBlock: IBlock = {
         }}
         tag="mj-section"
       >
-        <Section padding={"0px"}>
+        <Section padding={"5px"}>
           <Column>
-            <Text font-size={"10px"} font-family={"Helvetica"} padding={"0px"} align={"center"}>{`Un problème d'affichage ? <a href='${params.data.data.value.link}'>Cliquez ici</a>`}</Text>
+            <Text font-size={"10px"} font-family={"Helvetica"} padding={"5px 0px"} align={"center"}>{`Un problème d'affichage ? <a href='${params.data.data.value.link}'>Cliquez ici</a>`}</Text>
           </Column>
         </Section>
         <Section padding={"0px"} css-class={'hide-on-desktop'}>
@@ -56,7 +56,7 @@ export const InnoceanTopBlock: IBlock = {
             params={params}
             tag="mj-image"
             src={params.data.data.value.mobileImageUrl}
-            padding="0"
+            padding="0px"
             alt="hyundai"
           />
         </Section>
@@ -66,7 +66,7 @@ export const InnoceanTopBlock: IBlock = {
             tag="mj-image"
             src={params.data.data.value.desktopImageUrl}
             width="600px"
-            padding="0"
+            padding="0px"
             alt="hyundai"
           />
         </Section>
