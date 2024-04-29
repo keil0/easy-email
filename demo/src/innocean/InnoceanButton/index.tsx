@@ -12,7 +12,7 @@ export type IInnoceanButton = IBlockData<
   }
 >;
 
-export const InnoceanButtonBlock: IBlock = {
+export const InnoceanButton: IBlock = {
   name: 'Button',
   type: InnoceanBlocksType.BUTTON,
   create(

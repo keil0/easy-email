@@ -99,6 +99,12 @@ const defaultCategories: ExtensionProps['categories'] = [
       {
         type: InnoceanBlocksType.TEXT_BLOCK
       },
+      {
+        type: InnoceanBlocksType.TITLE_IMAGE_BLOCK
+      },
+      {
+        type: InnoceanBlocksType.TWO_COLUMNS
+      },
     ]
   },
   {

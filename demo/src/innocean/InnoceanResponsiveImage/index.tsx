@@ -14,7 +14,7 @@ export type ICustomResponsiveImage = IBlockData<
   }
 >;
 
-export const InnoceanResponsiveImageBlock: IBlock = {
+export const InnoceanResponsiveImage: IBlock = {
   name: 'ResponsiveImage',
   type: InnoceanBlocksType.RESPONSIVE_IMAGE,
   create(

@@ -1,9 +1,7 @@
 import {
   AdvancedType,
   BasicType,
-  BlockManager,
   components,
-  IBlock,
   IBlockData,
   createBlock,
   t,
