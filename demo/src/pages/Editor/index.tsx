@@ -105,6 +105,27 @@ const defaultCategories: ExtensionProps['categories'] = [
       {
         type: InnoceanBlocksType.TWO_COLUMNS
       },
+      {
+        type: InnoceanBlocksType.THREE_COLUMNS
+      },
+      {
+        type: InnoceanBlocksType.FOUR_COLUMNS
+      },
+      {
+        type: InnoceanBlocksType.HERO
+      },
+      {
+        type: InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA
+      },
+      {
+        type: InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE
+      },
+      {
+        type: InnoceanBlocksType.SLICE_CTA_IMAGE
+      },
+      {
+        type: InnoceanBlocksType.SLICE_IMAGE_CTA
+      },
     ]
   },
   {
