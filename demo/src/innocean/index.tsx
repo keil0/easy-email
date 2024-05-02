@@ -20,6 +20,8 @@ import { InnoceanSliceBackgroundCTAImage, Panel as SliceBackgroundCTAImagePanel 
 import { InnoceanSliceCTAImage, Panel as SliceCTAImagePanel } from './InnoceanSliceCTAImage';
 import { InnoceanSliceImageCTA, Panel as SliceImageCTAPanel } from './InnoceanSliceImageCTA';
 import { InnoceanSideImage, Panel as SideImagePanel } from './InnoceanSideImage';
+import { InnoceanFooter, Panel as FooterPanel} from './InnoceanFooter';
+import { InnoceanPolluscore, Panel as PolluscorePanel } from './InnoceanPolluscore';
 
 BlockManager.registerBlocks({
   [InnoceanBlocksType.RESPONSIVE_IMAGE]: InnoceanResponsiveImage,
@@ -36,6 +38,8 @@ BlockManager.registerBlocks({
   [InnoceanBlocksType.SLICE_CTA_IMAGE]: InnoceanSliceCTAImage,
   [InnoceanBlocksType.SLICE_IMAGE_CTA]: InnoceanSliceImageCTA,
   [InnoceanBlocksType.SIDE_IMAGE]: InnoceanSideImage,
+  [InnoceanBlocksType.FOOTER]: InnoceanFooter,
+  [InnoceanBlocksType.POLLUSCORE]: InnoceanPolluscore
 });
 
 BlockAttributeConfigurationManager.add({
@@ -53,4 +57,6 @@ BlockAttributeConfigurationManager.add({
   [InnoceanBlocksType.SLICE_CTA_IMAGE]: SliceCTAImagePanel,
   [InnoceanBlocksType.SLICE_IMAGE_CTA]: SliceImageCTAPanel,
   [InnoceanBlocksType.SIDE_IMAGE]: SideImagePanel,
+  [InnoceanBlocksType.FOOTER]: FooterPanel,
+  [InnoceanBlocksType.POLLUSCORE]: PolluscorePanel,
 });

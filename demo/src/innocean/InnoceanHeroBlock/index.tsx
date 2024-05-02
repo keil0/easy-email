@@ -13,18 +13,13 @@ import { InnoceanBlocksType } from '../constants';
 
 const { BasicBlock } = components;
 
-export type IBlockHero = IBlockData<
-  {},
-  {}
->;
-
-export const InnoceanHeroBlock = createBlock<IBlockHero>({
+export const InnoceanHeroBlock = createBlock<IBlockData>({
   get name() {
     return t('Hero');
   },
   type: InnoceanBlocksType.HERO,
   create: (payload) => {
-    const defaultData: IBlockHero = {
+    const defaultData: IBlockData = {
       type: InnoceanBlocksType.HERO,
       data: {
         value: {},

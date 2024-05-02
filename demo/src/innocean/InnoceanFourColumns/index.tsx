@@ -164,7 +164,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
               ],
             },
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
