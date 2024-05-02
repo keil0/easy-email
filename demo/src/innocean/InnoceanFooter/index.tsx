@@ -1,11 +1,10 @@
 import {
   AdvancedType,
-  BasicType,
   components,
   IBlockData,
   createBlock,
   t,
-  mergeBlock,
+  mergeBlock, BasicType,
 } from 'easy-email-core';
 import React from 'react';
 
@@ -35,7 +34,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
       },
       children: [
         {
-          type: BasicType.SECTION,
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -45,7 +44,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           },
           children: [
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -54,7 +53,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: BasicType.TEXT,
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: payload?.data?.value.followText || 'Suivez-nous sur <a href="#">drivetobusiness.fr</a>',
@@ -71,7 +70,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
               ],
             },
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -80,7 +79,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: BasicType.SOCIAL,
+                  type: AdvancedType.SOCIAL,
                   attributes: {
                     align: 'right',
                     color: '#333333',
@@ -149,7 +148,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           ],
         },
         {
-          type: BasicType.SECTION,
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -158,7 +157,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           },
           children: [
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -167,7 +166,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: BasicType.DIVIDER,
+                  type: AdvancedType.DIVIDER,
                   data: {
                     value: {},
                   },
@@ -185,7 +184,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           ]
         },
         {
-          type: BasicType.SECTION,
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -194,7 +193,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           },
           children: [
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -203,7 +202,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: BasicType.TEXT,
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: payload?.data?.value.copywriteText || '<strong>Hyundai</strong><br /> ©' + new Date().getFullYear() + ' Hyundai Motor France.<br /> Tous droits réservés.'
@@ -224,7 +223,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           ]
         },
         {
-          type: BasicType.SECTION,
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -233,7 +232,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           },
           children: [
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -242,7 +241,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: BasicType.DIVIDER,
+                  type: AdvancedType.DIVIDER,
                   data: {
                     value: {},
                   },
@@ -260,7 +259,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           ]
         },
         {
-          type: BasicType.SECTION,
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -269,7 +268,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           },
           children: [
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -293,7 +292,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                   children: [],
                 },
                 {
-                  type: BasicType.TEXT,
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: payload?.data?.value.mentionsText || 'Si vous ne souhaitez plus recevoir nos e-mails, <a href="#">cliquez-ici</a>.<br /><br />' +
@@ -317,7 +316,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           ]
         },
         {
-          type: BasicType.SECTION,
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -326,7 +325,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
           },
           children: [
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -335,7 +334,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: BasicType.TEXT,
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: payload?.data?.value.responsablityText || '<strong>Au quotidien, prenez les transports en commun #SeDéplacerMoinsPolluer</strong>'
@@ -353,24 +352,116 @@ export const InnoceanFooter = createBlock<IBlockData>({
           ]
         },
         {
-          type: BasicType.SECTION,
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
           attributes: {
-            padding: '0px',
+            padding: '15px 0px',
           },
           children: [
             {
-              type: BasicType.COLUMN,
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
               attributes: {
-                padding: '0px',
+                padding: '0px 10px 0px 10px',
               },
               children: [
-                // Polluscore
+                {
+                  type: InnoceanBlocksType.POLLUSCORE,
+                  data: {
+                    value: {
+                      line1: 'Titre de la ligne 1',
+                      line2: 'titre de la ligne 2',
+                      val: 0,
+                      width: 200,
+                      color: 'black',
+                      alt: 'Polluscore',
+                    },
+                  },
+                  attributes: {},
+                  children: [],
+                }
+              ]
+            },
+            {
+              type: AdvancedType.COLUMN,
+              data: {
+                value: {},
+              },
+              attributes: {
+                padding: '0px 10px 0px 10px',
+              },
+              children: [
+                {
+                  type: InnoceanBlocksType.POLLUSCORE,
+                  data: {
+                    value: {
+                      line1: 'Titre de la ligne 1',
+                      line2: 'titre de la ligne 2',
+                      val: 0,
+                      width: 200,
+                      color: 'black',
+                      alt: 'Polluscore',
+                    },
+                  },
+                  attributes: {},
+                  children: [],
+                }
+              ]
+            },
+            {
+              type: AdvancedType.COLUMN,
+              data: {
+                value: {},
+              },
+              attributes: {
+                padding: '0px 10px 0px 10px',
+              },
+              children: [
+                {
+                  type: InnoceanBlocksType.POLLUSCORE,
+                  data: {
+                    value: {
+                      line1: 'Titre de la ligne 1',
+                      line2: 'titre de la ligne 2',
+                      val: 0,
+                      width: 200,
+                      color: 'black',
+                      alt: 'Polluscore',
+                    },
+                  },
+                  attributes: {},
+                  children: [],
+                }
+              ]
+            },
+            {
+              type: AdvancedType.COLUMN,
+              data: {
+                value: {},
+              },
+              attributes: {
+                padding: '0px 10px 0px 10px',
+              },
+              children: [
+                {
+                  type: InnoceanBlocksType.POLLUSCORE,
+                  data: {
+                    value: {
+                      line1: 'Titre de la ligne 1',
+                      line2: 'titre de la ligne 2',
+                      val: 0,
+                      width: 200,
+                      color: 'black',
+                      alt: 'Polluscore',
+                    },
+                  },
+                  attributes: {},
+                  children: [],
+                }
               ]
             }
           ]

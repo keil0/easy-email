@@ -13,18 +13,13 @@ import { InnoceanBlocksType } from '../constants';
 
 const { BasicBlock } = components;
 
-export type IBlockText = IBlockData<
-  {},
-  {}
->;
-
-export const InnoceanTextBlock = createBlock<IBlockText>({
+export const InnoceanTextBlock = createBlock<IBlockData>({
   get name() {
     return t('Block text');
   },
   type: InnoceanBlocksType.TEXT_BLOCK,
   create: (payload) => {
-    const defaultData: IBlockText = {
+    const defaultData: IBlockData = {
       type: InnoceanBlocksType.TEXT_BLOCK,
       data: {
         value: {},

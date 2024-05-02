@@ -35,7 +35,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
       },
       children: [
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -44,7 +44,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -66,7 +66,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Article Title',
@@ -84,7 +84,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
               ],
             },
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -106,7 +106,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Article Title',
@@ -124,7 +124,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
               ],
             },
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -146,7 +146,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Article Title',
@@ -186,7 +186,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Article Title',

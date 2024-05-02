@@ -7,20 +7,7 @@ export function Panel() {
   const { focusIdx } = useFocusIdx();
   return (
     <AttributesPanelWrapper>
-      <Stack vertical>
-        <TextField
-          label="Button text"
-          name={`${focusIdx}.data.value.buttonText`}
-          inline
-          alignment="center"
-        />
-        <TextField
-          label="Button link"
-          name={`${focusIdx}.data.value.buttonLink`}
-          inline
-          alignment="center"
-        />
-      </Stack>
+
     </AttributesPanelWrapper>
   );
 }

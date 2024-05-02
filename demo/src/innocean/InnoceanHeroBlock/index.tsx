@@ -30,7 +30,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
       },
       children: [
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -39,7 +39,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -48,7 +48,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -80,7 +80,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
           ],
         },
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -89,7 +89,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -98,7 +98,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -113,7 +113,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content:
@@ -132,7 +132,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
                   children: [],
                 },
                 {
-                  type: 'button',
+                  type: AdvancedType.BUTTON,
                   data: {
                     value: {
                       content: 'Réserver un essai',
