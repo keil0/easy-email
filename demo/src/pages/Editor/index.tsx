@@ -129,6 +129,12 @@ const defaultCategories: ExtensionProps['categories'] = [
       {
         type: InnoceanBlocksType.SIDE_IMAGE
       },
+      {
+        type: InnoceanBlocksType.FOOTER
+      },
+      {
+        type: InnoceanBlocksType.POLLUSCORE
+      }
     ]
   },
   {

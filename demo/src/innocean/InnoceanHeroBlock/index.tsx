@@ -13,18 +13,13 @@ import { InnoceanBlocksType } from '../constants';
 
 const { BasicBlock } = components;
 
-export type IBlockHero = IBlockData<
-  {},
-  {}
->;
-
-export const InnoceanHeroBlock = createBlock<IBlockHero>({
+export const InnoceanHeroBlock = createBlock<IBlockData>({
   get name() {
     return t('Hero');
   },
   type: InnoceanBlocksType.HERO,
   create: (payload) => {
-    const defaultData: IBlockHero = {
+    const defaultData: IBlockData = {
       type: InnoceanBlocksType.HERO,
       data: {
         value: {},
@@ -35,7 +30,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
       },
       children: [
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -44,7 +39,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -53,7 +48,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -85,7 +80,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
           ],
         },
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -94,7 +89,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -103,7 +98,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -118,7 +113,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content:
@@ -137,7 +132,7 @@ export const InnoceanHeroBlock = createBlock<IBlockHero>({
                   children: [],
                 },
                 {
-                  type: 'button',
+                  type: AdvancedType.BUTTON,
                   data: {
                     value: {
                       content: 'Réserver un essai',

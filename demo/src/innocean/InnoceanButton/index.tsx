@@ -1,54 +1,47 @@
-import { AdvancedType, BasicType, components, IBlock, IBlockData } from 'easy-email-core';
+import { AdvancedType, BasicType, components, IBlock, IBlockData, mergeBlock } from 'easy-email-core';
 import React from 'react';
-import { merge } from 'lodash';
 
 import { InnoceanBlocksType } from '../constants';
 
-export type IInnoceanButton = IBlockData<
-  {},
-  {
-    buttonLink: string
-    buttonText: string
-  }
->;
+const { BasicBlock } = components;
 
-export const InnoceanButton: IBlock = {
-  name: 'Button',
+export const InnoceanButton: IBlockData = {
+  get name() {
+    return t('Button');
+  },
   type: InnoceanBlocksType.BUTTON,
-  create(
-    payload,
-  ) {
-    const defaultData: IInnoceanButton = {
-      type: InnoceanBlocksType.BUTTON,
+  create: (payload) => {
+    const defaultData: IBlockData = {
+      type: AdvancedType.BUTTON,
       data: {
         value: {
-          buttonText: payload?.data?.value.buttonText,
-          buttonLink: payload?.data?.value.buttonLink,
+          content: 'Réserver un essai',
         },
       },
       attributes: {
-        "border-radius": "0px",
-        "font-size": "15px",
-        align: "left",
-        "inner-padding": "15px 38px",
-        padding: "0px",
-        "background-color": "#002c5f",
+        'background-color': '#002c5f',
+        'font-family': 'Helvetica, Arial, sans-serif',
+        align: 'left',
+        color: '#FFFFFF',
+        'font-size': '15px',
+        'font-weight': 'normal',
+        'border-radius': '0px',
+        padding: '0px',
+        'inner-padding': '15px 38px',
+        'line-height': '120%',
+        target: '_blank',
+        'vertical-align': 'middle',
+        border: 'none',
+        'text-align': 'center',
+        href: '#',
       },
       children: [],
     };
-    return merge(defaultData, payload);
+    return mergeBlock(defaultData, payload);
   },
-  validParentType: [
-    BasicType.PAGE,
-    AdvancedType.WRAPPER,
-    AdvancedType.COLUMN,
-  ],
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER, AdvancedType.COLUMN, AdvancedType.SECTION],
   render(params) {
-    return (
-      <components.Section padding='0px'>
-
-      </components.Section>
-    );
+    return <BasicBlock params={params} />;
   },
 };
 
