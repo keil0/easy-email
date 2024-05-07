@@ -35,14 +35,14 @@ export const InnoceanTitleImageBlock = createBlock<ITitleImage>({
       },
       children: [
         {
-          type: 'column',
+          type: AdvancedType.COLUMN,
           data: {
             value: {}
           },
           attributes: {},
           children: [
             {
-              type: 'text',
+              type: AdvancedType.TEXT,
               data: {
                 value: {
                   content: 'Lorem ipsum dolor sit amet.',

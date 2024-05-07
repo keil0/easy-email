@@ -61,7 +61,12 @@ const defaultCategories: ExtensionProps['categories'] = [
       },
       {
         type: AdvancedType.IMAGE,
-        payload: { attributes: { padding: '0px 0px 0px 0px' } },
+        payload: {
+          attributes: {
+            padding: '0px 0px 0px 0px',
+            src: 'https://dummyimage.com/600x300/002c5f/fff.png&text=image'
+          },
+        },
       },
       {
         type: AdvancedType.BUTTON,
@@ -100,7 +105,7 @@ const defaultCategories: ExtensionProps['categories'] = [
         type: InnoceanBlocksType.TEXT_BLOCK
       },
       {
-        type: InnoceanBlocksType.TITLE_IMAGE_BLOCK
+        type: InnoceanBlocksType.TITLE_IMAGE_BLOCK,
       },
       {
         type: InnoceanBlocksType.TWO_COLUMNS
@@ -169,11 +174,32 @@ const defaultCategories: ExtensionProps['categories'] = [
 ];
 
 export const onUploadImage = async (blob: Blob) => {
+  const MAX_SIZE = 1 * 1024 * 1024; // 1MB
+  // Types MIME autorisés
+  const ALLOWED_TYPES = ['image/jpg','image/jpeg', 'image/png', 'image/gif'];
+
+  if (blob.size > MAX_SIZE) {
+    Notification.error({
+      title: 'Erreur',
+      content: 'Le fichier est trop volumineux',
+    });
+    throw new Error('Le fichier est trop volumineux');
+  }
+
+  if (!ALLOWED_TYPES.includes(blob.type)) {
+    Notification.error({
+      title: 'Erreur',
+      content: 'Type de fichier non autorisé',
+    });
+    throw new Error('Type de fichier non autorisé');
+  }
+
   const compressionFile = await (
     await imageCompression
   ).default(blob as File, {
     maxWidthOrHeight: 1440,
   });
+
   return services.common.uploadImageToBackend(compressionFile);
 };
 

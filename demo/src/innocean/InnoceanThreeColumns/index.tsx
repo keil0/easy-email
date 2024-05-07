@@ -35,7 +35,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
       },
       children: [
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -44,7 +44,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -53,7 +53,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -73,7 +73,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
           ],
         },
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -82,7 +82,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -104,7 +104,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -122,7 +122,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
               ],
             },
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -144,7 +144,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -162,7 +162,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
               ],
             },
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -184,7 +184,7 @@ export const InnoceanThreeColumns = createBlock<IThreeColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',

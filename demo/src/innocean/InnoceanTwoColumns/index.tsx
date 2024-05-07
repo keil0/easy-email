@@ -35,7 +35,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
       },
       children: [
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -44,7 +44,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -53,7 +53,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'A. Lorem ipsum dolor sit amet.',
@@ -81,7 +81,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -96,7 +96,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Sed porttitor eget justo eu ornare. Etiam ut orci non eros vestibulum luctus. Proin mattis odio at dignissim condimentum. Pellentesque molestie velit dolor, vel dignissim augue posuere sit amet. Vestibulum id sem maximus, luctus ex non, fringilla nunc. Quisque facilisis est et odio aliquam volutpat.',
@@ -109,7 +109,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                   children: [],
                 },
                 {
-                  type: 'button',
+                  type: AdvancedType.BUTTON,
                   data: {
                     value: {
                       content: 'Réserver un essai',
@@ -137,7 +137,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
               ],
             },
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -146,7 +146,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'B. Lorem ipsum dolor sit amet.',
@@ -174,7 +174,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Lorem ipsum dolor sit amet.',
@@ -189,7 +189,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                   children: [],
                 },
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Sed porttitor eget justo eu ornare. Etiam ut orci non eros vestibulum luctus. Proin mattis odio at dignissim condimentum. Pellentesque molestie velit dolor, vel dignissim augue posuere sit amet. Vestibulum id sem maximus, luctus ex non, fringilla nunc. Quisque facilisis est et odio aliquam volutpat.',
@@ -202,7 +202,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                   children: [],
                 },
                 {
-                  type: 'button',
+                  type: AdvancedType.BUTTON,
                   data: {
                     value: {
                       content: 'Réserver un essai',
