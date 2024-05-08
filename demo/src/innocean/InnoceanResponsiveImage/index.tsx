@@ -57,8 +57,6 @@ export const InnoceanResponsiveImage: IBlock = {
     AdvancedType.COLUMN,
   ],
   render(params) {
-    console.log('params', params);
-
     return <BasicBlock params={params} tag="mj-hero" />;
   },
 };

@@ -49,7 +49,6 @@ export function Table() {
           <Stack>
             <FontSize />
           </Stack>
-          <FontStyle />
           <TextAlign />
         </Collapse.Item>
       </CollapseWrapper>
