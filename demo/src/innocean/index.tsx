@@ -44,7 +44,6 @@ BlockManager.registerBlocks({
 
 BlockAttributeConfigurationManager.add({
   [InnoceanBlocksType.TOP]: TopPanel,
-  [InnoceanBlocksType.RESPONSIVE_IMAGE]: ResponsiveImagePanel,
   [InnoceanBlocksType.BUTTON]: ButtonPanel,
   [InnoceanBlocksType.TEXT_BLOCK]: TextBlockPanel,
   [InnoceanBlocksType.TITLE_IMAGE_BLOCK]: TitleImagePanel,

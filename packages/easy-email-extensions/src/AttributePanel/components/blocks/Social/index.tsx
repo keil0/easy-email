@@ -71,46 +71,45 @@ export function Social() {
           <Space direction='vertical'>
             <Grid.Row>
               <Grid.Col span={11}>
+                <FontSize />
+              </Grid.Col>
+              <Grid.Col
+                offset={1}
+                span={11}
+              >
+                <FontWeight />
+              </Grid.Col>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Col span={11}>
+                <LineHeight />
+              </Grid.Col>
+              <Grid.Col
+                offset={1}
+                span={11}
+              >
+                <Color />
+              </Grid.Col>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Col span={11}>
+                <ContainerBackgroundColor title={t('Background color')} />
+              </Grid.Col>
+              <Grid.Col
+                offset={1}
+                span={11}
+              >
+                <TextDecoration />
+              </Grid.Col>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Col span={11}>
 
               </Grid.Col>
               <Grid.Col
                 offset={1}
                 span={11}
               >
-                <FontSize />
-              </Grid.Col>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Col span={11}>
-                <FontWeight />
-              </Grid.Col>
-              <Grid.Col
-                offset={1}
-                span={11}
-              >
-                <LineHeight />
-              </Grid.Col>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Col span={11}>
-                <Color />
-              </Grid.Col>
-              <Grid.Col
-                offset={1}
-                span={11}
-              >
-                <ContainerBackgroundColor title={t('Background color')} />
-              </Grid.Col>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Col span={11}>
-                <TextDecoration />
-              </Grid.Col>
-              <Grid.Col
-                offset={1}
-                span={11}
-              >
-                <FontStyle />
               </Grid.Col>
             </Grid.Row>
           </Space>

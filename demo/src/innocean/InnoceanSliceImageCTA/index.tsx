@@ -30,7 +30,7 @@ export const InnoceanSliceImageCTA = createBlock<IBlockData>({
       },
       children: [
         {
-          type: 'section',
+          type: AdvancedType.SECTION,
           data: {
             value: {},
           },
@@ -39,7 +39,7 @@ export const InnoceanSliceImageCTA = createBlock<IBlockData>({
           },
           children: [
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -63,7 +63,7 @@ export const InnoceanSliceImageCTA = createBlock<IBlockData>({
               ],
             },
             {
-              type: 'column',
+              type: AdvancedType.COLUMN,
               data: {
                 value: {},
               },
@@ -72,7 +72,7 @@ export const InnoceanSliceImageCTA = createBlock<IBlockData>({
               },
               children: [
                 {
-                  type: 'text',
+                  type: AdvancedType.TEXT,
                   data: {
                     value: {
                       content: 'Sed porttitor eget justo eu ornare. Etiam ut orci non eros vestibulum luctus. Proin mattis odio at dignissim condimentum.',
@@ -86,7 +86,7 @@ export const InnoceanSliceImageCTA = createBlock<IBlockData>({
                   children: [],
                 },
                 {
-                  type: 'button',
+                  type: AdvancedType.BUTTON,
                   data: {
                     value: {
                       content: 'Réserver un essai',

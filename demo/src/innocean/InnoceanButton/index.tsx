@@ -1,4 +1,4 @@
-import { AdvancedType, BasicType, components, IBlock, IBlockData, mergeBlock } from 'easy-email-core';
+import { AdvancedType, BasicType, components, IBlockData, mergeBlock } from 'easy-email-core';
 import React from 'react';
 
 import { InnoceanBlocksType } from '../constants';

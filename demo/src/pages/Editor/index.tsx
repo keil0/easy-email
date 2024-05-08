@@ -61,7 +61,12 @@ const defaultCategories: ExtensionProps['categories'] = [
       },
       {
         type: AdvancedType.IMAGE,
-        payload: { attributes: { padding: '0px 0px 0px 0px' } },
+        payload: {
+          attributes: {
+            padding: '0px 0px 0px 0px',
+            src: 'https://dummyimage.com/600x300/002c5f/fff.png&text=image'
+          },
+        },
       },
       {
         type: AdvancedType.BUTTON,
@@ -100,7 +105,7 @@ const defaultCategories: ExtensionProps['categories'] = [
         type: InnoceanBlocksType.TEXT_BLOCK
       },
       {
-        type: InnoceanBlocksType.TITLE_IMAGE_BLOCK
+        type: InnoceanBlocksType.TITLE_IMAGE_BLOCK,
       },
       {
         type: InnoceanBlocksType.TWO_COLUMNS
@@ -169,11 +174,32 @@ const defaultCategories: ExtensionProps['categories'] = [
 ];
 
 export const onUploadImage = async (blob: Blob) => {
+  const MAX_SIZE = 1 * 1024 * 1024; // 1MB
+  // Types MIME autorisés
+  const ALLOWED_TYPES = ['image/jpg','image/jpeg', 'image/png', 'image/gif'];
+
+  if (blob.size > MAX_SIZE) {
+    Notification.error({
+      title: 'Erreur',
+      content: 'Le fichier est trop volumineux',
+    });
+    throw new Error('Le fichier est trop volumineux');
+  }
+
+  if (!ALLOWED_TYPES.includes(blob.type)) {
+    Notification.error({
+      title: 'Erreur',
+      content: 'Type de fichier non autorisé',
+    });
+    throw new Error('Type de fichier non autorisé');
+  }
+
   const compressionFile = await (
     await imageCompression
   ).default(blob as File, {
     maxWidthOrHeight: 1440,
   });
+
   return services.common.uploadImageToBackend(compressionFile);
 };
 
@@ -291,6 +317,11 @@ export default function Editor() {
     saveAs(new Blob([mjmlString], { type: 'text/mjml' }), 'easy-email.mjml');
   };
 
+  const defineDoctype = (content: string) => {
+    const newDoctype = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">`;
+    return content.replace(/<!doctype html>/i, newDoctype);
+  }
+
   const onExportHTML = (values: IEmailTemplate) => {
     const mjmlString = JsonToMjml({
       data: values.content,
@@ -298,7 +329,7 @@ export default function Editor() {
       context: values.content,
     });
 
-    const html = mjml(mjmlString, {}).html;
+    const html = defineDoctype(mjml(mjmlString, {}).html);
 
     navigator.clipboard.writeText(html);
     saveAs(new Blob([html], { type: 'text/html' }), 'easy-email.html');
