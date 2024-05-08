@@ -4,14 +4,15 @@ import { debounce } from 'lodash';
 import { useRefState } from 'easy-email-editor';
 
 const defaultPresetColor: string[] = [
+  '#002c5f',
+  '#e4dcd3',
+  '#f6f3f2',
+  '#a36b4f',
+  '#00aad2',
+  '#00aad2',
+  '#e63312',
+  '#aacae6',
   '#000000',
-  '#FFFFFF',
-  '#9b9b9b',
-  '#d0021b',
-  '#4a90e2',
-  '#7ed321',
-  '#bd10e0',
-  '#f8e71c',
 ];
 
 const CURRENT_COLORS_KEY = 'CURRENT_COLORS_KEY';
