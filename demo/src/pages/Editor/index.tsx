@@ -317,6 +317,11 @@ export default function Editor() {
     saveAs(new Blob([mjmlString], { type: 'text/mjml' }), 'easy-email.mjml');
   };
 
+  const defineDoctype = (content: string) => {
+    const newDoctype = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">`;
+    return content.replace(/<!doctype html>/i, newDoctype);
+  }
+
   const onExportHTML = (values: IEmailTemplate) => {
     const mjmlString = JsonToMjml({
       data: values.content,
@@ -324,7 +329,7 @@ export default function Editor() {
       context: values.content,
     });
 
-    const html = mjml(mjmlString, {}).html;
+    const html = defineDoctype(mjml(mjmlString, {}).html);
 
     navigator.clipboard.writeText(html);
     saveAs(new Blob([html], { type: 'text/html' }), 'easy-email.html');
