@@ -45,7 +45,11 @@ import "../../innocean";
 import { InnoceanBlocksType } from '@demo/innocean/constants';
 import JSZip from 'jszip';
 import { request } from '@demo/services/axios.config';
-import { convertImageUrlsToRelative, convertImageUrlsToRelativeMjml } from '@demo/utils/convertImageUrlsToRelative';
+import {
+  convertImageUrlsToRelativeHtml,
+  convertImageUrlsToRelativeJson,
+  convertImageUrlsToRelativeMjml,
+} from '@demo/utils/convertImageUrlsToRelative';
 
 export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number;
@@ -380,19 +384,23 @@ export default function Editor() {
 
       await Promise.all(imagePromises);
 
-      html = convertImageUrlsToRelative(html, imageUrls);
+      html = convertImageUrlsToRelativeHtml(html, imageUrls);
       mjmlString = convertImageUrlsToRelativeMjml(mjmlString, imageUrls);
+      const jsonContent = convertImageUrlsToRelativeJson(values, imageUrls);
 
       // Ajouter le fichier HTML
       zip.file('easy-email.html', html);
       // Ajouter le fichier MJML
       zip.file('easy-email.mjml', mjmlString);
+      // Ajouter le fichier JSON
+      zip.file('easy-email.json', JSON.stringify(jsonContent, null, 2));
 
       zip.generateAsync({ type: 'blob' }).then((content) => {
         saveAs(content, 'template.zip');
       });
     }
   };
+
 
   const handleSave = (restart, values) => {
     try {
