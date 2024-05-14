@@ -1,33 +1,36 @@
 import { IEmailTemplate } from 'easy-email-editor';
-import { IBlockData } from 'easy-email-core';
+import { AdvancedType, IBlockData } from 'easy-email-core';
 
-export const convertImageUrlsToRelativeHtml = (htmlContent: string, imageUrls: string[]): string => {
+export const convertImageUrlsToRelativeHtml = (htmlContent: string, imageUrls: string[], imageFilenames: string[]): string => {
   let updatedHtml = htmlContent;
   imageUrls.forEach((url, index) => {
-    const relativeUrl = `./image${index + 1}.${url.split('.').pop()}`;
-    updatedHtml = updatedHtml.replace(new RegExp(url, 'g'), relativeUrl);
+    if (imageFilenames[index]) {
+      const relativeUrl = `./${imageFilenames[index]}`;
+      updatedHtml = updatedHtml.replace(new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), relativeUrl);
+    }
   });
   return updatedHtml;
 };
 
-export const convertImageUrlsToRelativeMjml = (mjmlContent: string, imageUrls: string[]): string => {
+export const convertImageUrlsToRelativeMjml = (mjmlContent: string, imageUrls: string[], imageFilenames: string[]): string => {
   let updatedMjml = mjmlContent;
   imageUrls.forEach((url, index) => {
-    const relativeUrl = `./image${index + 1}.${url.split('.').pop()}`;
-    updatedMjml = updatedMjml.replace(new RegExp(url, 'g'), relativeUrl);
+    if (imageFilenames[index]) {
+      const relativeUrl = `./${imageFilenames[index]}`;
+      updatedMjml = updatedMjml.replace(new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), relativeUrl);
+    }
   });
   return updatedMjml;
 };
 
-export const convertImageUrlsToRelativeJson = (jsonContent: IEmailTemplate, imageUrls: string[]): IEmailTemplate => {
+export const convertImageUrlsToRelativeJson = (jsonContent: IEmailTemplate, imageUrls: string[], imageFilenames: string[]): IEmailTemplate => {
   let updatedJson = { ...jsonContent };
-  const relativeUrls = imageUrls.map((url, index) => `./images/image${index + 1}.${url.split('.').pop()}`);
 
   const replaceUrls = (content: IBlockData) => {
-    if (content.type === 'image') {
+    if (content.type === AdvancedType.IMAGE && content.attributes?.src) {
       imageUrls.forEach((url, index) => {
-        if (content.data?.value?.src === url) {
-          content.data.value.src = relativeUrls[index];
+        if (content.attributes.src === url && imageFilenames[index]) {
+          content.attributes.src = `./${imageFilenames[index]}`;
         }
       });
     }
@@ -40,3 +43,4 @@ export const convertImageUrlsToRelativeJson = (jsonContent: IEmailTemplate, imag
 
   return updatedJson;
 };
+

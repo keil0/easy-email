@@ -332,26 +332,30 @@ export default function Editor() {
       const imageUrls = extractImageUrls(templateData.content);
       const zip = new JSZip();
 
-      const imagePromises = imageUrls.map(async (url, index) => {
+      const downloadResults = await Promise.all(imageUrls.map(async (url, index) => {
         try {
           const response = await request.get<Blob>(url, { responseType: 'blob' });
           const blob: Blob = new Blob([response], { type: response.type });
-          zip.file(`image${index + 1}.${blob.type.split('/')[1]}`, blob, { binary: true });
+          const filename = `image${index + 1}.${blob.type.split('/')[1]}`;
+          zip.file(filename, blob, { binary: true });
+          return { url, filename, success: true };
         } catch (error) {
           console.error('Error downloading image:', url, error);
+          return { url, filename: undefined, success: false };
         }
-      });
+      }));
 
-      await Promise.all(imagePromises);
+      const successfulDownloads = downloadResults.filter(result => result.success);
+      const successfulImageUrls = successfulDownloads.map(result => result.url);
+      const imageFilenames = successfulDownloads.map(result => result.filename).filter((filename): filename is string => !!filename);
 
-      html = convertImageUrlsToRelativeHtml(html, imageUrls);
-      mjmlString = convertImageUrlsToRelativeMjml(mjmlString, imageUrls);
-      const jsonContent = convertImageUrlsToRelativeJson(values, imageUrls);
+      const updatedHtml = convertImageUrlsToRelativeHtml(html, successfulImageUrls, imageFilenames);
+      const updatedMjmlString = convertImageUrlsToRelativeMjml(mjmlString, successfulImageUrls, imageFilenames);
+      const updatedJsonContent = convertImageUrlsToRelativeJson(values, successfulImageUrls, imageFilenames);
 
-      // Ajouter les fichiers au même niveau
-      zip.file('easy-email.html', html);
-      zip.file('easy-email.mjml', mjmlString);
-      zip.file('easy-email.json', JSON.stringify(jsonContent, null, 2));
+      zip.file('easy-email.html', updatedHtml);
+      zip.file('easy-email.mjml', updatedMjmlString);
+      zip.file('easy-email.json', JSON.stringify(updatedJsonContent, null, 2));
 
       zip.generateAsync({ type: 'blob' }).then((content) => {
         saveAs(content, 'template.zip');
