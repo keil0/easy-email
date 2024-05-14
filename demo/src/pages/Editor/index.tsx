@@ -314,47 +314,10 @@ export default function Editor() {
     });
   };
 
-  const onExportMJML = (values: IEmailTemplate) => {
-    const mjmlString = JsonToMjml({
-      data: values.content,
-      mode: 'production',
-      context: values.content,
-    });
-    navigator.clipboard.writeText(mjmlString);
-    saveAs(new Blob([mjmlString], { type: 'text/mjml' }), 'easy-email.mjml');
-  };
-
   const defineDoctype = (content: string) => {
     const newDoctype = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">`;
     return content.replace(/<!doctype html>/i, newDoctype);
   }
-
-  const onExportHTML = (values: IEmailTemplate) => {
-    const mjmlString = JsonToMjml({
-      data: values.content,
-      mode: 'production',
-      context: values.content,
-    });
-
-    const html = defineDoctype(mjml(mjmlString, {}).html);
-
-    navigator.clipboard.writeText(html);
-    saveAs(new Blob([html], { type: 'text/html' }), 'easy-email.html');
-  };
-
-  const onExportJSON = (values: IEmailTemplate) => {
-    navigator.clipboard.writeText(JSON.stringify(values, null, 2));
-    saveAs(
-      new Blob([JSON.stringify(values, null, 2)], { type: 'application/json' }),
-      'easy-email.json',
-    );
-  };
-
-  const onExportImage = async () => {
-    if (templateData) {
-      await downloadImagesAsZip(extractImageUrls(templateData.content));
-    }
-  };
 
   const onExportZip = async (values: IEmailTemplate) => {
     let mjmlString = JsonToMjml({
@@ -489,46 +452,9 @@ export default function Editor() {
                           <strong>Import</strong>
                         </Button>
                       </Dropdown>
-                      <Dropdown
-                        droplist={
-                          <Menu>
-                            <Menu.Item
-                              key="Export MJML"
-                              onClick={() => onExportMJML(values)}
-                            >
-                              Export MJML
-                            </Menu.Item>
-                            <Menu.Item
-                              key="Export HTML"
-                              onClick={() => onExportHTML(values)}
-                            >
-                              Export HTML
-                            </Menu.Item>
-                            <Menu.Item
-                              key="Export JSON"
-                              onClick={() => onExportJSON(values)}
-                            >
-                              Export JSON
-                            </Menu.Item>
-                            <Menu.Item
-                              key="Export Image"
-                              onClick={() => onExportImage(values)}
-                            >
-                              Export Images
-                            </Menu.Item>
-                            <Menu.Item
-                              key="Export Zip"
-                              onClick={() => onExportZip(values)}
-                            >
-                              Export Zip
-                            </Menu.Item>
-                          </Menu>
-                        }
-                      >
-                        <Button>
-                          <strong>Export</strong>
-                        </Button>
-                      </Dropdown>
+                      <Button onClick={() => onExportZip(values)}>
+                        <strong>Export</strong>
+                     </Button>
                       <Button
                         onClick={() => handleSave(restart, values)}
                         type="primary"
