@@ -6,6 +6,7 @@ export const extractImageUrls = (node: IBlockData<any, any> | IBlockData<any, an
   } else if (typeof node === 'object' && node !== null) {
     // Vérifier les URLs d'images dans les nœuds de type advanced_image
     if (node.type === AdvancedType.IMAGE && node.attributes?.src) {
+      console.log("HERRRE");
       urls.push(node.attributes.src);
     }
     // Vérifier les URLs d'images dans les nœuds de type TOP
