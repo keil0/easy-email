@@ -43,6 +43,9 @@ import { downloadImagesAsZip } from '@demo/utils/downloadImages';
 const imageCompression = import('browser-image-compression');
 import "../../innocean";
 import { InnoceanBlocksType } from '@demo/innocean/constants';
+import JSZip from 'jszip';
+import { request } from '@demo/services/axios.config';
+import { convertImageUrlsToRelative, convertImageUrlsToRelativeMjml } from '@demo/utils/convertImageUrlsToRelative';
 
 export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number;
@@ -349,6 +352,48 @@ export default function Editor() {
     }
   };
 
+  const onExportZip = async (values: IEmailTemplate) => {
+    let mjmlString = JsonToMjml({
+      data: values.content,
+      mode: 'production',
+      context: values.content,
+    });
+
+    let html = defineDoctype(mjml(mjmlString, {}).html);
+
+    if (templateData) {
+      const imageUrls = extractImageUrls(templateData.content);
+      const zip = new JSZip();
+      const imgFolder = zip.folder('images');
+
+      const imagePromises = imageUrls.map(async (url, index) => {
+        try {
+          if (imgFolder) {
+            const response = await request.get<Blob>(url, { responseType: 'blob' });
+            const blob: Blob = new Blob([response], { type: response.type });
+            imgFolder.file(`image${index + 1}.${blob.type.split('/')[1]}`, blob, { binary: true });
+          }
+        } catch (error) {
+          console.error('Error downloading image:', url, error);
+        }
+      });
+
+      await Promise.all(imagePromises);
+
+      html = convertImageUrlsToRelative(html, imageUrls);
+      mjmlString = convertImageUrlsToRelativeMjml(mjmlString, imageUrls);
+
+      // Ajouter le fichier HTML
+      zip.file('easy-email.html', html);
+      // Ajouter le fichier MJML
+      zip.file('easy-email.mjml', mjmlString);
+
+      zip.generateAsync({ type: 'blob' }).then((content) => {
+        saveAs(content, 'template.zip');
+      });
+    }
+  };
+
   const handleSave = (restart, values) => {
     try {
       if (params.id) {
@@ -468,6 +513,12 @@ export default function Editor() {
                               onClick={() => onExportImage(values)}
                             >
                               Export Images
+                            </Menu.Item>
+                            <Menu.Item
+                              key="Export Zip"
+                              onClick={() => onExportZip(values)}
+                            >
+                              Export Zip
                             </Menu.Item>
                           </Menu>
                         }
