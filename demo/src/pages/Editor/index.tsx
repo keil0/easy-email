@@ -368,15 +368,12 @@ export default function Editor() {
     if (templateData) {
       const imageUrls = extractImageUrls(templateData.content);
       const zip = new JSZip();
-      const imgFolder = zip.folder('images');
 
       const imagePromises = imageUrls.map(async (url, index) => {
         try {
-          if (imgFolder) {
-            const response = await request.get<Blob>(url, { responseType: 'blob' });
-            const blob: Blob = new Blob([response], { type: response.type });
-            imgFolder.file(`image${index + 1}.${blob.type.split('/')[1]}`, blob, { binary: true });
-          }
+          const response = await request.get<Blob>(url, { responseType: 'blob' });
+          const blob: Blob = new Blob([response], { type: response.type });
+          zip.file(`image${index + 1}.${blob.type.split('/')[1]}`, blob, { binary: true });
         } catch (error) {
           console.error('Error downloading image:', url, error);
         }
@@ -388,11 +385,9 @@ export default function Editor() {
       mjmlString = convertImageUrlsToRelativeMjml(mjmlString, imageUrls);
       const jsonContent = convertImageUrlsToRelativeJson(values, imageUrls);
 
-      // Ajouter le fichier HTML
+      // Ajouter les fichiers au même niveau
       zip.file('easy-email.html', html);
-      // Ajouter le fichier MJML
       zip.file('easy-email.mjml', mjmlString);
-      // Ajouter le fichier JSON
       zip.file('easy-email.json', JSON.stringify(jsonContent, null, 2));
 
       zip.generateAsync({ type: 'blob' }).then((content) => {
@@ -400,7 +395,6 @@ export default function Editor() {
       });
     }
   };
-
 
   const handleSave = (restart, values) => {
     try {
