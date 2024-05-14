@@ -1,11 +1,11 @@
-import { IBlockData } from 'easy-email-core';
+import { AdvancedType, IBlockData } from 'easy-email-core';
 
 export const extractImageUrls = (node: IBlockData<any, any> | IBlockData<any, any>[], urls: string[] = []): string[] => {
   if (Array.isArray(node)) {
     node.forEach(child => extractImageUrls(child, urls));
   } else if (typeof node === 'object' && node !== null) {
     // Vérifier les URLs d'images dans les nœuds de type advanced_image
-    if (node.type === 'advanced_image' && node.attributes?.src) {
+    if (node.type === AdvancedType.IMAGE && node.attributes?.src) {
       urls.push(node.attributes.src);
     }
     // Vérifier les URLs d'images dans les nœuds de type TOP
