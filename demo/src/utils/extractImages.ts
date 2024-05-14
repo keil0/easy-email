@@ -9,17 +9,19 @@ export const extractImageUrls = (node: IBlockData<any, any> | IBlockData<any, an
       urls.push(node.attributes.src);
     }
     // Vérifier les URLs d'images dans les nœuds de type TOP
-    if (node.type === 'TOP' && node.data?.value?.desktopImageUrl) {
-      urls.push(node.data.value.desktopImageUrl);
+    if (node.type === 'TOP') {
+      if (node.data?.value?.desktopImageUrl) {
+        urls.push(node.data.value.desktopImageUrl);
+      }
+      if (node.data?.value?.mobileImageUrl) {
+        urls.push(node.data.value.mobileImageUrl);
+      }
     }
-    if (node.type === 'TOP' && node.data?.value?.mobileImageUrl) {
-      urls.push(node.data.value.mobileImageUrl);
-    }
-    // Vérifier les URLs d'images dans les nœuds de type RESPONSIVE_IMAGE
-    if (node.type === 'RESPONSIVE_IMAGE' && node.children) {
-      node.children.forEach(child => {
-        if (child.type === 'advanced_image' && child.attributes?.src) {
-          urls.push(child.attributes.src);
+    // Vérifier les URLs d'images dans les nœuds de type advanced_social
+    if (node.type === 'advanced_social' && node.data?.value?.elements) {
+      node.data.value.elements.forEach((element: any) => {
+        if (element.src) {
+          urls.push(element.src);
         }
       });
     }
