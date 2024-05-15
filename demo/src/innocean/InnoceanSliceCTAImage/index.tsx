@@ -10,6 +10,7 @@ import {
 import React from 'react';
 
 import { InnoceanBlocksType } from '../constants';
+import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
 const { BasicBlock } = components;
 
@@ -98,19 +99,7 @@ export const InnoceanSliceCTAImage = createBlock<IBlockData>({
                 'padding': '0px',
               },
               children: [
-                {
-                  type: InnoceanBlocksType.RESPONSIVE_IMAGE,
-                  data: {
-                    value: {
-                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/700x688/004dff/fff.png&text=header-desktop',
-                      mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=header-mobile',
-                    },
-                  },
-                  attributes: {
-                    padding: '0px',
-                  },
-                  children: [],
-                },
+                InnoceanResponsiveImage.create({}),
               ],
             },
           ]

@@ -10,6 +10,7 @@ import {
 import React from 'react';
 
 import { InnoceanBlocksType } from '../constants';
+import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
 const { BasicBlock } = components;
 
@@ -48,19 +49,7 @@ export const InnoceanSideImage = createBlock<IBlockData>({
                 padding: '0px',
               },
               children: [
-                {
-                  type: InnoceanBlocksType.RESPONSIVE_IMAGE,
-                  data: {
-                    value: {
-                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/600x1500/004dff/fff.png&text=image-desktop',
-                      mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/450x450/ecb0a0/fff.png&text=image-mobile',
-                    },
-                  },
-                  attributes: {
-                    padding: '0px',
-                  },
-                  children: [],
-                },
+                InnoceanResponsiveImage.create({}),
               ],
             },
             {
