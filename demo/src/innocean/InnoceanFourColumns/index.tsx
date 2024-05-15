@@ -53,15 +53,17 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
               },
               children: [
                 {
-                  type: InnoceanBlocksType.RESPONSIVE_IMAGE,
+                  type: AdvancedType.IMAGE,
                   data: {
-                    value: {
-                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/1200x688/004dff/fff.png&text=1',
-                      mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=1',
-                    },
+                    value: {},
                   },
                   attributes: {
-                    padding: '0px',
+                    height: 'auto',
+                    padding: '0px 0px',
+                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=1',
+                    width: '250px',
+                    align:"left",
+                    alt: 'Batterie',
                   },
                   children: [],
                 },
@@ -93,15 +95,17 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
               },
               children: [
                 {
-                  type: InnoceanBlocksType.RESPONSIVE_IMAGE,
+                  type: AdvancedType.IMAGE,
                   data: {
-                    value: {
-                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/1200x688/004dff/fff.png&text=2',
-                      mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=2',
-                    },
+                    value: {},
                   },
                   attributes: {
-                    padding: '0px',
+                    height: 'auto',
+                    padding: '0px 0px',
+                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=2',
+                    width: '250px',
+                    align:"left",
+                    alt: 'Batterie',
                   },
                   children: [],
                 },
@@ -133,15 +137,17 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
               },
               children: [
                 {
-                  type: InnoceanBlocksType.RESPONSIVE_IMAGE,
+                  type: AdvancedType.IMAGE,
                   data: {
-                    value: {
-                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/1200x688/004dff/fff.png&text=3',
-                      mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=3',
-                    },
+                    value: {},
                   },
                   attributes: {
-                    padding: '0px',
+                    height: 'auto',
+                    padding: '0px 0px',
+                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=3',
+                    width: '250px',
+                    align:"left",
+                    alt: 'Batterie',
                   },
                   children: [],
                 },
@@ -173,15 +179,17 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
               },
               children: [
                 {
-                  type: InnoceanBlocksType.RESPONSIVE_IMAGE,
+                  type: AdvancedType.IMAGE,
                   data: {
-                    value: {
-                      desktopImageUrl: payload?.data?.value.desktopImageUrl || 'https://dummyimage.com/1200x688/004dff/fff.png&text=4',
-                      mobileImageUrl: payload?.data?.value.mobileImageUrl || 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=4',
-                    },
+                    value: {},
                   },
                   attributes: {
-                    padding: '0px',
+                    height: 'auto',
+                    padding: '0px 0px',
+                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=4',
+                    width: '250px',
+                    align:"left",
+                    alt: 'Batterie',
                   },
                   children: [],
                 },

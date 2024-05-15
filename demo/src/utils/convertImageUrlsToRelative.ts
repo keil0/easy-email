@@ -43,4 +43,3 @@ export const convertImageUrlsToRelativeJson = (jsonContent: IEmailTemplate, imag
 
   return updatedJson;
 };
-
