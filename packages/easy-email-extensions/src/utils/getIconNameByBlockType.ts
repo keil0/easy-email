@@ -53,22 +53,22 @@ const iconsMap = {
   [AdvancedType.GROUP]: 'icon-group',
   [AdvancedType.HERO]: 'icon-hero',
 
-  [InnoceanBlocksType.RESPONSIVE_IMAGE]: '',
-  [InnoceanBlocksType.BUTTON]: '',
-  [InnoceanBlocksType.TOP]: '',
-  [InnoceanBlocksType.TEXT_BLOCK]: '',
-  [InnoceanBlocksType.TITLE_IMAGE_BLOCK]: '',
-  [InnoceanBlocksType.TWO_COLUMNS]: '',
-  [InnoceanBlocksType.THREE_COLUMNS]: '',
-  [InnoceanBlocksType.FOUR_COLUMNS]: '',
-  [InnoceanBlocksType.HERO]: '',
-  [InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA]: '',
-  [InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE]: '',
-  [InnoceanBlocksType.SLICE_CTA_IMAGE]: '',
-  [InnoceanBlocksType.SLICE_IMAGE_CTA]: '',
-  [InnoceanBlocksType.SIDE_IMAGE]: '',
-  [InnoceanBlocksType.FOOTER]: '',
-  [InnoceanBlocksType.POLLUSCORE]: ''
+  [InnoceanBlocksType.RESPONSIVE_IMAGE]: 'icomoon-image',
+  [InnoceanBlocksType.BUTTON]: 'icomoon-button',
+  [InnoceanBlocksType.TOP]: 'icomoon-top',
+  [InnoceanBlocksType.TEXT_BLOCK]: 'icomoon-block_text',
+  [InnoceanBlocksType.TITLE_IMAGE_BLOCK]: 'icomoon-title_image',
+  [InnoceanBlocksType.TWO_COLUMNS]: 'icomoon-columns',
+  [InnoceanBlocksType.THREE_COLUMNS]: 'icomoon-columns1',
+  [InnoceanBlocksType.FOUR_COLUMNS]: 'icomoon-columns2',
+  [InnoceanBlocksType.HERO]: 'icomoon-hero',
+  [InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA]: 'icomoon-imagetexte4',
+  [InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE]: 'icomoon-imagetexte3',
+  [InnoceanBlocksType.SLICE_CTA_IMAGE]: 'icomoon-imagetexte2',
+  [InnoceanBlocksType.SLICE_IMAGE_CTA]: 'icomoon-imagetexte1',
+  [InnoceanBlocksType.SIDE_IMAGE]: 'icomoon-imagetexte5',
+  [InnoceanBlocksType.FOOTER]: 'icomoon-footer',
+  [InnoceanBlocksType.POLLUSCORE]: 'icomoon-polluscore'
 };
 
 export function getIconNameByBlockType(type: string) {

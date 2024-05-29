@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 
 import { InnoceanBlocksType } from '../constants';
 
-const { BasicBlock, Column, Text, Section, Image } = components;
+const { BasicBlock, Column, Text, Section, Image, Raw } = components;
 
 export type ICustomTop = IBlockData<
   {},
@@ -38,6 +38,10 @@ export const InnoceanTopBlock: IBlock = {
     AdvancedType.WRAPPER,
   ],
   render(params) {
+
+    const commentOpen = '<!--[if !mso]><!-->';
+    const commentClose = '<!--<![endif]-->';
+
     return (
       <BasicBlock
         params={{
@@ -60,6 +64,7 @@ export const InnoceanTopBlock: IBlock = {
             alt="hyundai"
           />
         </Section>
+        <Raw>{commentOpen}</Raw>
         <Section padding={"0px"} css-class={'hide-on-mobile'}>
           <Image
             params={params}
@@ -70,6 +75,7 @@ export const InnoceanTopBlock: IBlock = {
             alt="hyundai"
           />
         </Section>
+        <Raw>{commentClose}</Raw>
       </BasicBlock>
     );
   },

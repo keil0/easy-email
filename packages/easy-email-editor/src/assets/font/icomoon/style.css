@@ -1,0 +1,75 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('icomoon.eot?wks8h9');
+  src:  url('icomoon.eot?wks8h9#iefix') format('embedded-opentype'),
+    url('icomoon.ttf?wks8h9') format('truetype'),
+    url('icomoon.woff?wks8h9') format('woff'),
+    url('icomoon.svg?wks8h9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icomoon-"], [class*=" icomoon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icomoon-columns:before {
+  content: "\e900";
+}
+.icomoon-columns1:before {
+  content: "\e901";
+}
+.icomoon-columns2:before {
+  content: "\e902";
+}
+.icomoon-block_text:before {
+  content: "\e903";
+}
+.icomoon-button:before {
+  content: "\e904";
+}
+.icomoon-footer:before {
+  content: "\e905";
+}
+.icomoon-hero:before {
+  content: "\e906";
+}
+.icomoon-image:before {
+  content: "\e907";
+}
+.icomoon-imagetexte1:before {
+  content: "\e908";
+}
+.icomoon-imagetexte2:before {
+  content: "\e909";
+}
+.icomoon-imagetexte3:before {
+  content: "\e90a";
+}
+.icomoon-imagetexte4:before {
+  content: "\e90b";
+}
+.icomoon-imagetexte5:before {
+  content: "\e90c";
+}
+.icomoon-polluscore:before {
+  content: "\e90d";
+}
+.icomoon-title_image:before {
+  content: "\e90e";
+}
+.icomoon-top:before {
+  content: "\e90f";
+}
