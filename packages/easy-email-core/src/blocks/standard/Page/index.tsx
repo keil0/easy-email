@@ -110,12 +110,12 @@ export const Page = createBlock<IPage>({
     const responsiveUtilities = `
       <mj-style>
         @media only screen and (max-width:${value.breakpoint}) {
-          .hide-on-mobile {
+          .hide_on_mobile {
             display: none !important;
           }
         }
         @media only screen and (min-width:${value.breakpoint}) {
-          .hide-on-desktop {
+          .show_on_mobile {
             display: none !important;
           }
         }
