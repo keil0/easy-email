@@ -30,7 +30,11 @@ export const InnoceanResponsiveImage: IBlock = {
             src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=header-desktop',
             width: '600px',
             alt: 'Image desktop',
-            'css-class': 'hide-on-mobile',
+            'css-class': 'hide_on_mobile',
+            style: {
+              display: 'block',
+              maxWidth: '100%',
+            }
           },
           children: [],
         },
@@ -45,7 +49,11 @@ export const InnoceanResponsiveImage: IBlock = {
             src: 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=header-mobile',
             width: '600px',
             alt: 'Image mobile',
-            'css-class': 'hide-on-desktop',
+            'css-class': 'show_on_mobile',
+            style: {
+              display: 'none',
+              maxWidth: '100%',
+            }
           },
           children: [],
         },

@@ -353,9 +353,9 @@ export default function Editor() {
       const updatedMjmlString = convertImageUrlsToRelativeMjml(mjmlString, successfulImageUrls, imageFilenames);
       const updatedJsonContent = convertImageUrlsToRelativeJson(values, successfulImageUrls, imageFilenames);
 
-      zip.file('easy-email.html', updatedHtml);
-      zip.file('easy-email.mjml', updatedMjmlString);
-      zip.file('easy-email.json', JSON.stringify(updatedJsonContent, null, 2));
+      zip.file('index.html', updatedHtml);
+      zip.file('template.mjml', updatedMjmlString);
+      zip.file('export.json', JSON.stringify(updatedJsonContent, null, 2));
 
       zip.generateAsync({ type: 'blob' }).then((content) => {
         saveAs(content, 'template.zip');

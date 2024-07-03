@@ -31,7 +31,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
       },
       attributes: {
         'background-color': '#FFFFFF',
-        padding: '0 10px 25px 0px',
+        padding: '0 10px 25px 10px',
       },
       children: [
         {
@@ -62,7 +62,6 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     padding: '0px 0px',
                     src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=1',
                     width: '250px',
-                    align:"left",
                     alt: 'Batterie',
                   },
                   children: [],
@@ -104,7 +103,6 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     padding: '0px 0px',
                     src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=2',
                     width: '250px',
-                    align:"left",
                     alt: 'Batterie',
                   },
                   children: [],
@@ -146,7 +144,6 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     padding: '0px 0px',
                     src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=3',
                     width: '250px',
-                    align:"left",
                     alt: 'Batterie',
                   },
                   children: [],
@@ -188,7 +185,6 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     padding: '0px 0px',
                     src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=4',
                     width: '250px',
-                    align:"left",
                     alt: 'Batterie',
                   },
                   children: [],
