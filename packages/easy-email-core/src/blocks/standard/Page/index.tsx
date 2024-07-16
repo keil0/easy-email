@@ -109,16 +109,22 @@ export const Page = createBlock<IPage>({
 
     const responsiveUtilities = `
       <mj-style>
-        @media only screen and (max-width:${value.breakpoint}) {
-          .hide_on_mobile {
-            display: none !important;
-          }
+      @media only screen and (max-width:${value.breakpoint}) {
+        .hide_on_mobile {
+          display: none !important;
         }
-        @media only screen and (min-width:${value.breakpoint}) {
-          .show_on_mobile {
-            display: none !important;
-          }
+        .show_on_mobile {
+          display: block !important;
         }
+      }
+      @media only screen and (min-width:${value.breakpoint}) {
+        .hide_on_mobile {
+          display: block !important;
+        }
+        .show_on_mobile {
+          display: none !important;
+        }
+      }
       </mj-style>
     `;
 

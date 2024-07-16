@@ -55,7 +55,7 @@ export const InnoceanTopBlock: IBlock = {
             <Text font-size={"10px"} font-family={"Helvetica"} padding={"5px 0px"} align={"center"}>{`Un problème d'affichage ? <a href='${params.data.data.value.link}'>Cliquez ici</a>`}</Text>
           </Column>
         </Section>
-        <Section padding={"0px"} css-class={'hide-on-desktop'}>
+        <Section padding={"0px"} css-class={'show_on_mobile'}>
           <Image
             params={params}
             tag="mj-image"
@@ -65,7 +65,7 @@ export const InnoceanTopBlock: IBlock = {
           />
         </Section>
         <Raw>{commentOpen}</Raw>
-        <Section padding={"0px"} css-class={'hide-on-mobile'}>
+        <Section padding={"0px"} css-class={'hide_on_mobile'}>
           <Image
             params={params}
             tag="mj-image"
