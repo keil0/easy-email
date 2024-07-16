@@ -23,7 +23,7 @@ export default function Frame({
     <Layout>
       <Header style={{ padding: '0 20px', backgroundColor: '#001529' }}>
         <Stack distribution='equalSpacing' alignment='center'>
-          <h1 style={{ color: 'white', margin: '15px 0' }}>Innocean - Easy Email</h1>
+          <h1 style={{ color: 'white', margin: '15px 0' }}>Innocean | Postcard</h1>
         </Stack>
       </Header>
       <Layout>

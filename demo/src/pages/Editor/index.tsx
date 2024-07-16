@@ -50,6 +50,7 @@ import {
   convertImageUrlsToRelativeJson,
   convertImageUrlsToRelativeMjml,
 } from '@demo/utils/convertImageUrlsToRelative';
+import { formatHtml } from '@demo/utils/formatHtml';
 
 export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number;
@@ -353,7 +354,9 @@ export default function Editor() {
       const updatedMjmlString = convertImageUrlsToRelativeMjml(mjmlString, successfulImageUrls, imageFilenames);
       const updatedJsonContent = convertImageUrlsToRelativeJson(values, successfulImageUrls, imageFilenames);
 
-      zip.file('index.html', updatedHtml);
+      const formatedHtml = formatHtml(updatedHtml);
+
+      zip.file('index.html', formatedHtml);
       zip.file('template.mjml', updatedMjmlString);
       zip.file('export.json', JSON.stringify(updatedJsonContent, null, 2));
 
