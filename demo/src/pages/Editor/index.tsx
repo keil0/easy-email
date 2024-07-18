@@ -51,6 +51,7 @@ import {
   convertImageUrlsToRelativeMjml,
 } from '@demo/utils/convertImageUrlsToRelative';
 import { formatHtml } from '@demo/utils/formatHtml';
+import { convertEmailTemplate } from '@demo/utils/refactorResponsiveImage';
 
 export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number;
@@ -354,7 +355,8 @@ export default function Editor() {
       const updatedMjmlString = convertImageUrlsToRelativeMjml(mjmlString, successfulImageUrls, imageFilenames);
       const updatedJsonContent = convertImageUrlsToRelativeJson(values, successfulImageUrls, imageFilenames);
 
-      const formatedHtml = formatHtml(updatedHtml);
+      const refactoredHtml = convertEmailTemplate(updatedHtml);
+      const formatedHtml = formatHtml(refactoredHtml);
 
       zip.file('index.html', formatedHtml);
       zip.file('template.mjml', updatedMjmlString);

@@ -117,14 +117,6 @@ export const Page = createBlock<IPage>({
           display: block !important;
         }
       }
-      @media only screen and (min-width:${value.breakpoint}) {
-        .hide_on_mobile {
-          display: block !important;
-        }
-        .show_on_mobile {
-          display: none !important;
-        }
-      }
       </mj-style>
     `;
 
