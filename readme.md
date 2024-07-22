@@ -17,17 +17,20 @@
 3. Copy the `backend/.env.example` file to `backend/.env` and update the values
 4. Install all dependencies
 ```bash
+cd <project_root>
 npm run install-all
 cd backend
 npm i
 ```
 5. Start the development server
 ```bash
+cd <project_root>
 cd docker
 docker compose -f docker-compose.localhost.yml up
 ```
 6. Create the database by running the following command
 ```bash
+cd <project_root>
 cd backend
 node ace migration:run
 ```
@@ -40,6 +43,7 @@ INSERT INTO users (email, full_name) VALUES ('example@example.com', 'John Doe');
 ```
 8. Copy the default images to the public folder
 ```bash
+cd <project_root>
 cp -r backend/uploads backend/public
 ```
 
@@ -47,8 +51,10 @@ cp -r backend/uploads backend/public
 1. Start frontend & backend in two terminals
 ```bash
 # In first terminal
+cd <project_root>
 npm run dev
 # In second terminal
+cd <project_root>
 cd backend
 npm run dev
 ```
