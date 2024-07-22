@@ -13,9 +13,11 @@ export const InnoceanResponsiveImage: IBlock = {
     payload,
   ) {
     const defaultData: IBlockData = {
-      type: InnoceanBlocksType.RESPONSIVE_IMAGE,
+      type: BasicType.HERO,
       data: { value: {} },
-      attributes: {},
+      attributes: {
+        "padding": "0px 0px"
+      },
       children: [
         {
           type: AdvancedType.IMAGE,
@@ -25,10 +27,14 @@ export const InnoceanResponsiveImage: IBlock = {
           attributes: {
             height: 'auto',
             padding: '0px 0px',
-            src: "https://dummyimage.com/1200x688/004dff/fff.png&text=header-desktop",
+            src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=image-desktop',
             width: '600px',
             alt: 'Image desktop',
-            "css-class": "hide-on-mobile"
+            'css-class': 'hide_on_mobile',
+            style: {
+              display: 'block',
+              maxWidth: '100%',
+            }
           },
           children: [],
         },
@@ -40,10 +46,14 @@ export const InnoceanResponsiveImage: IBlock = {
           attributes: {
             height: 'auto',
             padding: '0px 0px',
-            src: "https://dummyimage.com/375x430/ecb0a0/fff.png&text=header-mobile",
+            src: 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=image-mobile',
             width: '600px',
             alt: 'Image mobile',
-            "css-class": "hide-on-desktop"
+            'css-class': 'show_on_mobile',
+            style: {
+              display: 'none',
+              maxWidth: '100%',
+            }
           },
           children: [],
         },
@@ -55,6 +65,8 @@ export const InnoceanResponsiveImage: IBlock = {
     BasicType.PAGE,
     AdvancedType.WRAPPER,
     AdvancedType.COLUMN,
+    AdvancedType.SECTION,
+    AdvancedType.HERO,
   ],
   render(params) {
     return <BasicBlock params={params} tag="mj-hero" />;
