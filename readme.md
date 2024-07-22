@@ -113,8 +113,28 @@ INSERT INTO users (full_name, email, created_at) VALUES ('John', 'contact@exampl
 DELETE FROM users WHERE email = 'contact@example.com';
 ```
 
-## Configure CI/CD
-Define the following secrets in the repository settings:
+## Configure CI/CD & deploy automation
+### Define the following secrets in the repository settings:
 - `GHCR_TOKEN`: Github Personal Access Token to access Github packages
   And the following environment variables for staging / production in the repository settings:
 - `VITE_API_BASE_URL`: Backend base URL (e.g. https://postcard.innocean.app/auth)
+
+### Setup autopull
+1. SSH into the VPS
+2. Create folder to store the config
+```bash
+mkdir -p ~/watchtower
+cd ~/watchtower
+```
+3. Create a .env file with the following content
+```txt
+REPO_USER=INNOCEAN-FRANCE
+REPO_PASS=[PAT_TOKEN_HERE]
+WATCHTOWER_INCLUDE_RESTARTING=true
+```
+4. Run this following command
+```sh
+docker run -d --name watchtower-registr --env-file ~/watchtower/.env -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --interval 30 --cleanup
+```
+
+Now each time a new image is available, watchtower will pull it and restart the containers
