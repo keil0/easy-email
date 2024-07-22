@@ -11,7 +11,7 @@
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - Node.js v20.12.0 (or use NVM)
 
-## Setup local dev environnement
+## Setup local dev environment
 1. Clone the repository
 2. Copy the `.env.example` file to `.env`
 3. Copy the `backend/.env.example` file to `backend/.env` and update the values
