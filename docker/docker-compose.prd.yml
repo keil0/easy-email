@@ -21,7 +21,7 @@ services:
 
   postcard-auth:
     container_name: postcard-auth
-    image: ghcr.io/keil0/easy-email-auth:latest
+    image: ghcr.io/INNOCEAN-FRANCE/postcard-backend:latest
     restart: always
     env_file: .env
     networks:
@@ -41,7 +41,7 @@ services:
 
   postcard-app:
     container_name: postcard-app
-    image: ghcr.io/keil0/easy-email:latest
+    image: ghcr.io/INNOCEAN-FRANCE/postcard-frontend:latest
     restart: always
     networks:
       - traefik_network
