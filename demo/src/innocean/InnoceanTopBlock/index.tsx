@@ -5,17 +5,7 @@ import { merge } from 'lodash';
 import { InnoceanBlocksType } from '../constants';
 import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
-const { BasicBlock, Column, Text, Section, Image, Raw } = components;
-
-
-
-/*
-*  value: {
-          link: payload?.data?.value.link || '#',
-          desktopImageUrl: payload?.data?.value.desktopImageUrl || import.meta.env.VITE_API_BASE_URL as string + '/uploads/default/top_logo.png',
-          mobileImageUrl: payload?.data?.value.mobileImageUrl || import.meta.env.VITE_API_BASE_URL as string + '/uploads/default/top_logo_mobile.png',
-        },
-*/
+const { BasicBlock } = components;
 
 export const InnoceanTopBlock: IBlock = {
   name: 'Top',
