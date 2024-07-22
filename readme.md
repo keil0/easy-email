@@ -59,7 +59,7 @@ cd backend
 npm run dev
 ```
 2. Go to [http://localhost:3333](http://localhost:3333)
-3. Put the email and password you added in the database
+3. Put the email you added in the database
 4. Go to your email and click on the magic link (if you are using mailtrap, you can see the email in the mailtrap.io inbox)
 5. You can now go to [http://localhost:3000](http://localhost:3000) and see the postcard app
 
