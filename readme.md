@@ -1,184 +1,59 @@
-# Easy email
+# Innocean - Postcard
+## Stack
+- Easy Email forked from : https://github.com/m-Ryan/easy-email
+- Docker for infrastructure
+- Traefik for reverse proxy with auth middleware
+- MySQL for database
+- AdonisJS v6 for backend
 
-<br>
-<p align="center">
-  <a aria-label="Easy email logo" href="https://email.maocanhua.cn/?utm_source=github">
-    <img src="./logo_text.svg" width="300">
-  </a>
-</p>
-<br>
+## Requirements
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- Node.js v20.12.0 (or use NVM)
 
-<p align="center">
-
-  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
-  <a aria-label="React version" href="https://react.js">
-    <img alt="" src="https://img.shields.io/badge/React-18.2-yellow.svg">
-  </a>
-  <a aria-label="MJML" href="https://mjml.io/">
-    <img src="https://img.shields.io/badge/MJML-awesome-rgb(120 33 117).svg">
-  </a>
-  <a aria-label="Package size" href="https://www.typescriptlang.org/">
-    <img alt="Using TypeScript" src="https://img.shields.io/badge/%3C/%3E-TypeScript-brightgreenred.svg">
-  </a>
-</p>
-
----
-
-## Pro Version Announcement
-
-We are delighted to announce that we now have a more powerful and customizable commercial version available. <a href="https://github.com/Easy-Email-Pro/easy-email-pro" target="_blank">Check it out here </a>.
-
-If you are interested, feel free to contact us at ch.mao@qq.com.
-
----
-
-## Introduction
-
-Easy email is developed based on the [MJML](https://mjml.io/) and has very good compatibility. At the same time, it can generate code through drag-and-drop editing.
-
-## Features:
-
-- Drag and drop editor
-- Can be converted into `MJML`, or generated through `MJML`
-- Defined custom block
-- Dynamic rendering
-
-|                  Video Overview                  |
-| :----------------------------------------------: |
-| <img src="./StandardLayout.png" alt="Overview" > |
-
-## Live Demo
-
-Check out the live demo here: <a href="https://email.maocanhua.cn/?utm_source=github" target="_blank" alt="https://email.maocanhua.cn/?utm_source=github">email.maocanhua.cn</a>
-
-Pro version live demo here: <a href="https://demo.easyemail.pro/full?utm_source=github-live" target="_blank">demo.easyemail.pro</a>.
-
-
-## Getting started
-
-```sh
-$ npm install --save easy-email-core easy-email-editor easy-email-extensions react-final-form
+## Setup local dev environnement
+1. Clone the repository
+2. Copy the `.env.example` file to `.env`
+3. Copy the `backend/.env.example` file to `backend/.env` and update the values
+4. Install all dependencies
+```bash
+npm run install-all
+cd backend
+npm i
+```
+5. Start the development server
+```bash
+cd docker
+docker compose -f docker-compose.localhost.yml up
+```
+6. Create the database by running the following command
+```bash
+cd backend
+node ace migration:run
+```
+7. Add one user into the database by running the following command
+```bash
+docker exec -it easy_email_mysql mysql -u easy_email -peasy_email easy_email_users
+```
+```sql
+INSERT INTO users (email, full_name) VALUES ('example@example.com', 'John Doe');
+```
+8. Copy the default images to the public folder
+```bash
+cp -r backend/uploads backend/public
 ```
 
-or
-
-```sh
-$ yarn add easy-email-core easy-email-editor easy-email-extensions react-final-form
+## Run the project locally (frontend and backend)
+1. Start frontend & backend in two terminals
+```bash
+# In first terminal
+npm run dev
+# In second terminal
+cd backend
+npm run dev
 ```
+2. Go to [http://localhost:3333/auth](http://localhost:3333/auth)
+3. Put the email and password you added in the database
+4. Go to your email and click on the magic link (if you are using mailtrap, you can see the email in the mailtrap.io inbox)
+5. You can now go to [http://localhost:3000](http://localhost:3000) and see the postcard app
 
-```js
-import React from 'react';
-import { BlockManager, BasicType, AdvancedType } from 'easy-email-core';
-import { EmailEditor, EmailEditorProvider } from 'easy-email-editor';
-import { ExtensionProps, StandardLayout } from 'easy-email-extensions';
-import { useWindowSize } from 'react-use';
-
-import 'easy-email-editor/lib/style.css';
-import 'easy-email-extensions/lib/style.css';
-
-// theme, If you need to change the theme, you can make a duplicate in https://arco.design/themes/design/1799/setting/base/Color
-import '@arco-themes/react-easy-email-theme/css/arco.css';
-
-const initialValues = {
-  subject: 'Welcome to Easy-email',
-  subTitle: 'Nice to meet you!',
-  content: BlockManager.getBlockByType(BasicType.PAGE)!.create({}),
-};
-
-export default function App() {
-  const { width } = useWindowSize();
-
-  const smallScene = width < 1400;
-
-  return (
-    <EmailEditorProvider
-      data={initialValues}
-      height={'calc(100vh - 72px)'}
-      autoComplete
-      dashed={false}
-    >
-      {({ values }) => {
-        return (
-          <StandardLayout
-            compact={!smallScene}
-            showSourceCode={true}
-          >
-            <EmailEditor />
-          </StandardLayout>
-        );
-      }}
-    </EmailEditorProvider>
-  );
-}
-
-
-```
-
-## Examples
-
-> Vite: <a href="https://github.com/m-Ryan/easy-email-demo" target="_blank" alt="https://github.com/m-Ryan/easy-email-demo">https://github.com/m-Ryan/easy-email-demo</a>
-
-> Nextjs: <a href="https://github.com/m-Ryan/easy-email-nextjs-demo" target="_blank" alt="https://github.com/m-Ryan/easy-email-nextjs-demo">https://github.com/m-Ryan/easy-email-nextjs-demo</a>
-
-</br>
-
-## Configuration
-
-| property           | Type                                                                                               | Description                                                                                                                          |
-| ------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| height             | string / number                                                                                    | Set the height of the container                                                                                                      |
-| data               | interface IEmailTemplate { content: IPage; subject: string; subTitle: string; }                    | Source data                                                                                                                          |
-| children           | ( props: FormState<T>,helper: FormApi<IEmailTemplate, Partial<IEmailTemplate>>) => React.ReactNode | ReactNode                                                                                                                            |
-| onSubmit           | Config<IEmailTemplate, Partial<IEmailTemplate>>['onSubmit'];                                       | Called when the commit is triggered manually                                                                                         |
-| fontList           | { value: string; label: string; }[];                                                               | Default font list.                                                                                                                   |
-| interactiveStyle   | { hoverColor?: string; selectedColor?: string;}                                                    | Interactive prompt color                                                                                                             |
-| onUploadImage      | (data: Blob) => Promise<string>;                                                                   | Triggered when an image is pasted or uploaded                                                                                        |
-| onAddCollection    | (payload: CollectedBlock) => void;                                                                 | Add to collection list                                                                                                               |
-| onRemoveCollection | (payload: { id: string; }) => void;                                                                | Remove from collection list                                                                                                          |
-| dashed             | boolean                                                                                            | Show dashed                                                                                                                          |
-| autoComplete       | boolean                                                                                            | Automatically complete missing blocks. For example, Text => Section, will generate Text=>Column=>Section                             |
-| mergeTags          | Object                                                                                             | A merge tag is a bit of specific code that allows you to insert dynamic data into emails. Like `{{user.name}}`, and used for preview |
-| previewInjectData  | Object                                                                                             | Dynamic data for preview, it will overwrite mergeTags.                                                                               |
-| onBeforePreview    | (html: string, mergeTags: PropsProviderProps['mergeTags']) => string                               | Promise<string> You can replace mergeTags when previewing.                                                                           |
-
-## Hotkeys
-
-| hotkey            | Description                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------- |
-| mod+z             | undo                                                                                              |
-| mod+y             | redo                                                                                              |
-| delete/backspace  | delete block                                                                                      |
-| tab / shift + tab | fast select block, if block is focusing,`tab` select next block & `shift + tab` select prev block |
-
-## How does it work?
-
-<img alt="" src="./work.png">
-
-</br>
-
-## Packages
-
-- [easy-email-core](./packages/easy-email-core/readme.md)
-- [easy-email-editor](./packages/easy-email-editor/readme.md)
-- [easy-email-extensions](./packages/easy-email-extensions/readme.md)
-
-</br>
-
-## Development
-
-```sh
-$ git clone git@github.com:zalify/easy-email.git
-$ cd easy-email
-
-
-$ yarn
-$ yarn install-all
-$ yarn dev
-
-```
-
-`If you need some new features, we always welcome you to submit a PR.`
-
-## License
-
-The MIT License
