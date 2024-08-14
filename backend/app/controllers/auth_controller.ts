@@ -5,6 +5,7 @@ import { createMagicValidator } from '#validators/magic'
 import router from '@adonisjs/core/services/router'
 import env from '#start/env'
 import crypto from 'node:crypto'
+import { DateTime } from 'luxon'
 
 export default class AuthController {
   async check({ response }: HttpContext) {
@@ -13,12 +14,13 @@ export default class AuthController {
 
   async processMagicLink({ request, response, auth }: HttpContext) {
     const token = request.param('token')
-    const user = await User.findBy('token', token)
+    const user = await User.query()
+      .where('token', token)
+      .andWhere('tokenCreatedAt', '>', DateTime.now().minus({ minutes: 5 }).toSQL())
+      .first()
 
     if (user) {
       await auth.use('web').login(user)
-      user.token = null
-      await user.save()
     }
 
     return response.redirect('/')
@@ -53,6 +55,7 @@ export default class AuthController {
     if (user) {
       // Create and store token
       user.token = crypto.randomBytes(32).toString('hex')
+      user.tokenCreatedAt = DateTime.now()
       await user.save()
 
       // Build url

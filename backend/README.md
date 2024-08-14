@@ -2,6 +2,8 @@
 
 ## Run migration
 ```bash
+node ace migration:run
+or
 docker exec -it easy-email-auth node ace migration:run
 ```
 
