@@ -24,6 +24,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare token: string | null
 
+  @column.dateTime()
+  declare tokenCreatedAt: DateTime | null
+
   @hasMany(() => Template)
   declare templates: HasMany<typeof Template>
 
