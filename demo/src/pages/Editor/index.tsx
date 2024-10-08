@@ -3,14 +3,7 @@ import { useDispatch } from 'react-redux';
 import template from '@demo/store/template';
 import { useAppSelector } from '@demo/hooks/useAppSelector';
 import { useLoading } from '@demo/hooks/useLoading';
-import {
-  Button,
-  ConfigProvider,
-  Dropdown,
-  Notification,
-  Menu,
-  PageHeader,
-} from '@arco-design/web-react';
+import { Button, ConfigProvider, Dropdown, Menu, Notification, PageHeader } from '@arco-design/web-react';
 import { useHistory, useParams } from 'react-router-dom';
 import { cloneDeep } from 'lodash';
 import { Loading } from '@demo/components/loading';
@@ -18,19 +11,11 @@ import mjml from 'mjml-browser';
 import services from '@demo/services';
 import { IconMoonFill, IconSunFill } from '@arco-design/web-react/icon';
 import { saveAs } from 'file-saver';
-import {
-  EmailEditor,
-  EmailEditorProvider,
-  IEmailTemplate, useActiveTab,
-} from 'easy-email-editor';
+import { EmailEditor, EmailEditorProvider, IEmailTemplate } from 'easy-email-editor';
 import { Stack } from '@demo/components/Stack';
 
 import { AdvancedType, BasicType, IBlockData, JsonToMjml } from 'easy-email-core';
-import {
-  ExtensionProps,
-  MjmlToJson,
-  StandardLayout,
-} from 'easy-email-extensions';
+import { ExtensionProps, MjmlToJson, StandardLayout } from 'easy-email-extensions';
 import 'easy-email-editor/lib/style.css';
 import 'easy-email-extensions/lib/style.css';
 import '@arco-themes/react-easy-email-theme/css/arco.css';
@@ -39,9 +24,7 @@ import { Uploader } from '@demo/utils/Uploader';
 import enUS from '@arco-design/web-react/es/locale/en-US';
 import { WarnAboutUnsavedChanges } from '@demo/components/WarnAboutUnsavedChanges';
 import { extractImageUrls } from '@demo/utils/extractImages';
-import { downloadImagesAsZip } from '@demo/utils/downloadImages';
-const imageCompression = import('browser-image-compression');
-import "../../innocean";
+import '../../innocean';
 import { InnoceanBlocksType } from '@demo/innocean/constants';
 import JSZip from 'jszip';
 import { request } from '@demo/services/axios.config';
@@ -52,6 +35,8 @@ import {
 } from '@demo/utils/convertImageUrlsToRelative';
 import { formatHtml } from '@demo/utils/formatHtml';
 import { convertEmailTemplate } from '@demo/utils/refactorResponsiveImage';
+
+const imageCompression = import('browser-image-compression');
 
 export interface IEmailTemplateModel extends IEmailTemplate {
   id?: number;
@@ -183,7 +168,7 @@ const defaultCategories: ExtensionProps['categories'] = [
 ];
 
 export const onUploadImage = async (blob: Blob) => {
-  const MAX_SIZE = 1 * 1024 * 1024; // 1MB
+  const MAX_SIZE = 1024 * 1024; // 1MB
   // Types MIME autorisés
   const ALLOWED_TYPES = ['image/jpg','image/jpeg', 'image/png', 'image/gif'];
 
@@ -335,14 +320,16 @@ export default function Editor() {
       const zip = new JSZip();
 
       const downloadResults = await Promise.all(imageUrls.map(async (url, index) => {
+        const relativeUrl = url.startsWith('http') ? new URL(url).pathname : url
+
         try {
-          const response = await request.get<Blob>(url, { responseType: 'blob' });
+          const response = await request.get<Blob>(relativeUrl, { responseType: 'blob', baseURL: '' });
           const blob: Blob = new Blob([response], { type: response.type });
           const filename = `image${index + 1}.${blob.type.split('/')[1]}`;
           zip.file(filename, blob, { binary: true });
           return { url, filename, success: true };
         } catch (error) {
-          console.error('Error downloading image:', url, error);
+          console.error('Error downloading image:', relativeUrl, error);
           return { url, filename: undefined, success: false };
         }
       }));

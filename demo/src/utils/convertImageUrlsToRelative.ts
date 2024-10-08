@@ -5,7 +5,7 @@ export const convertImageUrlsToRelativeHtml = (htmlContent: string, imageUrls: s
   let updatedHtml = htmlContent;
   imageUrls.forEach((url, index) => {
     if (imageFilenames[index]) {
-      const relativeUrl = `./${imageFilenames[index]}`;
+      const relativeUrl = `${imageFilenames[index]}`;
       updatedHtml = updatedHtml.replace(new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), relativeUrl);
     }
   });
@@ -16,7 +16,7 @@ export const convertImageUrlsToRelativeMjml = (mjmlContent: string, imageUrls: s
   let updatedMjml = mjmlContent;
   imageUrls.forEach((url, index) => {
     if (imageFilenames[index]) {
-      const relativeUrl = `./${imageFilenames[index]}`;
+      const relativeUrl = `${imageFilenames[index]}`;
       updatedMjml = updatedMjml.replace(new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), relativeUrl);
     }
   });
@@ -30,7 +30,7 @@ export const convertImageUrlsToRelativeJson = (jsonContent: IEmailTemplate, imag
     if (content.type === AdvancedType.IMAGE && content.attributes?.src) {
       imageUrls.forEach((url, index) => {
         if (content.attributes.src === url && imageFilenames[index]) {
-          content.attributes.src = `./${imageFilenames[index]}`;
+          content.attributes.src = `${imageFilenames[index]}`;
         }
       });
     }

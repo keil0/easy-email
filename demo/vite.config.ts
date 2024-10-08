@@ -8,6 +8,13 @@ export default defineConfig({
     fs: {
       strict: false,
     },
+    proxy: {
+      '/uploads': {
+        target: 'http://localhost:3333',
+        changeOrigin: true,
+        secure: false,
+      },
+    }
   },
   resolve: {
     alias: {
