@@ -14,7 +14,7 @@ import { saveAs } from 'file-saver';
 import { EmailEditor, EmailEditorProvider, IEmailTemplate } from 'easy-email-editor';
 import { Stack } from '@demo/components/Stack';
 
-import { AdvancedType, BasicType, IBlockData, JsonToMjml } from 'easy-email-core';
+import { AdvancedType, BasicType, IBlockData, InnoceanBlocksType, JsonToMjml } from 'easy-email-core';
 import { ExtensionProps, MjmlToJson, StandardLayout } from 'easy-email-extensions';
 import 'easy-email-editor/lib/style.css';
 import 'easy-email-extensions/lib/style.css';
@@ -24,8 +24,6 @@ import { Uploader } from '@demo/utils/Uploader';
 import enUS from '@arco-design/web-react/es/locale/en-US';
 import { WarnAboutUnsavedChanges } from '@demo/components/WarnAboutUnsavedChanges';
 import { extractImageUrls } from '@demo/utils/extractImages';
-import '../../innocean';
-import { InnoceanBlocksType } from '@demo/innocean/constants';
 import JSZip from 'jszip';
 import { request } from '@demo/services/axios.config';
 import {
@@ -202,7 +200,7 @@ const fontList = [
 ].map(item => ({ value: item, label: item }));
 
 type UrlParams = {
-  id?: number
+  id?: string
 }
 
 export default function Editor() {

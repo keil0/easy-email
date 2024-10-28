@@ -1,10 +1,11 @@
 import { IBlock, IBlockData } from '@core/typings';
-import { standardBlocks, advancedBlocks } from '@core/blocks';
+import { advancedBlocks, innoceanBlocks, standardBlocks } from '@core/blocks';
 
 export class BlockManager {
   private static blocksMap: Record<string, IBlock> = {
     ...standardBlocks,
     ...advancedBlocks,
+    ...innoceanBlocks
   };
   private static autoCompletePath: { [key: string]: Array<string[]> } = {};
 

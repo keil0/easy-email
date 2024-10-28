@@ -1,5 +1,5 @@
 import createSliceState from './common/createSliceState';
-import { BlockManager, BasicType, AdvancedType } from 'easy-email-core';
+import { AdvancedType, BasicType, BlockManager } from 'easy-email-core';
 import { IEmailTemplate } from 'easy-email-editor';
 import { templateService } from '@demo/services/template';
 import { emailToImage } from '@demo/utils/emailToImage';
@@ -16,8 +16,8 @@ export default createSliceState({
     reset: async state => {
       return null;
     },
-    fetchById: async (state, { id }: { id: number; }) => {
-      const data = await templateService.getTemplate(id);
+    fetchById: async (state, { id }: { id: string; }) => {
+      const data = await templateService.getTemplate(Number(id));
       return data as IEmailTemplate;
     },
     fetchDefaultTemplate: async state => {

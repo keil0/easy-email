@@ -52,7 +52,6 @@ const heroList = [
         mode: 'fluid-height',
         padding: '100px 0px 100px 0px',
         'vertical-align': 'top',
-        'background-url': getImg('IMAGE_31'),
       },
       children: [
         {
