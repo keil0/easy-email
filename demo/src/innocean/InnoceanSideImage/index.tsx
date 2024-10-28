@@ -1,15 +1,9 @@
-import {
-  AdvancedType,
-  BasicType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock,
-} from 'easy-email-core';
 import React from 'react';
 
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
+
 import { InnoceanBlocksType } from '../constants';
+
 import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
 const { BasicBlock } = components;
@@ -19,34 +13,32 @@ export const InnoceanSideImage = createBlock<IBlockData>({
     return t('Side image');
   },
   type: InnoceanBlocksType.SIDE_IMAGE,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER, AdvancedType.COLUMN],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
     const defaultData: IBlockData = {
       type: InnoceanBlocksType.SIDE_IMAGE,
-      data: {
-        value: {},
-      },
+      data: { value: {} },
       attributes: {
         'background-color': '#FFFFFF',
-        padding: '25px 50px 25px 50px',
+        padding: '0px 0px 0px 0px',
       },
       children: [
         {
           type: BasicType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '0px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: BasicType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
                 width: '33%',
-                padding: '0px',
+                padding: '50px 0px 0px 50px',
               },
               children: [
                 InnoceanResponsiveImage.create({}),
@@ -54,12 +46,10 @@ export const InnoceanSideImage = createBlock<IBlockData>({
             },
             {
               type: BasicType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
                 width: '67%',
-                'padding': '0px 20px',
+                padding: '50px 50px 0px 50px',
               },
               children: [
                 {
@@ -73,7 +63,7 @@ export const InnoceanSideImage = createBlock<IBlockData>({
                     'font-size': '20px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '0px 0px 20px 0px',
+                    padding: '0px 0px 0px 0px',
                   },
                   children: [],
                 },
@@ -92,7 +82,7 @@ export const InnoceanSideImage = createBlock<IBlockData>({
                     'font-size': '14px',
                     'font-weight': 'normal',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '0px 0px 20px 0px',
+                    padding: '0px 0px 25px 0px',
                   },
                   children: [],
                 },
@@ -111,8 +101,8 @@ export const InnoceanSideImage = createBlock<IBlockData>({
                     'font-size': '15px',
                     'font-weight': 'normal',
                     'border-radius': '0px',
-                    padding: '0px',
-                    'inner-padding': '15px 38px',
+                    padding: '0px 0px 0px 0px',
+                    'inner-padding': '15px 38px 15px 38px',
                     'line-height': '120%',
                     target: '_blank',
                     'vertical-align': 'middle',
@@ -130,10 +120,7 @@ export const InnoceanSideImage = createBlock<IBlockData>({
     };
     return mergeBlock(defaultData, payload);
   },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER, AdvancedType.COLUMN],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
-  },
+
 });
 
 export { Panel } from './Panel';

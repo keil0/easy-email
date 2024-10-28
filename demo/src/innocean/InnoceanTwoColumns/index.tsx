@@ -37,7 +37,7 @@ export const InnoceanTwoColumns = createBlock<IBlockData>({
               type: AdvancedType.COLUMN,
               data: { value: {} },
               attributes: {
-                'padding': '0px 25px 0px 25px',
+                padding: '0px 25px 0px 25px',
               },
               children: [
                 {
@@ -51,7 +51,7 @@ export const InnoceanTwoColumns = createBlock<IBlockData>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px 20px 0px',
+                    padding: '25px 0px 20px 0px',
                   },
                   children: [],
                 },
@@ -99,7 +99,7 @@ export const InnoceanTwoColumns = createBlock<IBlockData>({
                     'font-size': '15px',
                     'font-weight': 'normal',
                     'border-radius': '0px',
-                    padding: '0px 0px 0px 0px',
+                    padding: '0px 0px 25px 0px',
                     'inner-padding': '15px 38px 15px 38px',
                     'line-height': '120%',
                     target: '_blank',
@@ -116,7 +116,7 @@ export const InnoceanTwoColumns = createBlock<IBlockData>({
               type: AdvancedType.COLUMN,
               data: { value: {} },
               attributes: {
-                'padding': '0px 25px 0px 25px',
+                padding: '0px 25px 0px 25px',
               },
               children: [
                 {
@@ -130,7 +130,7 @@ export const InnoceanTwoColumns = createBlock<IBlockData>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px 20px 0px',
+                    padding: '25px 0px 20px 0px',
                   },
                   children: [],
                 },
@@ -178,7 +178,7 @@ export const InnoceanTwoColumns = createBlock<IBlockData>({
                     'font-size': '15px',
                     'font-weight': 'normal',
                     'border-radius': '0px',
-                    padding: '0px 0px 0px 0px',
+                    padding: '0px 0px 25px 0px',
                     'inner-padding': '15px 38px 15px 38px',
                     'line-height': '120%',
                     target: '_blank',
