@@ -1,71 +1,46 @@
-import {
-  AdvancedType,
-  BasicType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock,
-} from 'easy-email-core';
 import React from 'react';
+
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
 
 import { InnoceanBlocksType } from '../constants';
 
+import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
+
 const { BasicBlock } = components;
 
-export type IFourColumns = IBlockData<
-  {},
-  {}
->;
-
-export const InnoceanFourColumns = createBlock<IFourColumns>({
+export const InnoceanFourColumns = createBlock<IBlockData>({
   get name() {
     return t('4 Columns');
   },
   type: InnoceanBlocksType.FOUR_COLUMNS,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
-    const defaultData: IFourColumns = {
+    const defaultData: IBlockData = {
       type: InnoceanBlocksType.FOUR_COLUMNS,
-      data: {
-        value: {},
-      },
+      data: { value: {} },
       attributes: {
         'background-color': '#FFFFFF',
-        padding: '0 10px 25px 10px',
+        padding: "0px 25px 0px 25px"
       },
       children: [
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '20px 10px 0',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                'padding': '0px 20px',
+                'padding': '0px 25px 0px 25px',
               },
               children: [
-                {
-                  type: AdvancedType.IMAGE,
-                  data: {
-                    value: {},
-                  },
-                  attributes: {
-                    height: 'auto',
-                    padding: '0px 0px',
-                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=1',
-                    width: '250px',
-                    alt: 'Batterie',
-                  },
-                  children: [],
-                },
+                InnoceanResponsiveImage.create({}),
                 {
                   type: AdvancedType.TEXT,
                   data: {
@@ -77,7 +52,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px',
+                    padding: '20px 0px 20px 0px',
                     align: 'center',
                   },
                   children: [],
@@ -86,27 +61,12 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                'padding': '0px 20px',
+                'padding': '0px 25px 0px 25px',
               },
               children: [
-                {
-                  type: AdvancedType.IMAGE,
-                  data: {
-                    value: {},
-                  },
-                  attributes: {
-                    height: 'auto',
-                    padding: '0px 0px',
-                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=2',
-                    width: '250px',
-                    alt: 'Batterie',
-                  },
-                  children: [],
-                },
+                InnoceanResponsiveImage.create({}),
                 {
                   type: AdvancedType.TEXT,
                   data: {
@@ -118,7 +78,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px',
+                    padding: '20px 0px 20px 0px',
                     align: 'center',
                   },
                   children: [],
@@ -127,27 +87,12 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                'padding': '0px 20px',
+                'padding': '0px 25px 0px 25px',
               },
               children: [
-                {
-                  type: AdvancedType.IMAGE,
-                  data: {
-                    value: {},
-                  },
-                  attributes: {
-                    height: 'auto',
-                    padding: '0px 0px',
-                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=3',
-                    width: '250px',
-                    alt: 'Batterie',
-                  },
-                  children: [],
-                },
+                InnoceanResponsiveImage.create({}),
                 {
                   type: AdvancedType.TEXT,
                   data: {
@@ -159,7 +104,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px',
+                    padding: '20px 0px 20px 0px',
                     align: 'center',
                   },
                   children: [],
@@ -168,27 +113,12 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                'padding': '0px 20px',
+                'padding': '0px 25px 0px 25px',
               },
               children: [
-                {
-                  type: AdvancedType.IMAGE,
-                  data: {
-                    value: {},
-                  },
-                  attributes: {
-                    height: 'auto',
-                    padding: '0px 0px',
-                    src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=4',
-                    width: '250px',
-                    alt: 'Batterie',
-                  },
-                  children: [],
-                },
+                InnoceanResponsiveImage.create({}),
                 {
                   type: AdvancedType.TEXT,
                   data: {
@@ -200,7 +130,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px',
+                    padding: '0px 0px 0px 0px',
                     align: 'center',
                   },
                   children: [],
@@ -212,11 +142,7 @@ export const InnoceanFourColumns = createBlock<IFourColumns>({
       ],
     };
     return mergeBlock(defaultData, payload);
-  },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
-  },
+  }
 });
 
 export { Panel } from './Panel';

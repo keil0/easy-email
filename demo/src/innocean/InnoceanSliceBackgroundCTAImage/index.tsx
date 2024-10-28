@@ -1,15 +1,9 @@
-import {
-  AdvancedType,
-  BasicType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock,
-} from 'easy-email-core';
 import React from 'react';
 
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
+
 import { InnoceanBlocksType } from '../constants';
+
 import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
 const { BasicBlock } = components;
@@ -19,33 +13,31 @@ export const InnoceanSliceBackgroundCTAImage = createBlock<IBlockData>({
     return t('Slice Background CTA Image');
   },
   type: InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
     const defaultData: IBlockData = {
       type: InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE,
-      data: {
-        value: {},
-      },
+      data: { value: {} },
       attributes: {
         'background-color': '#f6f3f2',
-        padding: '0 20px 25px 20px',
+        padding: '0px 0px 0px 0px',
       },
       children: [
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '0 5px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: "15px 25px"
+                padding: '0px 50px 0px 50px',
               },
               children: [
                 {
@@ -56,7 +48,7 @@ export const InnoceanSliceBackgroundCTAImage = createBlock<IBlockData>({
                     },
                   },
                   attributes: {
-                    padding: "0 0 20px",
+                    padding: "20px 0px 20px 0px",
                     'font-size': '15px',
                     'font-family': 'Helvetica, Arial, sans-serif',
                   },
@@ -77,8 +69,8 @@ export const InnoceanSliceBackgroundCTAImage = createBlock<IBlockData>({
                     'font-size': '15px',
                     'font-weight': 'normal',
                     'border-radius': '0px',
-                    padding: '0px',
-                    'inner-padding': '15px 38px',
+                    padding: '0px 0px 50px 0px',
+                    'inner-padding': '15px 38px 15px 38px',
                     'line-height': '120%',
                     target: '_blank',
                     'vertical-align': 'middle',
@@ -92,11 +84,9 @@ export const InnoceanSliceBackgroundCTAImage = createBlock<IBlockData>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                'padding': '0 25px',
+                padding: '0px 0px 0px 0px',
               },
               children: [
                 InnoceanResponsiveImage.create({}),
@@ -107,11 +97,7 @@ export const InnoceanSliceBackgroundCTAImage = createBlock<IBlockData>({
       ],
     };
     return mergeBlock(defaultData, payload);
-  },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
-  },
+  }
 });
 
 export { Panel } from './Panel';

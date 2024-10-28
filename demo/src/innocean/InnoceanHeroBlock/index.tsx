@@ -1,15 +1,9 @@
-import {
-  AdvancedType,
-  BasicType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock,
-} from 'easy-email-core';
 import React from 'react';
 
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
+
 import { InnoceanBlocksType } from '../constants';
+
 import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
 const { BasicBlock } = components;
@@ -19,33 +13,31 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
     return t('Hero');
   },
   type: InnoceanBlocksType.HERO,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER, AdvancedType.COLUMN],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
     const defaultData: IBlockData = {
       type: InnoceanBlocksType.HERO,
-      data: {
-        value: {},
-      },
+      data: {  value: {} },
       attributes: {
         'background-color': '#f6f3f2',
-        padding: '5px',
+        padding: '0px 50px 0px 50px',
       },
       children: [
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: {  value: {} },
           attributes: {
-            padding: '10px 25px',
+            padding: '15px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: '0px',
+                padding: '0px 0px 0px 0px',
               },
               children: [
                 {
@@ -59,7 +51,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
                     'font-size': '20px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '0px 0px 25px 0px',
+                    padding: '0px 0px 15px 0px',
                   },
                   children: [],
                 },
@@ -70,20 +62,16 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
         },
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: {  value: {} },
           attributes: {
-            padding: '0px 25px 15px 25px',
+            padding: '15px 0px 15px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: {  value: {} },
               attributes: {
-                padding: '0px',
+                padding: '0px 0px 0px 0px',
               },
               children: [
                 {
@@ -97,7 +85,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
                     'font-size': '20px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '0px 0px 20px 0px',
+                    padding: '0px 0px 15px 0px',
                   },
                   children: [],
                 },
@@ -135,8 +123,8 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
                     'font-size': '15px',
                     'font-weight': 'normal',
                     'border-radius': '0px',
-                    padding: '0px',
-                    'inner-padding': '15px 38px',
+                    padding: '0px 0px 0px 0px',
+                    'inner-padding': '15px 38px 15px 38px',
                     'line-height': '120%',
                     target: '_blank',
                     'vertical-align': 'middle',
@@ -153,11 +141,7 @@ export const InnoceanHeroBlock = createBlock<IBlockData>({
       ],
     };
     return mergeBlock(defaultData, payload);
-  },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER, AdvancedType.COLUMN],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
-  },
+  }
 });
 
 export { Panel } from './Panel';

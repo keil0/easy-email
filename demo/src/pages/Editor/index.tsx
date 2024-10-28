@@ -102,6 +102,9 @@ const defaultCategories: ExtensionProps['categories'] = [
         type: InnoceanBlocksType.TITLE_IMAGE_BLOCK,
       },
       {
+        type: InnoceanBlocksType.HERO
+      },
+      {
         type: InnoceanBlocksType.TWO_COLUMNS
       },
       {
@@ -111,22 +114,19 @@ const defaultCategories: ExtensionProps['categories'] = [
         type: InnoceanBlocksType.FOUR_COLUMNS
       },
       {
-        type: InnoceanBlocksType.HERO
-      },
-      {
         type: InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA
       },
       {
         type: InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE
       },
       {
-        type: InnoceanBlocksType.SLICE_CTA_IMAGE
+        type: InnoceanBlocksType.SIDE_IMAGE
       },
       {
         type: InnoceanBlocksType.SLICE_IMAGE_CTA
       },
       {
-        type: InnoceanBlocksType.SIDE_IMAGE
+        type: InnoceanBlocksType.SLICE_CTA_IMAGE
       },
       {
         type: InnoceanBlocksType.FOOTER
@@ -307,10 +307,12 @@ export default function Editor() {
   }
 
   const onExportZip = async (values: IEmailTemplate) => {
+    const clonedValues = structuredClone(values);
+
     let mjmlString = JsonToMjml({
-      data: values.content,
+      data: clonedValues.content,
       mode: 'production',
-      context: values.content,
+      context: clonedValues.content,
     });
 
     let html = defineDoctype(mjml(mjmlString, {}).html);
@@ -340,7 +342,7 @@ export default function Editor() {
 
       const updatedHtml = convertImageUrlsToRelativeHtml(html, successfulImageUrls, imageFilenames);
       const updatedMjmlString = convertImageUrlsToRelativeMjml(mjmlString, successfulImageUrls, imageFilenames);
-      const updatedJsonContent = convertImageUrlsToRelativeJson(values, successfulImageUrls, imageFilenames);
+      const updatedJsonContent = convertImageUrlsToRelativeJson(clonedValues, successfulImageUrls, imageFilenames);
 
       const refactoredHtml = convertEmailTemplate(updatedHtml);
       const formatedHtml = formatHtml(refactoredHtml);

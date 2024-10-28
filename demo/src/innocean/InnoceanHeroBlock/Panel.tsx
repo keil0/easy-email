@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  AttributesPanelWrapper,
-  BackgroundColor, CollapseWrapper, Padding,
-} from 'easy-email-extensions';
+import { AttributesPanelWrapper, BackgroundColor, CollapseWrapper, Padding } from 'easy-email-extensions';
 import { Collapse, Grid, Space } from '@arco-design/web-react';
 
 export function Panel() {

@@ -1,13 +1,6 @@
-import {
-  AdvancedType,
-  BasicType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock,
-} from 'easy-email-core';
 import React from 'react';
+
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
 
 import { InnoceanBlocksType } from '../constants';
 
@@ -15,15 +8,17 @@ const { BasicBlock } = components;
 
 export const InnoceanTextBlock = createBlock<IBlockData>({
   get name() {
-    return t('Block text');
+    return t('Text');
   },
   type: InnoceanBlocksType.TEXT_BLOCK,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER, AdvancedType.COLUMN],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
     const defaultData: IBlockData = {
       type: InnoceanBlocksType.TEXT_BLOCK,
-      data: {
-        value: {},
-      },
+      data: {  value: {} },
       attributes: {
         'background-color': "#FFFFFF",
         padding: "25px 50px 25px 50px"
@@ -78,8 +73,8 @@ export const InnoceanTextBlock = createBlock<IBlockData>({
             'font-size': '15px',
             'font-weight': 'normal',
             'border-radius': '0px',
-            padding: '0px',
-            'inner-padding': '15px 38px',
+            padding: "0px 0px 0px 0px",
+            'inner-padding': '15px 38px 15px 38px',
             'line-height': '120%',
             target: '_blank',
             'vertical-align': 'middle',
@@ -92,10 +87,6 @@ export const InnoceanTextBlock = createBlock<IBlockData>({
       ],
     };
     return mergeBlock(defaultData, payload);
-  },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER, AdvancedType.COLUMN],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
   },
 });
 

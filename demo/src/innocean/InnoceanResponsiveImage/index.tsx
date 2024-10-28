@@ -1,22 +1,34 @@
-import { AdvancedType, BasicType, components, IBlock, IBlockData } from 'easy-email-core';
 import React from 'react';
-import { merge } from 'lodash';
+
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
 
 import { InnoceanBlocksType } from '../constants';
 
 const { BasicBlock } = components;
 
-export const InnoceanResponsiveImage: IBlock = {
-  name: 'ResponsiveImage',
+export const InnoceanResponsiveImage = createBlock<IBlockData>({
+  get name() {
+    return t('Responsive Image');
+  },
   type: InnoceanBlocksType.RESPONSIVE_IMAGE,
-  create(
+  validParentType: [
+    BasicType.PAGE,
+    AdvancedType.WRAPPER,
+    AdvancedType.COLUMN,
+    AdvancedType.SECTION,
+    AdvancedType.HERO,
+  ],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
+  create: (
     payload,
-  ) {
+  ) => {
     const defaultData: IBlockData = {
-      type: BasicType.HERO,
+      type: InnoceanBlocksType.RESPONSIVE_IMAGE,
       data: { value: {} },
       attributes: {
-        "padding": "0px 0px"
+        padding: "0px 0px 0px 0px",
       },
       children: [
         {
@@ -26,7 +38,7 @@ export const InnoceanResponsiveImage: IBlock = {
           },
           attributes: {
             height: 'auto',
-            padding: '0px 0px',
+            padding: "0px 0px 0px 0px",
             src: 'https://dummyimage.com/1200x688/004dff/fff.png&text=image-desktop',
             width: '600px',
             alt: 'Image desktop',
@@ -44,8 +56,9 @@ export const InnoceanResponsiveImage: IBlock = {
             value: {},
           },
           attributes: {
+            'fluid-on-mobile': true,
             height: 'auto',
-            padding: '0px 0px',
+            padding: "0px 0px 0px 0px",
             src: 'https://dummyimage.com/375x430/ecb0a0/fff.png&text=image-mobile',
             width: '600px',
             alt: 'Image mobile',
@@ -59,16 +72,8 @@ export const InnoceanResponsiveImage: IBlock = {
         },
       ],
     };
-    return merge(defaultData, payload);
+    return mergeBlock(defaultData, payload);
   },
-  validParentType: [
-    BasicType.PAGE,
-    AdvancedType.WRAPPER,
-    AdvancedType.COLUMN,
-    AdvancedType.SECTION,
-    AdvancedType.HERO,
-  ],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
-  },
-};
+});
+
+export { Panel } from './Panel';

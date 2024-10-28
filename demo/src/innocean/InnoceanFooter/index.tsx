@@ -1,55 +1,43 @@
-import {
-  AdvancedType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock, BasicType,
-} from 'easy-email-core';
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
 import React from 'react';
 
 import { InnoceanBlocksType } from '../constants';
 
 const { BasicBlock } = components;
 
-export type IInnoceanFooter = IBlockData<
-  {},
-  {}
->;
+
 
 export const InnoceanFooter = createBlock<IBlockData>({
   get name() {
     return t('Footer');
   },
   type: InnoceanBlocksType.FOOTER,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
     const defaultData: IBlockData = {
       type: InnoceanBlocksType.FOOTER,
-      data: {
-        value: {},
-      },
+      data: { value: {} },
       attributes: {
         'background-color': '#FFFFFF',
-        padding: '0px 50px',
+        padding: '0px 50px 0px 50px',
       },
       children: [
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
             'background-color': '#FFFFFF',
-            padding: '0px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: '10px 0px 0px',
+                padding: '10px 0px 0px 0px',
               },
               children: [
                 {
@@ -62,7 +50,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                   attributes: {
                     'font-size': '12px',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '10px 0px',
+                    padding: '10px 0px 10px 0px',
                     'vertical-align': 'bottom',
                   },
                   children: [],
@@ -71,11 +59,9 @@ export const InnoceanFooter = createBlock<IBlockData>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: '10px 0px 0px',
+                padding: '10px 0px 0px 0px',
               },
               children: [
                 {
@@ -87,7 +73,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                     'font-size': '13px',
                     'font-weight': 'normal',
                     'border-radius': '3px',
-                    padding: '0px',
+                    padding: '0px 0px 0px 0px',
                     'icon-size': '20px',
                   },
                   data: {
@@ -149,20 +135,16 @@ export const InnoceanFooter = createBlock<IBlockData>({
         },
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '0px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: '10px 0px',
+                padding: '10px 0px 10px 0px',
               },
               children: [
                 {
@@ -171,7 +153,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                     value: {},
                   },
                   attributes: {
-                    padding: '0px',
+                    padding: '0px 0px 0px 0px',
                     'border-color': '#E9E9E9',
                     'border-style': 'solid',
                     'border-width': '1px',
@@ -185,20 +167,16 @@ export const InnoceanFooter = createBlock<IBlockData>({
         },
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '0px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: '10px 0px',
+                padding: '10px 0px 10px 0px',
               },
               children: [
                 {
@@ -210,7 +188,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                   },
                   attributes: {
                     'font-size': '10px',
-                    padding: '0px',
+                    padding: '0px 0px 0px 0px',
                     'border-color': '#E9E9E9',
                     'border-style': 'solid',
                     'border-width': '1px',
@@ -224,20 +202,16 @@ export const InnoceanFooter = createBlock<IBlockData>({
         },
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '0px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: '10px 0px',
+                padding: '10px 0px 10px 0px',
               },
               children: [
                 {
@@ -246,7 +220,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                     value: {},
                   },
                   attributes: {
-                    padding: '0px',
+                    padding: '0px 0px 0px 0px',
                     'border-color': '#E9E9E9',
                     'border-style': 'solid',
                     'border-width': '1px',
@@ -260,9 +234,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
         },
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
             padding: '0px',
           },
@@ -273,7 +245,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                 value: {},
               },
               attributes: {
-                padding: '10px 0px',
+                padding: '10px 0px 10px 0px',
               },
               children: [
                 {
@@ -283,7 +255,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                   },
                   attributes: {
                     height: 'auto',
-                    padding: '0px 0px 20px',
+                    padding: '0px 0px 20px 0px',
                     src: payload?.data?.value.batterieImageSrc || import.meta.env.VITE_API_BASE_URL as string + '/uploads/default/batterie.png',
                     width: '250px',
                     align:"left",
@@ -307,7 +279,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                   },
                   attributes: {
                     'font-size': '10px',
-                    padding: '0px',
+                    padding: '0px 0px 0px 0px',
                   },
                   children: [],
                 }
@@ -317,20 +289,16 @@ export const InnoceanFooter = createBlock<IBlockData>({
         },
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '0px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                padding: '10px 0px',
+                padding: '10px 0px 10px 0px',
               },
               children: [
                 {
@@ -342,7 +310,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
                   },
                   attributes: {
                     'font-size': '10px',
-                    padding: '10px 0 20px',
+                    padding: '10px 0px 20px 0px',
                     align: 'center',
                   },
                   children: [],
@@ -353,18 +321,14 @@ export const InnoceanFooter = createBlock<IBlockData>({
         },
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '15px 0px',
+            padding: '15px 0px 15px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
                 padding: '0px 10px 0px 10px',
               },
@@ -388,9 +352,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
                 padding: '0px 10px 0px 10px',
               },
@@ -414,9 +376,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
                 padding: '0px 10px 0px 10px',
               },
@@ -440,9 +400,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
                 padding: '0px 10px 0px 10px',
               },
@@ -469,11 +427,7 @@ export const InnoceanFooter = createBlock<IBlockData>({
       ],
     };
     return mergeBlock(defaultData, payload);
-  },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
-  },
+  }
 });
 
 export { Panel } from './Panel';

@@ -3,10 +3,7 @@ import { BlockAttributeConfigurationManager } from 'easy-email-extensions';
 
 import { InnoceanBlocksType } from './constants';
 
-import {
-  InnoceanResponsiveImage,
-  Panel as ResponsiveImagePanel,
-} from './InnoceanResponsiveImage';
+import { InnoceanResponsiveImage, Panel as ResponsiveImagePanel } from './InnoceanResponsiveImage';
 import { InnoceanButton, Panel as ButtonPanel } from './InnoceanButton';
 import { InnoceanTopBlock, Panel as TopPanel } from './InnoceanTopBlock';
 import { InnoceanTextBlock, Panel as TextBlockPanel } from './InnoceanTextBlock';
@@ -15,18 +12,24 @@ import { InnoceanTwoColumns, Panel as TwoColumnsPanel } from './InnoceanTwoColum
 import { InnoceanThreeColumns, Panel as ThreeColumnsPanel } from './InnoceanThreeColumns';
 import { InnoceanFourColumns, Panel as FourColumnsPanel } from './InnoceanFourColumns';
 import { InnoceanHeroBlock, Panel as HeroPanel } from './InnoceanHeroBlock';
-import { InnoceanSliceBackgroundImageCTA, Panel as SliceBackgroundImageCTAPanel } from './InnoceanSliceBackgroundImageCTA';
-import { InnoceanSliceBackgroundCTAImage, Panel as SliceBackgroundCTAImagePanel } from './InnoceanSliceBackgroundCTAImage';
+import {
+  InnoceanSliceBackgroundImageCTA,
+  Panel as SliceBackgroundImageCTAPanel,
+} from './InnoceanSliceBackgroundImageCTA';
+import {
+  InnoceanSliceBackgroundCTAImage,
+  Panel as SliceBackgroundCTAImagePanel,
+} from './InnoceanSliceBackgroundCTAImage';
 import { InnoceanSliceCTAImage, Panel as SliceCTAImagePanel } from './InnoceanSliceCTAImage';
 import { InnoceanSliceImageCTA, Panel as SliceImageCTAPanel } from './InnoceanSliceImageCTA';
 import { InnoceanSideImage, Panel as SideImagePanel } from './InnoceanSideImage';
-import { InnoceanFooter, Panel as FooterPanel} from './InnoceanFooter';
+import { InnoceanFooter, Panel as FooterPanel } from './InnoceanFooter';
 import { InnoceanPolluscore, Panel as PolluscorePanel } from './InnoceanPolluscore';
 
 BlockManager.registerBlocks({
+  [InnoceanBlocksType.TOP]: InnoceanTopBlock,
   [InnoceanBlocksType.RESPONSIVE_IMAGE]: InnoceanResponsiveImage,
   [InnoceanBlocksType.BUTTON]: InnoceanButton,
-  [InnoceanBlocksType.TOP]: InnoceanTopBlock,
   [InnoceanBlocksType.TEXT_BLOCK]: InnoceanTextBlock,
   [InnoceanBlocksType.TITLE_IMAGE_BLOCK]: InnoceanTitleImageBlock,
   [InnoceanBlocksType.TWO_COLUMNS]: InnoceanTwoColumns,
@@ -35,14 +38,15 @@ BlockManager.registerBlocks({
   [InnoceanBlocksType.HERO]: InnoceanHeroBlock,
   [InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA]: InnoceanSliceBackgroundImageCTA,
   [InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE]: InnoceanSliceBackgroundCTAImage,
-  [InnoceanBlocksType.SLICE_CTA_IMAGE]: InnoceanSliceCTAImage,
   [InnoceanBlocksType.SLICE_IMAGE_CTA]: InnoceanSliceImageCTA,
+  [InnoceanBlocksType.SLICE_CTA_IMAGE]: InnoceanSliceCTAImage,
   [InnoceanBlocksType.SIDE_IMAGE]: InnoceanSideImage,
   [InnoceanBlocksType.FOOTER]: InnoceanFooter,
-  [InnoceanBlocksType.POLLUSCORE]: InnoceanPolluscore
+  [InnoceanBlocksType.POLLUSCORE]: InnoceanPolluscore,
 });
 
 BlockAttributeConfigurationManager.add({
+  [InnoceanBlocksType.RESPONSIVE_IMAGE]: ResponsiveImagePanel,
   [InnoceanBlocksType.TOP]: TopPanel,
   [InnoceanBlocksType.BUTTON]: ButtonPanel,
   [InnoceanBlocksType.TEXT_BLOCK]: TextBlockPanel,
@@ -53,8 +57,8 @@ BlockAttributeConfigurationManager.add({
   [InnoceanBlocksType.HERO]: HeroPanel,
   [InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA]: SliceBackgroundImageCTAPanel,
   [InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE]: SliceBackgroundCTAImagePanel,
-  [InnoceanBlocksType.SLICE_CTA_IMAGE]: SliceCTAImagePanel,
   [InnoceanBlocksType.SLICE_IMAGE_CTA]: SliceImageCTAPanel,
+  [InnoceanBlocksType.SLICE_CTA_IMAGE]: SliceCTAImagePanel,
   [InnoceanBlocksType.SIDE_IMAGE]: SideImagePanel,
   [InnoceanBlocksType.FOOTER]: FooterPanel,
   [InnoceanBlocksType.POLLUSCORE]: PolluscorePanel,

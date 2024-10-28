@@ -1,56 +1,43 @@
-import {
-  AdvancedType,
-  BasicType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock,
-} from 'easy-email-core';
 import React from 'react';
 
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
+
 import { InnoceanBlocksType } from '../constants';
+
 import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
 const { BasicBlock } = components;
 
-export type ITwoColumns = IBlockData<
-  {},
-  {}
->;
-
-export const InnoceanTwoColumns = createBlock<ITwoColumns>({
+export const InnoceanTwoColumns = createBlock<IBlockData>({
   get name() {
     return t('2 Columns');
   },
   type: InnoceanBlocksType.TWO_COLUMNS,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
-    const defaultData: ITwoColumns = {
+    const defaultData: IBlockData = {
       type: InnoceanBlocksType.TWO_COLUMNS,
-      data: {
-        value: {},
-      },
+      data: { value: {} },
       attributes: {
         'background-color': '#FFFFFF',
-        padding: '0 10px 25px 10px',
+        padding: "0px 25px 0px 25px"
       },
       children: [
         {
           type: AdvancedType.SECTION,
-          data: {
-            value: {},
-          },
+          data: { value: {} },
           attributes: {
-            padding: '0 10px',
+            padding: '0px 0px 0px 0px',
           },
           children: [
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                'padding': '0px 20px',
+                'padding': '0px 25px 0px 25px',
               },
               children: [
                 {
@@ -64,7 +51,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px',
+                    padding: '20px 0px 20px 0px',
                   },
                   children: [],
                 },
@@ -112,8 +99,8 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                     'font-size': '15px',
                     'font-weight': 'normal',
                     'border-radius': '0px',
-                    padding: '0px',
-                    'inner-padding': '15px 38px',
+                    padding: '0px 0px 0px 0px',
+                    'inner-padding': '15px 38px 15px 38px',
                     'line-height': '120%',
                     target: '_blank',
                     'vertical-align': 'middle',
@@ -127,11 +114,9 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
             },
             {
               type: AdvancedType.COLUMN,
-              data: {
-                value: {},
-              },
+              data: { value: {} },
               attributes: {
-                'padding': '0px 20px',
+                'padding': '0px 25px 0px 25px',
               },
               children: [
                 {
@@ -145,7 +130,7 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                     'font-size': '15px',
                     'font-weight': 'bold',
                     'font-family': 'Helvetica, Arial, sans-serif',
-                    padding: '20px 0px',
+                    padding: '20px 0px 20px 0px',
                   },
                   children: [],
                 },
@@ -193,8 +178,8 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
                     'font-size': '15px',
                     'font-weight': 'normal',
                     'border-radius': '0px',
-                    padding: '0px',
-                    'inner-padding': '15px 38px',
+                    padding: '0px 0px 0px 0px',
+                    'inner-padding': '15px 38px 15px 38px',
                     'line-height': '120%',
                     target: '_blank',
                     'vertical-align': 'middle',
@@ -211,10 +196,6 @@ export const InnoceanTwoColumns = createBlock<ITwoColumns>({
       ],
     };
     return mergeBlock(defaultData, payload);
-  },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
   },
 });
 

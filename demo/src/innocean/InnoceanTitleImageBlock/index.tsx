@@ -1,37 +1,27 @@
-import {
-  AdvancedType,
-  BasicType,
-  components,
-  IBlockData,
-  createBlock,
-  t,
-  mergeBlock,
-} from 'easy-email-core';
 import React from 'react';
 
+import { AdvancedType, BasicType, components, createBlock, IBlockData, mergeBlock, t } from 'easy-email-core';
+
 import { InnoceanBlocksType } from '../constants';
+
 import { InnoceanResponsiveImage } from '@demo/innocean/InnoceanResponsiveImage';
 
 const { BasicBlock } = components;
 
-export type ITitleImage = IBlockData<
-  {},
-  {}
->;
-
-export const InnoceanTitleImageBlock = createBlock<ITitleImage>({
+export const InnoceanTitleImageBlock = createBlock<IBlockData>({
   get name() {
-    return t('Title\nImage');
+    return t('Title Image');
   },
   type: InnoceanBlocksType.TITLE_IMAGE_BLOCK,
+  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
+  render(params) {
+    return <BasicBlock params={params} tag="mj-hero" />;
+  },
   create: (payload) => {
-    const defaultData: ITitleImage = {
+    const defaultData: IBlockData = {
       type: InnoceanBlocksType.TITLE_IMAGE_BLOCK,
-      data: {
-        value: {},
-      },
+      data: { value: {} },
       attributes: {
-        'background-color': "#FFFFFF",
         padding: "25px 50px 25px 50px"
       },
       children: [
@@ -63,10 +53,6 @@ export const InnoceanTitleImageBlock = createBlock<ITitleImage>({
       ],
     };
     return mergeBlock(defaultData, payload);
-  },
-  validParentType: [BasicType.PAGE, AdvancedType.WRAPPER],
-  render(params) {
-    return <BasicBlock params={params} tag="mj-hero" />;
   },
 });
 
