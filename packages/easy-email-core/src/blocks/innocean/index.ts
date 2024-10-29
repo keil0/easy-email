@@ -36,4 +36,3 @@ export const innoceanBlocks = {
   [InnoceanBlocksType.POLLUSCORE]: InnoceanPolluscore,
 };
 
-export * from './blocks/InnoceanPolluscore/Panel'
