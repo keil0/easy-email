@@ -48,7 +48,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           labels: |
-            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ github.repository }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.title=Postcard Frontend
             org.opencontainers.image.description="Frontend application for Postcard"
             org.opencontainers.image.revision=${{ github.sha }}
