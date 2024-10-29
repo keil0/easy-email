@@ -19,7 +19,8 @@ import { Hero } from './Hero';
 import { Navbar } from './Navbar';
 import { Social } from './Social';
 import { Table } from './Table';
-import { BasicType, AdvancedType } from 'easy-email-core';
+import { AdvancedType, BasicType, InnoceanBlocksType } from 'easy-email-core';
+import { PolluscorePanel } from '@extensions/AttributePanel/components/blocks/Polluscore';
 
 export const blocks = {
   [BasicType.PAGE]: Page,
@@ -58,4 +59,21 @@ export const blocks = {
   [AdvancedType.SECTION]: Section,
   [AdvancedType.GROUP]: Group,
   [AdvancedType.COLUMN]: Column,
+
+  [InnoceanBlocksType.TOP]: Hero,
+  [InnoceanBlocksType.RESPONSIVE_IMAGE]: Hero,
+  [InnoceanBlocksType.BUTTON]: Hero,
+  [InnoceanBlocksType.TEXT_BLOCK]: Hero,
+  [InnoceanBlocksType.TITLE_IMAGE_BLOCK]: Hero,
+  [InnoceanBlocksType.TWO_COLUMNS]: Hero,
+  [InnoceanBlocksType.THREE_COLUMNS]: Hero,
+  [InnoceanBlocksType.FOUR_COLUMNS]: Hero,
+  [InnoceanBlocksType.HERO]: Hero,
+  [InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA]: Hero,
+  [InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE]: Hero,
+  [InnoceanBlocksType.SLICE_IMAGE_CTA]: Hero,
+  [InnoceanBlocksType.SLICE_CTA_IMAGE]: Hero,
+  [InnoceanBlocksType.SIDE_IMAGE]: Hero,
+  [InnoceanBlocksType.FOOTER]: Hero,
+  [InnoceanBlocksType.POLLUSCORE]: PolluscorePanel
 };

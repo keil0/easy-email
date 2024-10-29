@@ -2,7 +2,6 @@ import React from 'react';
 import { IBlockData } from '@core/typings';
 import { BasicType } from '@core/constants';
 import { createBlock } from '@core/utils/createBlock';
-import { getImg } from '@core/utils/getImg';
 import { mergeBlock } from '@core/utils/mergeBlock';
 import { t } from '@core/utils';
 import { BasicBlock } from '@core/components/BasicBlock';
@@ -41,7 +40,6 @@ export const Hero = createBlock<IHero>({
         mode: 'fluid-height',
         padding: '100px 0px 100px 0px',
         'vertical-align': 'top',
-        'background-url': getImg('IMAGE_31'),
       },
       children: [
         {

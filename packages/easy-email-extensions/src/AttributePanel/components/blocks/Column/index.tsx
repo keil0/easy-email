@@ -5,7 +5,6 @@ import { AttributesPanelWrapper } from '@extensions/AttributePanel/components/at
 import { Padding } from '@extensions/AttributePanel/components/attributes/Padding';
 import { Width } from '@extensions/AttributePanel/components/attributes/Width';
 import { VerticalAlign } from '@extensions/AttributePanel/components/attributes/VerticalAlign';
-import { Background } from '@extensions/AttributePanel/components/attributes/Background';
 import { Border } from '@extensions/AttributePanel/components/attributes/Border';
 import { ClassName } from '../../attributes/ClassName';
 import { CollapseWrapper } from '../../attributes/CollapseWrapper';

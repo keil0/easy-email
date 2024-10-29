@@ -10,6 +10,7 @@ import { useEditorProps, useFocusIdx } from 'easy-email-editor';
 import { AttributesPanelWrapper } from '@extensions/AttributePanel/components/attributes/AttributesPanelWrapper';
 import { ClassName } from '../../attributes/ClassName';
 import { CollapseWrapper } from '../../attributes/CollapseWrapper';
+import { DynamicDisplay } from '@extensions';
 
 const options = [
   {
@@ -32,9 +33,17 @@ export function Hero() {
 
   return (
     <AttributesPanelWrapper>
-      <CollapseWrapper defaultActiveKey={['0', '1', '2']}>
+      <CollapseWrapper defaultActiveKey={['1', '2', '3']}>
         <Collapse.Item
           name='0'
+          header={t('Dynamic display')}
+        >
+          <Space direction='vertical'>
+            <DynamicDisplay />
+          </Space>
+        </Collapse.Item>
+        <Collapse.Item
+          name='1'
           header={t('Dimension')}
         >
           <Space direction='vertical'>
@@ -60,7 +69,7 @@ export function Hero() {
           </Space>
         </Collapse.Item>
         <Collapse.Item
-          name='1'
+          name='2'
           header={t('Background')}
         >
           <Space direction='vertical'>
@@ -115,7 +124,7 @@ export function Hero() {
           </Space>
         </Collapse.Item>
         <Collapse.Item
-          name='4'
+          name='3'
           header={t('Extra')}
         >
           <Grid.Col span={24}>

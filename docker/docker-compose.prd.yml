@@ -14,20 +14,20 @@ services:
       - --entrypoints.web.http.redirections.entryPoint.to=websecure
       - --entrypoints.web.http.redirections.entryPoint.scheme=https
       - --entrypoints.websecure.address=:443
-      - --api.dashboard=true
+      - --api.dashboard=false
     ports:
       - "80:80"
       - "443:443"
 
   postcard-auth:
     container_name: postcard-auth
-    image: ghcr.io/INNOCEAN-FRANCE/postcard-backend:latest
+    image: ghcr.io/keil0/postcard-backend:latest
     restart: always
     env_file: .env
     networks:
       - traefik_network
     volumes:
-      - ./uploads:/usr/src/app/public/uploads
+      - ./uploads:/usr/src/app/build/public/uploads
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.postcard-auth.rule=Host(`postcard.innocean.app`) && PathPrefix(`/auth`)"
@@ -41,7 +41,7 @@ services:
 
   postcard-app:
     container_name: postcard-app
-    image: ghcr.io/INNOCEAN-FRANCE/postcard-frontend:latest
+    image: ghcr.io/keil0/postcard-frontend:latest
     restart: always
     networks:
       - traefik_network

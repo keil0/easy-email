@@ -78,18 +78,18 @@ npm run dev
 3. Create .env file base from .env.example
 4. [Generate a Personal Access Token (PAT) from Github](https://github.com/settings/tokens)
 5. Login to Github packages
-    ```bash
-    echo "[PAT_TOKEN_HERE]" | docker login ghcr.io -u USERNAME --password-stdin
-    ```
+```bash
+echo "[PAT_TOKEN_HERE]" | docker login ghcr.io -u USERNAME --password-stdin
+```
 6. Create uploads folder to store images `mkdir uploads`
 7. Run the docker-compose
-    ```bash
-    docker-compose up -d
-    ```
+```bash
+docker-compose up -d
+```
 8. Run migration
-    ```bash
-    docker exec -it postcard-auth node ace migration:run
-    ```
+```bash
+docker exec -it postcard-auth node ace migration:run
+```
 
 ### Database manual operations
 #### Connect to the database

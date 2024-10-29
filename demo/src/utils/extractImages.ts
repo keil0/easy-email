@@ -1,4 +1,4 @@
-import { AdvancedType, IBlockData } from 'easy-email-core';
+import { IBlockData } from 'easy-email-core';
 
 export const extractImageUrls = (node: IBlockData<any, any> | IBlockData<any, any>[], urls: string[] = []): string[] => {
   if (Array.isArray(node)) {
