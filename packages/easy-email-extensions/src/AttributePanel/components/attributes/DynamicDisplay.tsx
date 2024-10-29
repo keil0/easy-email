@@ -18,12 +18,12 @@ export function DynamicDisplay({
         <Stack.Item fill>
           <TextField
             label={t('Module')}
-            name={`${focusIdx}.attributes.dynamicModule`}
+            name={`${focusIdx}.attributes.data-actito-module`}
             config={config}
           />
           <TextField
             label={t('If')}
-            name={`${focusIdx}.attributes.dynamicIf`}
+            name={`${focusIdx}.attributes.data-actito-if`}
             config={config}
           />
         </Stack.Item>

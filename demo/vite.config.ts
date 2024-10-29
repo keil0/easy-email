@@ -49,7 +49,7 @@ export default defineConfig({
     minify: 'terser',
     manifest: true,
     sourcemap: true,
-    target: 'es2015',
+    target: 'esnext',
     rollupOptions: {
       output: {
         manualChunks(id) {

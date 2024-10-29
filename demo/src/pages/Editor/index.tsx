@@ -313,6 +313,8 @@ export default function Editor() {
       context: clonedValues.content,
     });
 
+    console.log('mjmlString:', mjmlString);
+
     let html = defineDoctype(mjml(mjmlString, {}).html);
 
     if (templateData) {
