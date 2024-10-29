@@ -44,6 +44,8 @@ jobs:
             NODE_ENV=production
             VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}
           tags: ghcr.io/${{ github.repository_owner }}/postcard-frontend:latest
+          labels:
+            - org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ github.repository_name }}
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
