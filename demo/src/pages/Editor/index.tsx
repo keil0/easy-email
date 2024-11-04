@@ -33,6 +33,7 @@ import {
 } from '@demo/utils/convertImageUrlsToRelative';
 import { formatHtml } from '@demo/utils/formatHtml';
 import { convertEmailTemplate } from '@demo/utils/refactorResponsiveImage';
+import { convertDataAttributesToMjHtmlAttributes } from '@demo/utils/dataAttributes';
 
 const imageCompression = import('browser-image-compression');
 
@@ -313,7 +314,7 @@ export default function Editor() {
       context: clonedValues.content,
     });
 
-    console.log('mjmlString:', mjmlString);
+    mjmlString = convertDataAttributesToMjHtmlAttributes(mjmlString);
 
     let html = defineDoctype(mjml(mjmlString, {}).html);
 
