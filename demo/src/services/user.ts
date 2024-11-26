@@ -11,6 +11,10 @@ export const user = {
     return request.get<IUser>('/user/user/info', {
 
     });
+  },
+  async getUserId(): Promise<number> {
+    const { userId } = await request.get<{userId: number}>('/me');
+    return userId;
   }
 };
 

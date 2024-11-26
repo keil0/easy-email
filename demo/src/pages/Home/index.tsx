@@ -8,6 +8,7 @@ import { Stack } from '@demo/components/Stack';
 import { history } from '@demo/utils/history';
 import templates from '@demo/store/templates';
 import template from '@demo/store/template';
+import services from '@demo/services';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -21,7 +22,33 @@ export default function Home() {
         content: 'Template deleted successfully',
       });
     }
-  }
+  };
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append('images', files[i]);
+      }
+
+      // Reset the file input value to allow re-selecting the same files
+      event.target.value = '';
+
+      try {
+        await services.common.uploadImagesToBackend(formData);
+        Notification.success({
+          title: 'Success',
+          content: 'Images uploaded successfully',
+        });
+      } catch (e) {
+        Notification.error({
+          title: 'Error',
+          content: 'Failed to upload images',
+        });
+      }
+    }
+  };
 
   useEffect(() => {
     dispatch(template.actions.reset(undefined));
@@ -30,22 +57,42 @@ export default function Home() {
 
   return (
     <Frame
-      title='Templates'
+      title="Templates"
       primaryAction={
-        <Button
-          type='primary'
-          size="large"
-          onClick={() => {
-            history.push(`/editor/new`);
-          }}
-        >
-          Create
-        </Button>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+            id="hiddenFileInput"
+          />
+          <Button
+            type="secondary"
+            size="large"
+            onClick={() => {
+              document.getElementById('hiddenFileInput')?.click();
+            }}
+          >
+            Upload images
+          </Button>
+          <Button
+            type="primary"
+            size="large"
+            onClick={() => {
+              history.push(`/editor/new`);
+            }}
+          >
+            Create
+          </Button>
+
+        </div>
       }
     >
       <>
         <Stack>
-          {[ ...templatesState].map((item) => (
+          {[...templatesState].map((item) => (
             <CardItem data={item} key={item.id} handleDelete={handleDelete} />
           ))}
         </Stack>

@@ -34,6 +34,10 @@ import {
 import { formatHtml } from '@demo/utils/formatHtml';
 import { convertEmailTemplate } from '@demo/utils/refactorResponsiveImage';
 import { convertDataAttributesToMjHtmlAttributes } from '@demo/utils/dataAttributes';
+import {
+  convertRelativeUrlsToAbsoluteJson,
+  convertRelativeUrlsToAbsoluteMjml,
+} from '@demo/utils/convertImageUrlsToAbsolute';
 
 const imageCompression = import('browser-image-compression');
 
@@ -57,7 +61,7 @@ const defaultCategories: ExtensionProps['categories'] = [
         payload: {
           attributes: {
             padding: '0px 0px 0px 0px',
-            src: 'https://dummyimage.com/600x300/002c5f/fff.png&text=image'
+            src: 'https://dummyimage.com/600x300/002c5f/fff.png&text=image',
           },
         },
       },
@@ -86,54 +90,54 @@ const defaultCategories: ExtensionProps['categories'] = [
     active: true,
     blocks: [
       {
-        type: InnoceanBlocksType.TOP
+        type: InnoceanBlocksType.TOP,
       },
       {
-        type: InnoceanBlocksType.RESPONSIVE_IMAGE
+        type: InnoceanBlocksType.RESPONSIVE_IMAGE,
       },
       {
-        type: InnoceanBlocksType.BUTTON
+        type: InnoceanBlocksType.BUTTON,
       },
       {
-        type: InnoceanBlocksType.TEXT_BLOCK
+        type: InnoceanBlocksType.TEXT_BLOCK,
       },
       {
         type: InnoceanBlocksType.TITLE_IMAGE_BLOCK,
       },
       {
-        type: InnoceanBlocksType.HERO
+        type: InnoceanBlocksType.HERO,
       },
       {
-        type: InnoceanBlocksType.TWO_COLUMNS
+        type: InnoceanBlocksType.TWO_COLUMNS,
       },
       {
-        type: InnoceanBlocksType.THREE_COLUMNS
+        type: InnoceanBlocksType.THREE_COLUMNS,
       },
       {
-        type: InnoceanBlocksType.FOUR_COLUMNS
+        type: InnoceanBlocksType.FOUR_COLUMNS,
       },
       {
-        type: InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA
+        type: InnoceanBlocksType.SLICE_BACKGROUND_IMAGE_CTA,
       },
       {
-        type: InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE
+        type: InnoceanBlocksType.SLICE_BACKGROUND_CTA_IMAGE,
       },
       {
-        type: InnoceanBlocksType.SIDE_IMAGE
+        type: InnoceanBlocksType.SIDE_IMAGE,
       },
       {
-        type: InnoceanBlocksType.SLICE_IMAGE_CTA
+        type: InnoceanBlocksType.SLICE_IMAGE_CTA,
       },
       {
-        type: InnoceanBlocksType.SLICE_CTA_IMAGE
+        type: InnoceanBlocksType.SLICE_CTA_IMAGE,
       },
       {
-        type: InnoceanBlocksType.FOOTER
+        type: InnoceanBlocksType.FOOTER,
       },
       {
-        type: InnoceanBlocksType.POLLUSCORE
-      }
-    ]
+        type: InnoceanBlocksType.POLLUSCORE,
+      },
+    ],
   },
   {
     label: 'Layout',
@@ -169,7 +173,7 @@ const defaultCategories: ExtensionProps['categories'] = [
 export const onUploadImage = async (blob: Blob) => {
   const MAX_SIZE = 1024 * 1024; // 1MB
   // Types MIME autorisés
-  const ALLOWED_TYPES = ['image/jpg','image/jpeg', 'image/png', 'image/gif'];
+  const ALLOWED_TYPES = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
   if (blob.size > MAX_SIZE) {
     Notification.error({
@@ -244,17 +248,23 @@ export default function Editor() {
       accept: 'text/mjml',
       limit: 1,
     });
+    const userId = await services.user.getUserId();
+    console.log('USER ID : ', userId);
+
     const [file] = await uploader.chooseFile();
     const reader = new FileReader();
     const pageData = await new Promise<[string, IEmailTemplate['content']]>(
       (resolve, reject) => {
-        reader.onload = function(evt) {
+        reader.onload = function (evt) {
           if (!evt.target) {
             reject();
             return;
           }
           try {
-            const pageData = MjmlToJson(evt.target.result as any);
+            const baseUrl = import.meta.env.VITE_API_BASE_URL as string + `/uploads/${userId}/`;
+            const mjmlContent = evt.target.result as string;
+            const absoluteMjmlContent = convertRelativeUrlsToAbsoluteMjml(mjmlContent, baseUrl);
+            const pageData = MjmlToJson(absoluteMjmlContent);
             resolve([file.name, pageData]);
           } catch (error) {
             reject();
@@ -271,22 +281,27 @@ export default function Editor() {
     });
   };
 
+
   const onImportJSON = async ({ restart }: { restart: (val: IEmailTemplate) => void; }) => {
     const uploader = new Uploader(() => Promise.resolve(''), {
       accept: 'application/json',
       limit: 1,
     });
+    const userId = await services.user.getUserId();
+    console.log('USER ID : ', userId);
     const [file] = await uploader.chooseFile();
     const reader = new FileReader();
     const emailTemplate = await new Promise<IEmailTemplate>((resolve, reject) => {
-      reader.onload = function(evt) {
+      reader.onload = function (evt) {
         if (!evt.target) {
           reject();
           return;
         }
         try {
-          const template = JSON.parse(evt.target.result as any) as IEmailTemplate;
-          resolve(template);
+          const baseUrl = import.meta.env.VITE_API_BASE_URL as string + `/uploads/${userId}/`;
+          const template = JSON.parse(evt.target.result as string) as IEmailTemplate;
+          const absoluteJsonContent = convertRelativeUrlsToAbsoluteJson(template, baseUrl);
+          resolve(absoluteJsonContent);
         } catch (error) {
           reject();
         }
@@ -303,7 +318,7 @@ export default function Editor() {
   const defineDoctype = (content: string) => {
     const newDoctype = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">`;
     return content.replace(/<!doctype html>/i, newDoctype);
-  }
+  };
 
   const onExportZip = async (values: IEmailTemplate) => {
     const clonedValues = structuredClone(values);
@@ -322,15 +337,27 @@ export default function Editor() {
       const imageUrls = extractImageUrls(templateData.content);
       const zip = new JSZip();
 
-      const downloadResults = await Promise.all(imageUrls.map(async (url, index) => {
-        const relativeUrl = url.startsWith('http') ? new URL(url).pathname : url
+      const downloadResults = await Promise.all(imageUrls.map(async (url) => {
+        const relativeUrl = url.startsWith('http') ? new URL(url).pathname : url;
 
         try {
-          const response = await request.get<Blob>(relativeUrl, { responseType: 'blob', baseURL: '' });
+          const response = await request.get<Blob>(relativeUrl, {
+            responseType: 'blob',
+            baseURL: '',
+          });
+
           const blob: Blob = new Blob([response], { type: response.type });
-          const filename = `image${index + 1}.${blob.type.split('/')[1]}`;
-          zip.file(filename, blob, { binary: true });
-          return { url, filename, success: true };
+
+          // Extract the filename from the URL
+          const urlParts = relativeUrl.split('/');
+          const originalFilename = urlParts[urlParts.length - 1];
+
+          // Ensure the filename is sanitized
+          const sanitizedFilename = originalFilename.replace(/[^a-zA-Z0-9À-ÖØ-öø-ÿ'·.\-_ \s]/g, '_');
+
+          zip.file(sanitizedFilename, blob, { binary: true });
+
+          return { url, filename: sanitizedFilename, success: true };
         } catch (error) {
           console.error('Error downloading image:', relativeUrl, error);
           return { url, filename: undefined, success: false };
@@ -453,7 +480,7 @@ export default function Editor() {
                       </Dropdown>
                       <Button onClick={() => onExportZip(values)}>
                         <strong>Export</strong>
-                     </Button>
+                      </Button>
                       <Button
                         onClick={() => handleSave(restart, values)}
                         type="primary"

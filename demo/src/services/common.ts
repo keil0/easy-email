@@ -46,7 +46,10 @@ export const common = {
     const data = new FormData();
     data.append('image', file);
     return request.post<string>('/templates/upload', data);
-  }
+  },
+  uploadImagesToBackend(formData: FormData) {
+    return request.post<string>('/templates/upload-multiple', formData);
+  },
 };
 
 export interface IAppMenuItem {
