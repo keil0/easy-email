@@ -8,10 +8,10 @@
 */
 
 import { middleware } from '#start/kernel'
+import router from '@adonisjs/core/services/router'
 
 const AuthController = () => import('#controllers/auth_controller')
 const TemplatesController = () => import('#controllers/templates_controller')
-import router from '@adonisjs/core/services/router'
 
 // Auth & session management
 router.get('/', [AuthController, 'check']).as('auth.check').use(middleware.auth())
@@ -20,6 +20,7 @@ router.get('/check-inbox', [AuthController, 'checkInbox']).as('auth.checkInbox')
 router.get('/magic-connect/:token', [AuthController, 'processMagicLink']).as('auth.loginMagic')
 router.post('/logout', [AuthController, 'logout']).use(middleware.auth()).as('auth.logout')
 router.post('/magic', [AuthController, 'sendMagicLink']).as('auth.sendMagicLink')
+router.get('/me', [AuthController, 'me']).as('auth.me').use(middleware.auth())
 
 // Template & image management
 router
@@ -42,5 +43,9 @@ router
     router
       .post('/templates/upload', [TemplatesController, 'uploadTemplateImage'])
       .as('templates.uploadTemplateImage')
+    // UPLOAD IMAGES
+    router
+      .post('/templates/upload-multiple', [TemplatesController, 'uploadMultipleImages'])
+      .as('templates.uploadMultipleImages')
   })
   .use(middleware.auth())

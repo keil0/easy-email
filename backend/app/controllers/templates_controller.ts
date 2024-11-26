@@ -5,6 +5,7 @@ import app from '@adonisjs/core/services/app'
 import { cuid } from '@adonisjs/core/helpers'
 import Image from '#models/image'
 import env from '#start/env'
+import drive from '@adonisjs/drive/services/main'
 
 export default class TemplatesController {
   async getMyTemplates({ response, auth }: HttpContext) {
@@ -115,5 +116,59 @@ export default class TemplatesController {
     await imageDb.related('user').associate(auth.user!)
 
     return response.send(absolutePublicUrl)
+  }
+
+  async uploadMultipleImages({ request, response, auth }: HttpContext) {
+    const images = request.files('images', {
+      size: '5mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    })
+
+    if (images.length === 0) {
+      return response.status(400).send({
+        message: 'No images uploaded.',
+      })
+    }
+
+    const uploadedUrls = []
+    for (const image of images) {
+      const originalName = this.sanitizeFileName(image.clientName)
+
+      const imagePath = app.makePath(`public/uploads/${auth.user!.id}`)
+
+      // Check if the file already exists
+      if (await drive.use().exists(imagePath)) {
+        continue // Skip this file if it already exists
+      }
+
+      await image.move(imagePath, {
+        name: originalName,
+      })
+
+      const absolutePublicUrl =
+        env.get('BASE_DOMAIN') +
+        `${env.get('NODE_ENV') === 'development' ? '' : '/auth'}` +
+        `/uploads/${auth.user!.id}/` +
+        originalName
+
+      // Save image to database or any other storage
+      const imageDb = await Image.create({
+        url: absolutePublicUrl,
+      })
+
+      // Link image to template
+      await imageDb.related('user').associate(auth.user!)
+
+      uploadedUrls.push(absolutePublicUrl)
+    }
+
+    return response.ok({
+      message: 'Images uploaded successfully',
+      urls: uploadedUrls,
+    })
+  }
+
+  private sanitizeFileName(fileName: string): string {
+    return fileName.replace(/[^a-zA-Z0-9À-ÖØ-öø-ÿ'·.\-_ \s]/g, '_')
   }
 }

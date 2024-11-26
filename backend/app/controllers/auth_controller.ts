@@ -87,4 +87,9 @@ export default class AuthController {
         .make('auth.checkInbox')
     )
   }
+
+  // Return the current user id
+  async me({ auth, response }: HttpContext) {
+    return response.send({ userId: auth.user!.id })
+  }
 }
