@@ -33,7 +33,7 @@ import {
 } from '@demo/utils/convertImageUrlsToRelative';
 import { formatHtml } from '@demo/utils/formatHtml';
 import { convertEmailTemplate } from '@demo/utils/refactorResponsiveImage';
-import { convertDataAttributesToMjHtmlAttributes } from '@demo/utils/dataAttributes';
+import { convertDataAttributesToMjHtmlAttributes, moveDataAttributesFromDivToTable } from '@demo/utils/dataAttributes';
 import {
   convertRelativeUrlsToAbsoluteJson,
   convertRelativeUrlsToAbsoluteMjml,
@@ -397,8 +397,9 @@ export default function Editor() {
 
       const refactoredHtml = convertEmailTemplate(updatedHtml);
       const formatedHtml = formatHtml(refactoredHtml);
+      const fixedHtml = moveDataAttributesFromDivToTable(formatedHtml);
 
-      zip.file('index.html', formatedHtml);
+      zip.file('index.html', fixedHtml);
       zip.file('template.mjml', updatedMjmlString);
       zip.file('export.json', JSON.stringify(updatedJsonContent, null, 2));
 
