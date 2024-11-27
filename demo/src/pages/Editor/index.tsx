@@ -33,7 +33,7 @@ import {
 } from '@demo/utils/convertImageUrlsToRelative';
 import { formatHtml } from '@demo/utils/formatHtml';
 import { convertEmailTemplate } from '@demo/utils/refactorResponsiveImage';
-import { convertDataAttributesToMjHtmlAttributes } from '@demo/utils/dataAttributes';
+import { convertDataAttributesToMjHtmlAttributes, moveDataAttributesFromDivToTable } from '@demo/utils/dataAttributes';
 import {
   convertRelativeUrlsToAbsoluteJson,
   convertRelativeUrlsToAbsoluteMjml,
@@ -249,7 +249,6 @@ export default function Editor() {
       limit: 1,
     });
     const userId = await services.user.getUserId();
-    console.log('USER ID : ', userId);
 
     const [file] = await uploader.chooseFile();
     const reader = new FileReader();
@@ -281,14 +280,12 @@ export default function Editor() {
     });
   };
 
-
   const onImportJSON = async ({ restart }: { restart: (val: IEmailTemplate) => void; }) => {
     const uploader = new Uploader(() => Promise.resolve(''), {
       accept: 'application/json',
       limit: 1,
     });
     const userId = await services.user.getUserId();
-    console.log('USER ID : ', userId);
     const [file] = await uploader.chooseFile();
     const reader = new FileReader();
     const emailTemplate = await new Promise<IEmailTemplate>((resolve, reject) => {
@@ -313,6 +310,32 @@ export default function Editor() {
       content: emailTemplate.content,
       subTitle: emailTemplate.subTitle,
     });
+  };
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append('images', files[i]);
+      }
+
+      // Reset the file input value to allow re-selecting the same files
+      event.target.value = '';
+
+      try {
+        await services.common.uploadImagesToBackend(formData);
+        Notification.success({
+          title: 'Success',
+          content: 'Images uploaded successfully',
+        });
+      } catch (e) {
+        Notification.error({
+          title: 'Error',
+          content: 'Failed to upload images',
+        });
+      }
+    }
   };
 
   const defineDoctype = (content: string) => {
@@ -374,8 +397,9 @@ export default function Editor() {
 
       const refactoredHtml = convertEmailTemplate(updatedHtml);
       const formatedHtml = formatHtml(refactoredHtml);
+      const fixedHtml = moveDataAttributesFromDivToTable(formatedHtml);
 
-      zip.file('index.html', formatedHtml);
+      zip.file('index.html', fixedHtml);
       zip.file('template.mjml', updatedMjmlString);
       zip.file('export.json', JSON.stringify(updatedJsonContent, null, 2));
 
@@ -429,6 +453,14 @@ export default function Editor() {
   return (
     <ConfigProvider locale={enUS}>
       <div>
+        <input
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={handleImageUpload}
+          style={{ display: 'none' }}
+          id="hiddenFileInput"
+        />
         <EmailEditorProvider
           key={'id'}
           height={'calc(100vh - 68px)'}
@@ -470,6 +502,14 @@ export default function Editor() {
                               onClick={() => onImportJSON({ restart })}
                             >
                               Import from JSON
+                            </Menu.Item>
+                            <Menu.Item
+                              key="Images"
+                              onClick={() => {
+                                document.getElementById('hiddenFileInput')?.click();
+                              }}
+                            >
+                              Import images
                             </Menu.Item>
                           </Menu>
                         }
