@@ -491,25 +491,24 @@ export default function Editor() {
                         droplist={
                           <Menu>
                             <Menu.Item
-                              key="MJML"
-                              onClick={() => onImportMJML({ restart })}
-                            >
-                              Import from MJML
-                            </Menu.Item>
-
-                            <Menu.Item
-                              key="JSON"
-                              onClick={() => onImportJSON({ restart })}
-                            >
-                              Import from JSON
-                            </Menu.Item>
-                            <Menu.Item
                               key="Images"
                               onClick={() => {
                                 document.getElementById('hiddenFileInput')?.click();
                               }}
                             >
-                              Import images
+                              1. Import images
+                            </Menu.Item>
+                            <Menu.Item
+                              key="JSON"
+                              onClick={() => onImportJSON({ restart })}
+                            >
+                              2.a Import from JSON (optimized)
+                            </Menu.Item>
+                            <Menu.Item
+                              key="MJML"
+                              onClick={() => onImportMJML({ restart })}
+                            >
+                              2.b Import from MJML
                             </Menu.Item>
                           </Menu>
                         }
